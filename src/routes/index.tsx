@@ -1264,7 +1264,7 @@ function Locations() {
 
 function Footer() {
   return (
-    <footer className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
+    <footer id="footer" className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="grid gap-10 grid-cols-2 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
