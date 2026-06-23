@@ -959,7 +959,7 @@ function About() {
 
 /* ---------- BESTSELLERS ---------- */
 
-function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void }) {
+function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void; dark?: boolean }) {
   const isShipping = p.delivery === "Доставка по РФ";
   return (
     <motion.div
@@ -967,11 +967,11 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
       className="product-card shrink-0 snap-start"
       style={{
         width: 220,
-        background: "#FFFFFF",
+        background: dark ? "rgba(255,251,243,0.06)" : "#FFFFFF",
         borderRadius: 16,
         overflow: "hidden",
-        border: "1px solid rgba(30,58,47,0.07)",
-        boxShadow: "0 2px 16px rgba(30,58,47,0.06)",
+        border: dark ? "1px solid rgba(255,251,243,0.08)" : "1px solid rgba(30,58,47,0.07)",
+        boxShadow: dark ? "0 2px 16px rgba(0,0,0,0.25)" : "0 2px 16px rgba(30,58,47,0.06)",
         transition: "box-shadow 0.3s ease, transform 0.3s ease",
       }}
     >
