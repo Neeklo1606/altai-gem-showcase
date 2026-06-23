@@ -1064,7 +1064,7 @@ function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]
         >
           {p.cat}
         </div>
-        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(100,80,50,0.6)" }}>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: dark ? "rgba(255,251,243,0.5)" : "rgba(100,80,50,0.6)" }}>
           {p.producer}
         </div>
         <h4
@@ -1072,7 +1072,7 @@ function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]
             fontFamily: "'Unbounded', sans-serif",
             fontSize: 14,
             fontWeight: 700,
-            color: "#1A3028",
+            color: dark ? "#FFFBF3" : "#1A3028",
             lineHeight: 1.3,
             marginTop: 4,
           }}
@@ -1083,7 +1083,7 @@ function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: 12,
-            color: "#7A6A5A",
+            color: dark ? "rgba(255,251,243,0.6)" : "#7A6A5A",
             lineHeight: 1.4,
             marginTop: 4,
             overflow: "hidden",
@@ -1098,12 +1098,12 @@ function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]
             fontFamily: "'Unbounded', sans-serif",
             fontSize: 20,
             fontWeight: 800,
-            color: "#1A3028",
+            color: dark ? "#FFFBF3" : "#1A3028",
             marginTop: 10,
           }}
         >
           {p.price}
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "#7A6A5A", marginLeft: 6 }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: dark ? "rgba(255,251,243,0.55)" : "#7A6A5A", marginLeft: 6 }}>
             {p.unit}
           </span>
         </div>
