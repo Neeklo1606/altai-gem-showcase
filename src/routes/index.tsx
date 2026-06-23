@@ -44,45 +44,39 @@ const CATEGORIES = [
 
 const CATEGORY_CARDS = [
   {
-    title: "Мёд",
-    desc: "Донниковый, горный, таёжный, прополис",
+    title: "Мёд и пчелопродукты",
     count: 12,
-    emoji: "🍯",
+    photo: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #5C3A00 0%, #C8973A 100%)",
   },
   {
     title: "Травяные чаи",
-    desc: "Иван-чай, чага, алтайский сбор",
     count: 8,
-    emoji: "🌿",
+    photo: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #0D2B1A 0%, #1E6B3A 100%)",
   },
   {
     title: "Деликатесы из марала",
-    desc: "Вырезка, колбасы, копчёности",
     count: 6,
-    emoji: "🦌",
+    photo: "https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #2A0A0A 0%, #7A2020 100%)",
   },
   {
     title: "Натуральная косметика",
-    desc: "Кремы, шампуни, мыло, масла",
     count: 15,
-    emoji: "🌸",
+    photo: "https://images.unsplash.com/photo-1612817288484-6f916006741a?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #0F2010 0%, #2D5A1E 100%)",
   },
   {
-    title: "Пантогематоген",
-    desc: "Бальзамы на травах, пантогематоген",
+    title: "Пантогематоген и бальзамы",
     count: 9,
-    emoji: "💪",
+    photo: "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #0A0F2A 0%, #1E3A7A 100%)",
   },
   {
     title: "Подарочные наборы",
-    desc: "Готовые наборы от 1 200 ₽",
     count: 10,
-    emoji: "🎁",
+    photo: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=600&q=80&fit=crop",
     gradient: "linear-gradient(135deg, #2A1A00 0%, #7A5000 100%)",
   },
 ];
