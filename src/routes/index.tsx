@@ -271,9 +271,8 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
       }}
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
-        <a href="#" className="flex shrink-0 items-center gap-2">
-          <span className="text-xl">🌿</span>
-          <span className="font-display text-[20px] font-bold text-forest">Жемчужина Алтая</span>
+        <a href="#" className="flex shrink-0 items-center">
+          <span style={{ fontFamily: "'Unbounded', sans-serif", fontSize: 18, fontWeight: 700, color: "#1A3028" }}>Жемчужина Алтая</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
