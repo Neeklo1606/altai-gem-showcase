@@ -471,7 +471,7 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 function CategoryBar({ active, setActive }: { active: string; setActive: (id: string) => void }) {
   return (
     <div
-      className="sticky top-16 md:top-[72px] z-40"
+      className="sticky top-14 md:top-[72px] z-40"
       style={{
         backgroundColor: "rgba(249,243,232,0.97)",
         backdropFilter: "blur(12px)",
