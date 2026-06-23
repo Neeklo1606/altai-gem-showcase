@@ -150,7 +150,7 @@ function LandingPage() {
 
   const handleAdd = (item: CartItem) => {
     cart.addItem(item);
-    setToast("Добавлено в корзину!");
+    setToast("Добавлено в корзину");
     setTimeout(() => setToast(null), 2000);
   };
 
