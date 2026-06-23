@@ -95,8 +95,8 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-display);
+  h1, h2, h3, .font-display {
+    font-family: 'Unbounded', sans-serif;
   }
 }
 
