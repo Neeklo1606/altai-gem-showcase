@@ -520,33 +520,41 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <SectionHeading>Наша продукция</SectionHeading>
 
-        <div className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-          {CATEGORY_CARDS.map((c, i) => (
-            <motion.div
-              key={c.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              whileHover={{ y: -4 }}
-              className="group h-[280px] cursor-pointer overflow-hidden rounded-2xl border bg-parchment shadow-card transition-all hover:shadow-card-hover"
-              style={{ borderColor: "transparent" }}
-            >
-              <div
-                className="grid h-[160px] place-items-center text-6xl"
-                style={{ background: c.gradient }}
+        <div style={{ overflow: "hidden" }}>
+          <div
+            className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+            style={{ minHeight: typeof window !== "undefined" && window.innerWidth < 768 ? 1200 : 900 }}
+          >
+            {CATEGORY_CARDS.map((c, i) => (
+              <motion.div
+                key={c.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.5, delay: i * 0.08 }}
+                whileHover={{ y: -4 }}
+                className="group h-[280px] cursor-pointer overflow-hidden rounded-2xl border bg-parchment shadow-card hover:shadow-card-hover"
+                style={{
+                  borderColor: "transparent",
+                  transition: "opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease",
+                }}
               >
-                <span className="drop-shadow-lg">{c.emoji}</span>
-              </div>
-              <div className="p-4">
-                <h3 className="font-display text-xl font-bold text-forest">{c.title}</h3>
-                <p className="mt-1 text-[13px] text-ink-muted">{c.desc}</p>
-                <div className="mt-3 flex items-center gap-1 text-[13px] font-medium" style={{ color: "var(--honey)" }}>
-                  → {c.count} товаров
+                <div
+                  className="grid h-[160px] place-items-center text-6xl"
+                  style={{ background: c.gradient }}
+                >
+                  <span className="drop-shadow-lg">{c.emoji}</span>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+                <div className="p-4">
+                  <h3 className="font-display text-xl font-bold text-forest">{c.title}</h3>
+                  <p className="mt-1 text-[13px] text-ink-muted">{c.desc}</p>
+                  <div className="mt-3 flex items-center gap-1 text-[13px] font-medium" style={{ color: "var(--honey)" }}>
+                    → {c.count} товаров
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
