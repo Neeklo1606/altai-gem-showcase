@@ -20,7 +20,7 @@ import {
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Жемчужина Алтая — натуральная продукция с Алтая" },
+      { title: "Жемчужина Алтая - натуральная продукция с Алтая" },
       {
         name: "description",
         content:
@@ -108,7 +108,7 @@ const STATS = [
 ];
 
 const FEATURES = [
-  { Icon: Leaf, title: "Только натуральное", desc: "Без консервантов, красителей и ароматизаторов. Каждый продукт — прямо от алтайских производителей" },
+  { Icon: Leaf, title: "Только натуральное", desc: "Без консервантов, красителей и ароматизаторов. Каждый продукт - прямо от алтайских производителей" },
   { Icon: MapPin, title: "Два магазина в городе", desc: "ул. Титова, 32 (Левый берег) и Гурьевская, 55 (Правый берег). Приходите лично" },
   { Icon: Truck, title: "Доставка по России", desc: "Отправляем СДЭК в любой регион. Упаковка защитит продукцию в дороге" },
   { Icon: Star, title: "4.4 на Яндекс.Картах", desc: "Реальные отзывы реальных покупателей. Смотрите сами по ссылке на картах" },
@@ -143,14 +143,14 @@ function LandingPage() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const handleAdd = (item: CartItem) => {
     cart.addItem(item);
-    setToast("Добавлено в корзину!");
+    setToast("Добавлено в корзину");
     setTimeout(() => setToast(null), 2000);
   };
 
@@ -160,7 +160,12 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream text-ink pb-20 md:pb-0">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="min-h-screen bg-cream text-ink pb-20 md:pb-0"
+    >
       <Header
         cartCount={cart.totalCount}
         onCartOpen={() => setIsCartOpen(true)}
@@ -209,14 +214,35 @@ function LandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
-            style={{ boxShadow: "0 8px 32px rgba(200, 151, 58, 0.4)" }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] flex items-center gap-2 -translate-x-1/2 rounded-full px-5 py-3 shadow-lg"
+            style={{
+              background: "#0F1E18",
+              color: "#FFFBF3",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 14,
+              boxShadow: "0 12px 36px rgba(0,0,0,0.35)",
+            }}
           >
+            <span
+              className="grid place-items-center"
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: "50%",
+                background: "#1E8A4C",
+                color: "#FFFFFF",
+                fontSize: 12,
+                fontWeight: 700,
+              }}
+            >
+              ✓
+            </span>
             {toast}
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
@@ -235,12 +261,13 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="sticky top-0 z-50 w-full transition-all"
+      className="sticky top-0 z-50 w-full"
       style={{
-        backgroundColor: "rgba(255, 251, 243, 0.95)",
+        backgroundColor: scrolled ? "rgba(255, 251, 243, 0.99)" : "rgba(255, 251, 243, 0.85)",
         backdropFilter: "blur(12px)",
         borderBottom: scrolled ? "1px solid rgba(200, 151, 58, 0.3)" : "1px solid transparent",
-        boxShadow: scrolled ? "0 2px 12px rgba(30, 58, 47, 0.06)" : "none",
+        boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.15)" : "none",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
       }}
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
@@ -643,7 +670,7 @@ function About() {
   return (
     <section id="about" className="w-full" style={{ background: "#1A3028" }}>
       <div className="grid grid-cols-1 lg:grid-cols-5">
-        {/* LEFT — image */}
+        {/* LEFT - image */}
         <div className="relative lg:col-span-3">
           <img
             src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80&fit=crop"
@@ -661,7 +688,7 @@ function About() {
           />
         </div>
 
-        {/* RIGHT — content */}
+        {/* RIGHT - content */}
         <div
           className="flex flex-col justify-center lg:col-span-2"
           style={{ padding: "var(--about-pad, 40px 24px)" }}
@@ -709,7 +736,7 @@ function About() {
               marginTop: 12,
             }}
           >
-            Алтайская деревня — немецкое поселение на Алтае. Шлегель — фермерское хозяйство возле Белокурихи. Продукция поступает напрямую от производителей.
+            Алтайская деревня - немецкое поселение на Алтае. Шлегель - фермерское хозяйство возле Белокурихи. Продукция поступает напрямую от производителей.
           </p>
 
           <div
@@ -864,12 +891,12 @@ function BrandStory() {
           </h2>
           <div className="mt-6 space-y-5 text-base leading-[1.7]" style={{ color: "rgba(255,251,243,0.8)" }}>
             <p>
-              Жемчужина Алтая — это два магазина в Новосибирске, где собрано лучшее из алтайских гор и лесов:
+              Жемчужина Алтая - это два магазина в Новосибирске, где собрано лучшее из алтайских гор и лесов:
               натуральный мёд, деликатесы из марала, травяные сборы и косметика на основе алтайских растений.
             </p>
             <p>
               Каждый продукт проходит строгий отбор. Мы работаем только с проверенными производителями из
-              Алтайского края и Республики Алтай, где экологическая чистота — не маркетинг, а реальность.
+              Алтайского края и Республики Алтай, где экологическая чистота - не маркетинг, а реальность.
             </p>
             <p>
               Мы начали с одного магазина в 2018 году. Сегодня нас находят туристы, которые хотят увезти
@@ -910,7 +937,7 @@ function WhyUs() {
   const cards = [
     { Icon: Leaf, title: "Только натуральное", desc: "Продукция напрямую от производителей. Без консервантов и ароматизаторов" },
     { Icon: MapPin, title: "Два магазина", desc: "ул. Титова, 32 и Гурьевская, 55. Приходите попробовать лично" },
-    { Icon: Truck, title: "Доставка по России", desc: "Отправляем СДЭК. Мёд, колбасы, косметика — в любой регион" },
+    { Icon: Truck, title: "Доставка по России", desc: "Отправляем СДЭК. Мёд, колбасы, косметика - в любой регион" },
     { Icon: Shield, title: "Контроль качества", desc: "Работаем только с проверенными хозяйствами с 2018 года" },
   ];
 
@@ -1263,88 +1290,101 @@ function Locations() {
 /* ---------- FOOTER ---------- */
 
 function Footer() {
+  const socials = [
+    { label: "VK", initials: "VK" },
+    { label: "Telegram", initials: "TG" },
+    { label: "WhatsApp", initials: "WA" },
+  ];
+
   return (
-    <footer id="footer" className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
+    <footer
+      id="footer"
+      style={{
+        background: "#0F1E18",
+        borderTop: "2px solid #C8973A",
+        paddingTop: 48,
+        paddingBottom: 32,
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="grid gap-10 grid-cols-2 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <span>🌿</span>
-              <span className="font-display text-xl font-bold" style={{ color: "#FFFBF3" }}>
-                Жемчужина Алтая
-              </span>
-            </div>
-            <p className="mt-3 text-sm" style={{ color: "rgba(255,251,243,0.6)" }}>
-              Дарим лучшее от алтайской природы
-            </p>
-            <div className="mt-4 flex gap-3">
-              {["VK", "TG", "WA"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="grid h-10 w-10 place-items-center rounded-full border text-xs font-bold transition-colors hover:bg-honey hover:text-forest"
-                  style={{ borderColor: "rgba(200,151,58,0.3)", color: "var(--honey)" }}
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span>🌿</span>
+            <span
+              style={{
+                fontFamily: "'Unbounded', sans-serif",
+                fontSize: 18,
+                fontWeight: 700,
+                color: "#FFFBF3",
+              }}
+            >
+              Жемчужина Алтая
+            </span>
           </div>
 
-          <FooterCol title="Каталог" links={["Мёд", "Чаи и травы", "Мясо марала", "Косметика", "Подарки"]} />
-          <FooterCol title="Информация" links={["О нас", "Доставка и оплата", "Возврат", "Контакты"]} />
-          <div>
-            <h4 className="font-display text-base font-bold" style={{ color: "#FFFBF3" }}>Контакты</h4>
-            <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(255,251,243,0.7)" }}>
-              <li>+7 (960) 798-16-22</li>
-              <li>ул. Титова, 32</li>
-              <li>Гурьевская, 55</li>
-              <li>Ежедневно: уточняйте</li>
-            </ul>
+          <div className="flex gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href="#"
+                aria-label={s.label}
+                className="footer-social grid place-items-center"
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,251,243,0.15)",
+                  color: "rgba(255,251,243,0.5)",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  transition: "border-color 0.2s ease, color 0.2s ease",
+                }}
+              >
+                {s.initials}
+              </a>
+            ))}
           </div>
         </div>
 
         <div
-          className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 border-t pt-6 text-xs"
-          style={{ borderColor: "rgba(200,151,58,0.2)", color: "rgba(255,251,243,0.5)" }}
+          className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 12,
+            color: "rgba(255,251,243,0.3)",
+          }}
         >
-          <div>© 2026 Жемчужина Алтая · Новосибирск</div>
+          <div>2026 Жемчужина Алтая</div>
           <div className="flex items-center gap-4">
-            <a
-              href="/admin"
-              style={{ fontSize: 11, color: "rgba(100,100,100,0.4)" }}
-            >
+            <a href="/admin" style={{ fontSize: 11, color: "rgba(255,251,243,0.2)" }}>
               Admin
             </a>
             <span>
               Разработка:{" "}
-              <a href="https://neeklo.studio" target="_blank" rel="noopener noreferrer" style={{ color: "var(--honey)" }}>
+              <a
+                href="https://neeklo.studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "rgba(255,251,243,0.5)" }}
+              >
                 neeklo.studio
               </a>
             </span>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .footer-social:hover {
+          border-color: #C8973A !important;
+          color: #C8973A !important;
+        }
+      `}</style>
     </footer>
   );
 }
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <h4 className="font-display text-base font-bold" style={{ color: "#FFFBF3" }}>{title}</h4>
-      <ul className="mt-4 space-y-2 text-sm">
-        {links.map((l) => (
-          <li key={l}>
-            <a href="#" className="transition-colors hover:text-honey" style={{ color: "rgba(255,251,243,0.7)" }}>
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+
 
 /* ---------- CART DRAWER ---------- */
 

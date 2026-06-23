@@ -39,7 +39,7 @@
   --color-ink: var(--text);
   --color-ink-muted: var(--text-muted);
 
-  --font-display: "Playfair Display", serif;
+  --font-display: "Unbounded", sans-serif;
   --font-body: "Inter", sans-serif;
   --font-sans: "Inter", sans-serif;
 }
@@ -95,8 +95,8 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3 {
-    font-family: var(--font-display);
+  h1, h2, h3, .font-display {
+    font-family: 'Unbounded', sans-serif;
   }
 }
 
