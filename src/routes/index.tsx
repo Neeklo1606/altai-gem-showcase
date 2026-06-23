@@ -12,6 +12,9 @@ import {
   Star,
   Shield,
   ArrowRight,
+  Home,
+  LayoutGrid,
+  Phone,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
@@ -157,7 +160,7 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream text-ink">
+    <div className="min-h-screen bg-cream text-ink pb-20 md:pb-0">
       <Header
         cartCount={cart.totalCount}
         onCartOpen={() => setIsCartOpen(true)}
@@ -193,6 +196,12 @@ function LandingPage() {
         onRemove={cart.removeItem}
       />
 
+      <MobileBottomNav
+        cartCount={cart.totalCount}
+        onCartOpen={() => setIsCartOpen(true)}
+        scrollTo={scrollTo}
+      />
+
       {/* Toast */}
       <AnimatePresence>
         {toast && (
@@ -200,7 +209,7 @@ function LandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="fixed bottom-8 left-1/2 z-[60] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
+            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
             style={{ boxShadow: "0 8px 32px rgba(200, 151, 58, 0.4)" }}
           >
             {toast}
@@ -234,7 +243,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
         boxShadow: scrolled ? "0 2px 12px rgba(30, 58, 47, 0.06)" : "none",
       }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
         <a href="#" className="flex shrink-0 items-center gap-2">
           <span className="text-xl">🌿</span>
           <span className="font-display text-[20px] font-bold text-forest">Жемчужина Алтая</span>
@@ -275,7 +284,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
             )}
           </motion.button>
           <button
-            className="md:hidden grid h-10 w-10 place-items-center rounded-full text-forest"
+            className="hidden grid h-10 w-10 place-items-center rounded-full text-forest"
             onClick={() => setMobileMenu(!mobileMenu)}
             aria-label="Меню"
           >
@@ -321,6 +330,7 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 
   return (
     <section
+      id="hero"
       className="relative flex items-center overflow-hidden"
       style={{ height: "100svh", minHeight: 600 }}
     >
@@ -461,7 +471,7 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 function CategoryBar({ active, setActive }: { active: string; setActive: (id: string) => void }) {
   return (
     <div
-      className="sticky top-16 md:top-[72px] z-40"
+      className="sticky top-14 md:top-[72px] z-40"
       style={{
         backgroundColor: "rgba(249,243,232,0.97)",
         backdropFilter: "blur(12px)",
@@ -1254,7 +1264,7 @@ function Locations() {
 
 function Footer() {
   return (
-    <footer className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
+    <footer id="footer" className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="grid gap-10 grid-cols-2 md:grid-cols-4">
           <div className="col-span-2 md:col-span-1">
@@ -1419,5 +1429,132 @@ function CartDrawer({
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+/* ---------- MOBILE BOTTOM NAV ---------- */
+
+function MobileBottomNav({
+  cartCount,
+  onCartOpen,
+  scrollTo,
+}: {
+  cartCount: number;
+  onCartOpen: () => void;
+  scrollTo: (id: string) => void;
+}) {
+  const [active, setActive] = useState("hero");
+
+  const items: {
+    id: string;
+    label: string;
+    Icon: typeof Home;
+    target: string;
+  }[] = [
+    { id: "hero", label: "Главная", Icon: Home, target: "hero" },
+    { id: "catalog", label: "Каталог", Icon: LayoutGrid, target: "catalog" },
+    { id: "locations", label: "Доставка", Icon: Truck, target: "locations" },
+    { id: "footer", label: "Контакты", Icon: Phone, target: "footer" },
+  ];
+
+  const go = (id: string, target: string) => {
+    setActive(id);
+    scrollTo(target);
+  };
+
+  return (
+    <nav
+      className="md:hidden flex"
+      style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        height: 64,
+        background: "rgba(15, 30, 24, 0.96)",
+        backdropFilter: "blur(20px)",
+        borderTop: "1px solid rgba(200, 151, 58, 0.15)",
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        justifyContent: "space-around",
+        alignItems: "center",
+      }}
+    >
+      {items.slice(0, 2).map((it) => {
+        const isActive = active === it.id;
+        return (
+          <button
+            key={it.id}
+            onClick={() => go(it.id, it.target)}
+            className="flex flex-col items-center"
+            style={{
+              gap: 3,
+              padding: "8px 12px",
+              color: isActive ? "#C8973A" : "rgba(255,251,243,0.4)",
+            }}
+          >
+            <it.Icon size={22} />
+            <span style={{ fontSize: 9, letterSpacing: "0.3px" }}>{it.label}</span>
+          </button>
+        );
+      })}
+
+      {/* Center cart */}
+      <button
+        onClick={onCartOpen}
+        className="relative grid place-items-center"
+        style={{
+          width: 52,
+          height: 52,
+          borderRadius: "50%",
+          background: "#C8973A",
+          padding: 14,
+          boxShadow: "0 6px 18px rgba(200,151,58,0.45)",
+        }}
+        aria-label="Корзина"
+      >
+        <ShoppingCart size={24} color="#1A3028" />
+        {cartCount > 0 && (
+          <span
+            className="grid place-items-center"
+            style={{
+              position: "absolute",
+              top: -2,
+              right: -2,
+              minWidth: 18,
+              height: 18,
+              padding: "0 5px",
+              borderRadius: 100,
+              background: "#D93030",
+              color: "#FFFFFF",
+              fontSize: 10,
+              fontWeight: 700,
+              border: "2px solid rgba(15,30,24,0.96)",
+            }}
+          >
+            {cartCount}
+          </span>
+        )}
+      </button>
+
+      {items.slice(2).map((it) => {
+        const isActive = active === it.id;
+        return (
+          <button
+            key={it.id}
+            onClick={() => go(it.id, it.target)}
+            className="flex flex-col items-center"
+            style={{
+              gap: 3,
+              padding: "8px 12px",
+              color: isActive ? "#C8973A" : "rgba(255,251,243,0.4)",
+            }}
+          >
+            <it.Icon size={22} />
+            <span style={{ fontSize: 9, letterSpacing: "0.3px" }}>{it.label}</span>
+          </button>
+        );
+      })}
+    </nav>
   );
 }
