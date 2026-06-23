@@ -261,12 +261,13 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
-      className="sticky top-0 z-50 w-full transition-all"
+      className="sticky top-0 z-50 w-full"
       style={{
-        backgroundColor: "rgba(255, 251, 243, 0.95)",
+        backgroundColor: scrolled ? "rgba(255, 251, 243, 0.99)" : "rgba(255, 251, 243, 0.85)",
         backdropFilter: "blur(12px)",
         borderBottom: scrolled ? "1px solid rgba(200, 151, 58, 0.3)" : "1px solid transparent",
-        boxShadow: scrolled ? "0 2px 12px rgba(30, 58, 47, 0.06)" : "none",
+        boxShadow: scrolled ? "0 4px 24px rgba(0,0,0,0.15)" : "none",
+        transition: "background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease",
       }}
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
