@@ -136,6 +136,7 @@ function LandingPage() {
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
     const onScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
