@@ -95,7 +95,7 @@ const BESTSELLERS = [
 ];
 
 const STATS = [
-  { value: 4.4, suffix: " ⭐", label: "Рейтинг на Яндекс.Картах", decimals: 1 },
+  { value: 4.4, suffix: " ★", label: "Рейтинг на Яндекс.Картах", decimals: 1 },
   { value: 180, suffix: "+", label: "Фотографий продукции", decimals: 0 },
   { value: 2, suffix: "", label: "Магазина в Новосибирске", decimals: 0 },
   { value: 2018, suffix: "", label: "Год основания", decimals: 0 },
@@ -172,11 +172,11 @@ function LandingPage() {
       <div
         aria-hidden
         style={{
-          height: 32,
-          background: "#1A3028",
+          height: 28,
+          backgroundColor: "#1A3028",
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='40' height='32' viewBox='0 0 40 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L10 0 L20 16 L30 0 L40 16 L30 32 L20 16 L10 32 Z' fill='none' stroke='rgba(200,151,58,0.35)' stroke-width='1'/%3E%3C/svg%3E\")",
-          backgroundSize: "40px 32px",
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='28'%3E%3Cpolygon points='0,14 7,0 15,14 23,0 30,14 23,28 15,14 7,28' fill='none' stroke='%23C8973A' stroke-width='0.8' opacity='0.5'/%3E%3C/svg%3E\")",
+          backgroundSize: "30px 28px",
           backgroundRepeat: "repeat-x",
         }}
       />
@@ -194,6 +194,21 @@ function LandingPage() {
       <BrandStory />
 
       <WhyUs />
+
+      <div style={{ width: "100%", overflow: "hidden" }} className="h-[200px] md:h-[300px]">
+        <img
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80&fit=crop&crop=center"
+          alt="Горы Алтая"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 40%",
+            filter: "brightness(0.75) saturate(1.1)",
+            display: "block",
+          }}
+        />
+      </div>
 
       <GiftSets onAdd={handleAdd} />
 
@@ -305,7 +320,16 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={onCartOpen}
-            className="relative flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-sm font-medium text-cream transition-colors hover:bg-forest-mid"
+            className="cart-btn relative flex items-center gap-2 rounded-lg px-4 py-2"
+            style={{
+              border: "1.5px solid #1A3028",
+              background: "transparent",
+              color: "#1A3028",
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 13,
+              fontWeight: 600,
+              transition: "background 0.2s ease, color 0.2s ease",
+            }}
           >
             <ShoppingCart className="h-4 w-4" />
             <span className="hidden sm:inline">Корзина</span>
@@ -347,6 +371,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
           </motion.div>
         )}
       </AnimatePresence>
+      <style>{`.cart-btn:hover { background: #1A3028 !important; color: #FFFBF3 !important; }`}</style>
     </motion.header>
   );
 }
@@ -934,7 +959,7 @@ function About() {
 
 /* ---------- BESTSELLERS ---------- */
 
-function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void }) {
+function ProductCard({ p, onAdd, dark = false }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void; dark?: boolean }) {
   const isShipping = p.delivery === "Доставка по РФ";
   return (
     <motion.div
@@ -942,11 +967,11 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
       className="product-card shrink-0 snap-start"
       style={{
         width: 220,
-        background: "#FFFFFF",
+        background: dark ? "rgba(255,251,243,0.06)" : "#FFFFFF",
         borderRadius: 16,
         overflow: "hidden",
-        border: "1px solid rgba(30,58,47,0.07)",
-        boxShadow: "0 2px 16px rgba(30,58,47,0.06)",
+        border: dark ? "1px solid rgba(255,251,243,0.08)" : "1px solid rgba(30,58,47,0.07)",
+        boxShadow: dark ? "0 2px 16px rgba(0,0,0,0.25)" : "0 2px 16px rgba(30,58,47,0.06)",
         transition: "box-shadow 0.3s ease, transform 0.3s ease",
       }}
     >
@@ -1039,7 +1064,7 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
         >
           {p.cat}
         </div>
-        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(100,80,50,0.6)" }}>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: dark ? "rgba(255,251,243,0.5)" : "rgba(100,80,50,0.6)" }}>
           {p.producer}
         </div>
         <h4
@@ -1047,7 +1072,7 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
             fontFamily: "'Unbounded', sans-serif",
             fontSize: 14,
             fontWeight: 700,
-            color: "#1A3028",
+            color: dark ? "#FFFBF3" : "#1A3028",
             lineHeight: 1.3,
             marginTop: 4,
           }}
@@ -1058,7 +1083,7 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
           style={{
             fontFamily: "Inter, sans-serif",
             fontSize: 12,
-            color: "#7A6A5A",
+            color: dark ? "rgba(255,251,243,0.6)" : "#7A6A5A",
             lineHeight: 1.4,
             marginTop: 4,
             overflow: "hidden",
@@ -1073,12 +1098,12 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
             fontFamily: "'Unbounded', sans-serif",
             fontSize: 20,
             fontWeight: 800,
-            color: "#1A3028",
+            color: dark ? "#FFFBF3" : "#1A3028",
             marginTop: 10,
           }}
         >
           {p.price}
-          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "#7A6A5A", marginLeft: 6 }}>
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: dark ? "rgba(255,251,243,0.55)" : "#7A6A5A", marginLeft: 6 }}>
             {p.unit}
           </span>
         </div>
@@ -1106,25 +1131,39 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
 
 function Bestsellers({ onAdd }: { onAdd: (i: CartItem) => void }) {
   return (
-    <section className="bg-cream py-16 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-display font-bold text-forest text-[28px] md:text-[40px]">
-            Хиты продаж
-          </h2>
-          <button className="shrink-0 text-sm font-medium hover:underline" style={{ color: "var(--honey)" }}>
-            Посмотреть все →
-          </button>
-        </div>
+    <section style={{ background: "#1A3028", padding: "40px 0 56px" }}>
+      <div className="mx-auto max-w-7xl" style={{ padding: "0 24px 32px" }}>
+        <h2
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontWeight: 900,
+            color: "#FFFBF3",
+            textAlign: "left",
+            lineHeight: 1.05,
+          }}
+          className="text-[32px] md:text-[48px]"
+        >
+          Хиты продаж
+        </h2>
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 16,
+            color: "rgba(255,251,243,0.5)",
+            marginTop: 8,
+          }}
+        >
+          Самое популярное этого сезона
+        </p>
+      </div>
 
-        <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 -mx-4 px-4">
-          {BESTSELLERS.map((p) => (
-            <ProductCard key={p.name} p={p} onAdd={onAdd} />
-          ))}
-        </div>
+      <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3" style={{ padding: "0 24px 12px" }}>
+        {BESTSELLERS.map((p) => (
+          <ProductCard key={p.name} p={p} onAdd={onAdd} dark />
+        ))}
       </div>
       <style>{`
-        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.18); }
+        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.25); }
         .product-card:hover .pc-img { transform: scale(1.05); }
       `}</style>
     </section>
