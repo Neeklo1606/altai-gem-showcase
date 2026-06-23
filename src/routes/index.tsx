@@ -175,6 +175,18 @@ function LandingPage() {
         scrollTo={scrollTo}
       />
 
+      <div
+        aria-hidden
+        style={{
+          height: 32,
+          background: "#1A3028",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='40' height='32' viewBox='0 0 40 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L10 0 L20 16 L30 0 L40 16 L30 32 L20 16 L10 32 Z' fill='none' stroke='rgba(200,151,58,0.35)' stroke-width='1'/%3E%3C/svg%3E\")",
+          backgroundSize: "40px 32px",
+          backgroundRepeat: "repeat-x",
+        }}
+      />
+
       <Hero scrollTo={scrollTo} />
 
       <CategoryBar active={activeCat} setActive={setActiveCat} />
@@ -271,9 +283,8 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
       }}
     >
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
-        <a href="#" className="flex shrink-0 items-center gap-2">
-          <span className="text-xl">🌿</span>
-          <span className="font-display text-[20px] font-bold text-forest">Жемчужина Алтая</span>
+        <a href="#" className="flex shrink-0 items-center">
+          <span style={{ fontFamily: "'Unbounded', sans-serif", fontSize: 18, fontWeight: 700, color: "#1A3028" }}>Жемчужина Алтая</span>
         </a>
 
         <nav className="hidden md:flex items-center gap-8">
@@ -536,20 +547,24 @@ function CategoryBar({ active, setActive }: { active: string; setActive: (id: st
 
 /* ---------- SECTION HEADING ---------- */
 
-function SectionHeading({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+function SectionHeading({ children, dark = false, subtitle }: { children: React.ReactNode; dark?: boolean; subtitle?: string }) {
   return (
     <div className="mb-12 text-center">
       <h2
-        className="font-display font-bold text-[28px] md:text-[40px]"
-        style={{ color: dark ? "#FFFBF3" : "var(--forest)" }}
+        style={{
+          fontFamily: "'Unbounded', sans-serif",
+          fontWeight: 800,
+          color: dark ? "#FFFBF3" : "#1A3028",
+        }}
+        className="text-[28px] md:text-[40px]"
       >
         {children}
       </h2>
-      <div className="mt-4 flex items-center justify-center gap-4">
-        <span className="h-px w-12" style={{ background: "var(--honey)" }} />
-        <span style={{ color: "var(--honey)" }}>🌿</span>
-        <span className="h-px w-12" style={{ background: "var(--honey)" }} />
-      </div>
+      {subtitle && (
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 16, color: dark ? "rgba(255,251,243,0.65)" : "#6B5E4E", marginTop: 12 }}>
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
@@ -560,7 +575,7 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
   return (
     <section id="catalog" className="bg-cream py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionHeading>Наша продукция</SectionHeading>
+        <SectionHeading subtitle="Выберите категорию">Наша продукция</SectionHeading>
 
         <div style={{ overflow: "hidden" }}>
           <div
@@ -1308,8 +1323,7 @@ function Footer() {
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="flex flex-col items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span>🌿</span>
+          <div className="flex items-center">
             <span
               style={{
                 fontFamily: "'Unbounded', sans-serif",
