@@ -175,6 +175,18 @@ function LandingPage() {
         scrollTo={scrollTo}
       />
 
+      <div
+        aria-hidden
+        style={{
+          height: 32,
+          background: "#1A3028",
+          backgroundImage:
+            "url(\"data:image/svg+xml,%3Csvg width='40' height='32' viewBox='0 0 40 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L10 0 L20 16 L30 0 L40 16 L30 32 L20 16 L10 32 Z' fill='none' stroke='rgba(200,151,58,0.35)' stroke-width='1'/%3E%3C/svg%3E\")",
+          backgroundSize: "40px 32px",
+          backgroundRepeat: "repeat-x",
+        }}
+      />
+
       <Hero scrollTo={scrollTo} />
 
       <CategoryBar active={activeCat} setActive={setActiveCat} />
