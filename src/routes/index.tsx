@@ -160,7 +160,7 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream text-ink">
+    <div className="min-h-screen bg-cream text-ink pb-20 md:pb-0">
       <Header
         cartCount={cart.totalCount}
         onCartOpen={() => setIsCartOpen(true)}
@@ -196,6 +196,12 @@ function LandingPage() {
         onRemove={cart.removeItem}
       />
 
+      <MobileBottomNav
+        cartCount={cart.totalCount}
+        onCartOpen={() => setIsCartOpen(true)}
+        scrollTo={scrollTo}
+      />
+
       {/* Toast */}
       <AnimatePresence>
         {toast && (
@@ -203,7 +209,7 @@ function LandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="fixed bottom-8 left-1/2 z-[60] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
+            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
             style={{ boxShadow: "0 8px 32px rgba(200, 151, 58, 0.4)" }}
           >
             {toast}
