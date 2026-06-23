@@ -111,9 +111,9 @@ const FEATURES = [
 ];
 
 const GIFT_SETS = [
-  { name: "Набор Сладкоежка", price: 2650, desc: "Мёд с орехами, конфеты ручной работы, кедровые матрёшки, чай", gradient: "linear-gradient(135deg, #F5C76A 0%, #C8973A 100%)", badge: "Популярный", emoji: "🎁" },
-  { name: "Набор Здоровье", price: 2390, desc: "Алтайский чай, растирка, мазь пантовая, кедровая живица, бальзам", gradient: "linear-gradient(135deg, #6AAE7E 0%, #1E5C3F 100%)", badge: null, emoji: "🌿" },
-  { name: "Набор Супермен", price: 1200, desc: "Мёд, бальзам Чемчудой, батончик пантогематоген, чай Батыр", gradient: "linear-gradient(135deg, #B89248 0%, #5C4416 100%)", badge: "Хит", emoji: "💪" },
+  { name: "Набор Сладкоежка", price: 2650, desc: "Мёд, кедровые конфеты, травяной чай, варенье", gradient: "linear-gradient(135deg, #7B4F0A 0%, #C8973A 100%)", badge: "Хит", emoji: "🎁" },
+  { name: "Набор Здоровье", price: 2390, desc: "Пантогематоген, бальзам, мазь пантовая, чай Батыр", gradient: "linear-gradient(135deg, #0D2B1A 0%, #1E6B3A 100%)", badge: null, emoji: "🌿" },
+  { name: "Набор Энергия", price: 1200, desc: "Мёд, пантогематоген, бальзам Чемчудой", gradient: "linear-gradient(135deg, #2A1A00 0%, #7A5000 100%)", badge: null, emoji: "💪" },
 ];
 
 /* ---------- CART HOOK ---------- */
