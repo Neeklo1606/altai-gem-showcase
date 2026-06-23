@@ -172,6 +172,8 @@ function LandingPage() {
 
       <Catalog onAdd={handleAdd} />
 
+      <About />
+
       <Bestsellers onAdd={handleAdd} />
 
       <BrandStory />
