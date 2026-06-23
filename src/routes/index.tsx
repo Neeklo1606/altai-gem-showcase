@@ -1385,22 +1385,6 @@ function Footer() {
 }
 
 
-function FooterCol({ title, links }: { title: string; links: string[] }) {
-  return (
-    <div>
-      <h4 className="font-display text-base font-bold" style={{ color: "#FFFBF3" }}>{title}</h4>
-      <ul className="mt-4 space-y-2 text-sm">
-        {links.map((l) => (
-          <li key={l}>
-            <a href="#" className="transition-colors hover:text-honey" style={{ color: "rgba(255,251,243,0.7)" }}>
-              {l}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
 
 /* ---------- CART DRAWER ---------- */
 
