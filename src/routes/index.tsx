@@ -1123,6 +1123,10 @@ function Bestsellers({ onAdd }: { onAdd: (i: CartItem) => void }) {
           ))}
         </div>
       </div>
+      <style>{`
+        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.18); }
+        .product-card:hover .pc-img { transform: scale(1.05); }
+      `}</style>
     </section>
   );
 }
