@@ -143,7 +143,7 @@ function LandingPage() {
 
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
-    const onScroll = () => setScrolled(window.scrollY > 50);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll);
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
