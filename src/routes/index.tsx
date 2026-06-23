@@ -563,7 +563,7 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
   return (
     <section id="catalog" className="bg-cream py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionHeading>Наша продукция</SectionHeading>
+        <SectionHeading subtitle="Выберите категорию">Наша продукция</SectionHeading>
 
         <div style={{ overflow: "hidden" }}>
           <div
