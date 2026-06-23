@@ -172,6 +172,8 @@ function LandingPage() {
 
       <Catalog onAdd={handleAdd} />
 
+      <About />
+
       <Bestsellers onAdd={handleAdd} />
 
       <BrandStory />
@@ -617,6 +619,138 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
     </section>
   );
 }
+
+/* ---------- ABOUT ---------- */
+
+function About() {
+  const stats = [
+    { num: "2", label: "Фермерских хозяйства" },
+    { num: "2018", label: "Год основания" },
+    { num: "2", label: "Магазина в НСК" },
+    { num: "100%", label: "Натуральное" },
+  ];
+
+  return (
+    <section id="about" className="w-full" style={{ background: "#1A3028" }}>
+      <div className="grid grid-cols-1 lg:grid-cols-5">
+        {/* LEFT — image */}
+        <div className="relative lg:col-span-3">
+          <img
+            src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80&fit=crop"
+            alt="Алтайские горы"
+            className="block w-full object-cover"
+            style={{ height: "var(--about-img-h, 300px)" }}
+          />
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(15,30,15,0.4) 100%)",
+            }}
+          />
+        </div>
+
+        {/* RIGHT — content */}
+        <div
+          className="flex flex-col justify-center lg:col-span-2"
+          style={{ padding: "var(--about-pad, 40px 24px)" }}
+        >
+          <div
+            style={{
+              fontSize: 12,
+              letterSpacing: "2px",
+              textTransform: "uppercase",
+              color: "#C8973A",
+              fontWeight: 600,
+            }}
+          >
+            О нас
+          </div>
+
+          <h2
+            style={{
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 28,
+              fontWeight: 700,
+              color: "#FFFBF3",
+              marginTop: 12,
+              lineHeight: 1.15,
+            }}
+          >
+            Два хозяйства. Одна история.
+          </h2>
+
+          <p
+            style={{
+              fontSize: 15,
+              color: "rgba(255,251,243,0.75)",
+              lineHeight: 1.65,
+              marginTop: 16,
+            }}
+          >
+            Мы работаем с двумя фермерскими хозяйствами: Алтайская деревня и Шлегель. Оба находятся в Алтайском крае, оба производят натуральную продукцию без добавок.
+          </p>
+          <p
+            style={{
+              fontSize: 15,
+              color: "rgba(255,251,243,0.75)",
+              lineHeight: 1.65,
+              marginTop: 12,
+            }}
+          >
+            Алтайская деревня — немецкое поселение на Алтае. Шлегель — фермерское хозяйство возле Белокурихи. Продукция поступает напрямую от производителей.
+          </p>
+
+          <div
+            className="grid grid-cols-2"
+            style={{ gap: 16, marginTop: 28 }}
+          >
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                style={{
+                  border: "1px solid rgba(200,151,58,0.2)",
+                  borderRadius: 12,
+                  padding: "14px 16px",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: "'Unbounded', sans-serif",
+                    fontSize: 26,
+                    color: "#C8973A",
+                    fontWeight: 700,
+                    lineHeight: 1.1,
+                  }}
+                >
+                  {s.num}
+                </div>
+                <div
+                  style={{
+                    fontSize: 12,
+                    color: "rgba(255,251,243,0.55)",
+                    marginTop: 4,
+                  }}
+                >
+                  {s.label}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        @media (min-width: 1024px) {
+          #about { --about-img-h: 500px; --about-pad: 60px 48px; }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+
 
 /* ---------- BESTSELLERS ---------- */
 
