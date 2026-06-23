@@ -371,6 +371,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
           </motion.div>
         )}
       </AnimatePresence>
+      <style>{`.cart-btn:hover { background: #1A3028 !important; color: #FFFBF3 !important; }`}</style>
     </motion.header>
   );
 }
