@@ -320,7 +320,16 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
           <motion.button
             whileTap={{ scale: 0.95 }}
             onClick={onCartOpen}
-            className="relative flex items-center gap-2 rounded-full bg-forest px-4 py-2 text-sm font-medium text-cream transition-colors hover:bg-forest-mid"
+            className="cart-btn relative flex items-center gap-2 rounded-lg px-4 py-2"
+            style={{
+              border: "1.5px solid #1A3028",
+              background: "transparent",
+              color: "#1A3028",
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 13,
+              fontWeight: 600,
+              transition: "background 0.2s ease, color 0.2s ease",
+            }}
           >
             <ShoppingCart className="h-4 w-4" />
             <span className="hidden sm:inline">Корзина</span>
