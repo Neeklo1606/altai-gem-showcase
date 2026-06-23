@@ -369,82 +369,133 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
   return (
     <section
       id="hero"
-      className="relative flex items-center overflow-hidden"
+      className="relative overflow-hidden"
       style={{ height: "100svh", minHeight: 600 }}
     >
-      {/* Background photo */}
+      {/* LAYER 1 - Photo */}
       <img
-        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80&fit=crop&crop=center"
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=85&fit=crop&crop=center"
         alt="Горы Алтая"
-        className="absolute inset-0 h-full w-full object-cover"
-        style={{ objectPosition: "center" }}
-      />
-      {/* Overlay 1 */}
-      <div
-        className="absolute inset-0"
         style={{
-          background:
-            "linear-gradient(to right, rgba(10,25,15,0.92) 0%, rgba(10,25,15,0.75) 50%, rgba(10,25,15,0.3) 100%)",
-        }}
-      />
-      {/* Overlay 2 */}
-      <div
-        className="absolute inset-0"
-        style={{
-          background:
-            "linear-gradient(to top, rgba(10,25,15,0.8) 0%, transparent 50%)",
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          objectPosition: "center 30%",
         }}
       />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 md:px-8">
-        <div className="max-w-2xl">
+      {/* LAYER 2 - Dark overlay */}
+      <div
+        style={{
+          position: "absolute",
+          inset: 0,
+          background:
+            "linear-gradient(105deg, rgba(8,18,12,0.88) 0%, rgba(8,18,12,0.72) 45%, rgba(8,18,12,0.35) 100%)",
+        }}
+      />
+
+      {/* LAYER 3 - Bottom fade */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: 200,
+          background: "linear-gradient(to top, rgba(249,243,232,1) 0%, transparent 100%)",
+          pointerEvents: "none",
+        }}
+      />
+
+      {/* LAYER 4 - Content */}
+      <div
+        className="relative z-10 mx-auto h-full w-full max-w-7xl"
+        style={{ padding: "100px 20px 60px" }}
+      >
+        <div className="hero-pad max-w-2xl">
           <motion.div {...fade(0.1)}>
-            <span
-              className="inline-flex items-center rounded-full border px-3.5 py-1 text-[13px] font-medium"
+            <div
               style={{
-                background: "rgba(200,151,58,0.2)",
-                color: "var(--honey)",
-                borderColor: "rgba(200,151,58,0.4)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 8,
+                background: "rgba(200,151,58,0.18)",
+                border: "1px solid rgba(200,151,58,0.4)",
+                borderRadius: 100,
+                padding: "6px 16px",
+                marginBottom: 24,
               }}
             >
-              🏔 Продукция с Алтая
-            </span>
+              <span
+                style={{
+                  width: 6,
+                  height: 6,
+                  borderRadius: "50%",
+                  background: "#C8973A",
+                  display: "block",
+                }}
+              />
+              <span
+                style={{
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 13,
+                  color: "#C8973A",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                Натуральная продукция с Алтая
+              </span>
+            </div>
           </motion.div>
 
           <motion.h1
             {...fade(0.3)}
-            className="mt-6 text-[40px] md:text-[64px]"
             style={{
-              color: "#FFFBF3",
+              margin: 0,
               fontFamily: "'Unbounded', sans-serif",
               fontWeight: 800,
               lineHeight: 1.0,
+              color: "#FFFBF3",
             }}
+            className="hero-h1"
           >
-            Продукты
-            <br />
-            с душой <span style={{ color: "#C8973A" }}>Алтая</span>
+            <span style={{ display: "block" }}>Продукты с душой</span>
+            <span style={{ display: "block", color: "#C8973A" }}>Алтая</span>
           </motion.h1>
 
           <motion.p
             {...fade(0.5)}
-            className="text-[17px] leading-relaxed"
             style={{
+              fontFamily: "Inter, sans-serif",
               color: "rgba(255,251,243,0.72)",
-              maxWidth: 460,
-              marginTop: 16,
+              maxWidth: 480,
+              lineHeight: 1.55,
+              marginTop: 20,
             }}
+            className="hero-sub"
           >
-            Натуральная продукция двух алтайских фермерских хозяйств. Два магазина в Новосибирске. Доставка по России.
+            Два фермерских хозяйства. Два магазина в Новосибирске. Доставка по всей России.
           </motion.p>
 
-          <motion.div {...fade(0.7)} className="mt-8 flex flex-wrap gap-3">
+          <motion.div
+            {...fade(0.7)}
+            style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}
+          >
             <motion.button
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => scrollTo("catalog")}
-              className="rounded-lg px-7 py-3.5 text-[15px] transition-colors hover:brightness-110"
-              style={{ backgroundColor: "#C8973A", color: "#1A3028", fontWeight: 700 }}
+              style={{
+                background: "#C8973A",
+                color: "#1A3028",
+                fontFamily: "'Unbounded', sans-serif",
+                fontSize: 14,
+                fontWeight: 700,
+                padding: "15px 32px",
+                borderRadius: 8,
+              }}
             >
               Смотреть каталог
             </motion.button>
@@ -452,43 +503,101 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => scrollTo("gifts")}
-              className="rounded-lg border-[1.5px] px-7 py-3.5 text-[15px] font-medium transition-colors hover:border-honey hover:text-honey"
-              style={{ borderColor: "rgba(255,251,243,0.4)", color: "#FFFBF3" }}
+              className="hero-btn-ghost"
+              style={{
+                background: "transparent",
+                border: "1.5px solid rgba(255,251,243,0.4)",
+                color: "#FFFBF3",
+                fontFamily: "'Unbounded', sans-serif",
+                fontSize: 14,
+                fontWeight: 700,
+                padding: "15px 32px",
+                borderRadius: 8,
+                transition: "border-color 0.2s, color 0.2s",
+              }}
             >
               Подарочные наборы
             </motion.button>
           </motion.div>
 
-          <motion.p
+          <motion.div
             {...fade(0.9)}
-            className="mt-6 text-[13px]"
-            style={{ color: "rgba(255,251,243,0.6)" }}
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              gap: 20,
+              marginTop: 28,
+              fontFamily: "Inter, sans-serif",
+              fontSize: 13,
+              color: "rgba(255,251,243,0.45)",
+            }}
           >
-            ⭐ 4.4 на Яндекс.Картах · 180+ фото · 8 отзывов · Работаем с 2018 г.
-          </motion.p>
+            <span>★ 4.4 на Яндекс.Картах</span>
+            <span>·</span>
+            <span>Работаем с 2018 г.</span>
+            <span>·</span>
+            <span>180+ фотографий</span>
+          </motion.div>
         </div>
 
-        {/* Floating product card */}
+        {/* Floating product card - desktop only */}
         <motion.div
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="absolute hidden lg:block right-12 top-1/2 -translate-y-1/2 w-[220px] rounded-2xl p-5"
+          className="hidden lg:block"
           style={{
-            background: "rgba(255,251,243,0.1)",
-            backdropFilter: "blur(20px)",
-            border: "1px solid rgba(200,151,58,0.4)",
-            animation: "heroFloat 4s ease-in-out infinite",
+            position: "absolute",
+            right: "8%",
+            top: "50%",
+            transform: "translateY(-50%)",
+            background: "rgba(10,20,15,0.65)",
+            backdropFilter: "blur(24px)",
+            WebkitBackdropFilter: "blur(24px)",
+            border: "1px solid rgba(200,151,58,0.35)",
+            borderRadius: 20,
+            padding: "20px 24px",
+            width: 210,
+            animation: "heroFloat 3.5s ease-in-out infinite",
           }}
         >
-          <div className="text-5xl mb-3">🍯</div>
-          <div className="font-display text-lg font-semibold" style={{ color: "#FFFBF3" }}>
+          <div style={{ fontSize: 44, lineHeight: 1 }}>🍯</div>
+          <div
+            style={{
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 15,
+              fontWeight: 700,
+              color: "#FFFBF3",
+              marginTop: 12,
+            }}
+          >
             Донниковый мёд
           </div>
-          <div className="mt-1 text-sm" style={{ color: "rgba(255,251,243,0.7)" }}>
+          <div
+            style={{
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 20,
+              fontWeight: 800,
+              color: "#C8973A",
+              marginTop: 6,
+            }}
+          >
             890 ₽/кг
           </div>
-          <div className="mt-3 inline-block text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--honey)" }}>
+          <div
+            style={{
+              display: "inline-block",
+              background: "rgba(200,151,58,0.2)",
+              border: "1px solid rgba(200,151,58,0.4)",
+              color: "#C8973A",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 11,
+              fontWeight: 600,
+              borderRadius: 100,
+              padding: "3px 10px",
+              marginTop: 8,
+            }}
+          >
             Хит продаж
           </div>
         </motion.div>
@@ -497,7 +606,18 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
       <style>{`
         @keyframes heroFloat {
           0%, 100% { transform: translateY(-50%) translateY(0); }
-          50% { transform: translateY(-50%) translateY(-12px); }
+          50% { transform: translateY(-50%) translateY(-10px); }
+        }
+        .hero-h1 { font-size: 42px; }
+        .hero-sub { font-size: 15px; }
+        .hero-btn-ghost:hover { border-color: #C8973A !important; color: #C8973A !important; }
+        @media (min-width: 768px) {
+          .hero-pad { padding-top: 20px; }
+          .hero-h1 { font-size: 68px; }
+          .hero-sub { font-size: 18px; }
+        }
+        @media (min-width: 1024px) {
+          .hero-pad { padding-left: 20px; }
         }
       `}</style>
     </section>
