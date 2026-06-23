@@ -456,8 +456,12 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 function CategoryBar({ active, setActive }: { active: string; setActive: (id: string) => void }) {
   return (
     <div
-      className="sticky top-16 md:top-[72px] z-40 border-b"
-      style={{ borderColor: "rgba(200,151,58,0.2)", backgroundColor: "#F9F3E8" }}
+      className="sticky top-16 md:top-[72px] z-40"
+      style={{
+        backgroundColor: "rgba(249,243,232,0.97)",
+        backdropFilter: "blur(12px)",
+        borderBottom: "1px solid rgba(200,151,58,0.15)",
+      }}
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="no-scrollbar flex gap-2 overflow-x-auto py-3">
