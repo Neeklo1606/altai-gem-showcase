@@ -533,25 +533,74 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                whileHover={{ y: -4 }}
-                className="group h-[280px] cursor-pointer overflow-hidden rounded-2xl border bg-parchment shadow-card hover:shadow-card-hover"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+                className="category-card relative cursor-pointer overflow-hidden"
                 style={{
-                  borderColor: "transparent",
-                  transition: "opacity 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease",
+                  height: "var(--cat-h)",
+                  borderRadius: 20,
+                  background: c.gradient,
+                  transition: "filter 0.3s ease, box-shadow 0.3s ease",
+                  boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
                 }}
               >
+                {/* noise texture */}
                 <div
-                  className="grid h-[160px] place-items-center text-6xl"
-                  style={{ background: c.gradient }}
-                >
-                  <span className="drop-shadow-lg">{c.emoji}</span>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-display text-xl font-bold text-forest">{c.title}</h3>
-                  <p className="mt-1 text-[13px] text-ink-muted">{c.desc}</p>
-                  <div className="mt-3 flex items-center gap-1 text-[13px] font-medium" style={{ color: "var(--honey)" }}>
-                    → {c.count} товаров
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>\")",
+                    opacity: 0.04,
+                    mixBlendMode: "overlay",
+                  }}
+                />
+                {/* bottom shine */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(255,255,255,0.06) 0%, transparent 60%)",
+                  }}
+                />
+                {/* text */}
+                <div className="relative" style={{ margin: 20 }}>
+                  <h3
+                    style={{
+                      fontFamily: "'Unbounded', sans-serif",
+                      fontSize: 18,
+                      fontWeight: 700,
+                      color: "#FFFBF3",
+                      lineHeight: 1.1,
+                    }}
+                  >
+                    {c.title}
+                  </h3>
+                  <div
+                    style={{
+                      marginTop: 6,
+                      fontSize: 13,
+                      color: "rgba(255,251,243,0.55)",
+                    }}
+                  >
+                    {c.count} товаров
                   </div>
+                </div>
+                {/* emoji */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute"
+                  style={{
+                    bottom: 16,
+                    right: 16,
+                    fontSize: 52,
+                    lineHeight: 1,
+                    transform: "rotate(10deg)",
+                    filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))",
+                  }}
+                >
+                  {c.emoji}
                 </div>
               </motion.div>
             ))}
