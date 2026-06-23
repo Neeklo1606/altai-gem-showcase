@@ -12,6 +12,9 @@ import {
   Star,
   Shield,
   ArrowRight,
+  Home,
+  LayoutGrid,
+  Phone,
 } from "lucide-react";
 
 export const Route = createFileRoute("/")({
