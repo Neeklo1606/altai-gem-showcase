@@ -330,6 +330,7 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 
   return (
     <section
+      id="hero"
       className="relative flex items-center overflow-hidden"
       style={{ height: "100svh", minHeight: 600 }}
     >
