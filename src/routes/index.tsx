@@ -896,29 +896,140 @@ function BrandStory() {
 /* ---------- WHY US ---------- */
 
 function WhyUs() {
+  const cards = [
+    { Icon: Leaf, title: "Только натуральное", desc: "Продукция напрямую от производителей. Без консервантов и ароматизаторов" },
+    { Icon: MapPin, title: "Два магазина", desc: "ул. Титова, 32 и Гурьевская, 55. Приходите попробовать лично" },
+    { Icon: Truck, title: "Доставка по России", desc: "Отправляем СДЭК. Мёд, колбасы, косметика — в любой регион" },
+    { Icon: Shield, title: "Контроль качества", desc: "Работаем только с проверенными хозяйствами с 2018 года" },
+  ];
+
+  const shops = [
+    { name: "Левый берег", addr: "ул. Титова, 32" },
+    { name: "Правый берег", addr: "Гурьевская, 55" },
+  ];
+
   return (
-    <section className="bg-cream py-16 md:py-24">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <SectionHeading>Почему выбирают нас</SectionHeading>
+    <section id="locations" style={{ background: "#F9F3E8", padding: "72px 24px" }}>
+      <div className="mx-auto max-w-7xl">
+        <h2
+          className="text-center"
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 32,
+            fontWeight: 800,
+            color: "#1A3028",
+            lineHeight: 1.1,
+          }}
+        >
+          Почему выбирают нас
+        </h2>
+        <div style={{ width: 60, height: 3, background: "#C8973A", margin: "12px auto 48px" }} />
+
         <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
-          {FEATURES.map((f, i) => (
+          {cards.map((c, i) => (
             <motion.div
-              key={f.title}
+              key={c.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              whileHover={{ y: -4 }}
-              className="rounded-xl border bg-parchment p-6 shadow-card transition-all hover:shadow-card-hover"
-              style={{ borderColor: "rgba(200,151,58,0.15)" }}
+              className="why-card"
+              style={{
+                background: "#FFFFFF",
+                border: "1px solid rgba(200,151,58,0.15)",
+                borderRadius: 20,
+                padding: "28px 24px",
+                boxShadow: "0 4px 20px rgba(30,58,47,0.06)",
+                transition: "all 0.3s ease",
+              }}
             >
-              <f.Icon className="h-12 w-12" style={{ color: "var(--honey)" }} />
-              <h3 className="mt-4 font-display text-lg font-bold text-forest">{f.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-muted">{f.desc}</p>
+              <div
+                className="grid place-items-center"
+                style={{
+                  width: 52,
+                  height: 52,
+                  borderRadius: "50%",
+                  background: "rgba(200,151,58,0.1)",
+                  marginBottom: 16,
+                }}
+              >
+                <c.Icon size={26} color="#C8973A" />
+              </div>
+              <h3
+                style={{
+                  fontFamily: "'Unbounded', sans-serif",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "#1A3028",
+                  marginBottom: 8,
+                }}
+              >
+                {c.title}
+              </h3>
+              <p style={{ fontSize: 14, color: "#6B5E4E", lineHeight: 1.6 }}>{c.desc}</p>
             </motion.div>
           ))}
         </div>
+
+        <div style={{ marginTop: 64 }}>
+          <h2
+            className="text-center"
+            style={{
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 28,
+              fontWeight: 800,
+              color: "#1A3028",
+              lineHeight: 1.1,
+              marginBottom: 32,
+            }}
+          >
+            Найдите нас
+          </h2>
+          <div className="grid gap-5 grid-cols-1 md:grid-cols-2">
+            {shops.map((s) => (
+              <div
+                key={s.name}
+                style={{
+                  background: "#1A3028",
+                  borderRadius: 20,
+                  padding: 28,
+                }}
+              >
+                <MapPin size={24} color="#C8973A" />
+                <h3
+                  style={{
+                    fontFamily: "'Unbounded', sans-serif",
+                    fontSize: 16,
+                    color: "#FFFBF3",
+                    marginTop: 12,
+                  }}
+                >
+                  {s.name}
+                </h3>
+                <p style={{ fontSize: 15, color: "rgba(255,251,243,0.7)", margin: "8px 0" }}>
+                  {s.addr}
+                </p>
+                <a
+                  href="https://yandex.ru/maps/-/CDSir28U"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: "#C8973A", fontSize: 14 }}
+                >
+                  Открыть карту →
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
+
+      <style>{`
+        .why-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 32px rgba(200,151,58,0.15);
+          border-color: rgba(200,151,58,0.4);
+        }
+      `}</style>
     </section>
   );
 }
