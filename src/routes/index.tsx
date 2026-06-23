@@ -243,7 +243,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
         boxShadow: scrolled ? "0 2px 12px rgba(30, 58, 47, 0.06)" : "none",
       }}
     >
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 md:h-[72px] md:px-8">
         <a href="#" className="flex shrink-0 items-center gap-2">
           <span className="text-xl">🌿</span>
           <span className="font-display text-[20px] font-bold text-forest">Жемчужина Алтая</span>
