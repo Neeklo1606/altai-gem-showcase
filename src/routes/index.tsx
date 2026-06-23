@@ -10,6 +10,7 @@ import {
   MapPin,
   Truck,
   Star,
+  Shield,
   ArrowRight,
 } from "lucide-react";
 
