@@ -935,36 +935,171 @@ function About() {
 /* ---------- BESTSELLERS ---------- */
 
 function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void }) {
+  const isShipping = p.delivery === "Доставка по РФ";
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="shrink-0 w-[75vw] sm:w-[220px] snap-start rounded-xl bg-parchment p-4 shadow-card transition-all hover:shadow-card-hover"
+      className="product-card shrink-0 snap-start"
+      style={{
+        width: 220,
+        background: "#FFFFFF",
+        borderRadius: 16,
+        overflow: "hidden",
+        border: "1px solid rgba(30,58,47,0.07)",
+        boxShadow: "0 2px 16px rgba(30,58,47,0.06)",
+        transition: "box-shadow 0.3s ease, transform 0.3s ease",
+      }}
     >
-      <div
-        className="grid h-[140px] place-items-center rounded-lg text-5xl"
-        style={{ background: p.bg }}
-      >
-        {p.emoji}
+      {/* Image zone */}
+      <div style={{ position: "relative", height: 180, background: p.bg, overflow: "hidden" }}>
+        <img
+          src={p.photo}
+          alt={p.name}
+          className="pc-img"
+          onError={(e) => {
+            const el = e.currentTarget as HTMLImageElement;
+            el.style.display = "none";
+            const fb = el.nextElementSibling as HTMLElement | null;
+            if (fb) fb.style.display = "grid";
+          }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: "transform 0.3s ease",
+            display: "block",
+          }}
+        />
+        <div
+          aria-hidden
+          style={{
+            display: "none",
+            position: "absolute",
+            inset: 0,
+            placeItems: "center",
+            fontSize: 56,
+            background: p.bg,
+          }}
+        >
+          {p.emoji}
+        </div>
+
+        {/* Delivery badge */}
+        <div
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            background: isShipping ? "rgba(22,101,52,0.85)" : "rgba(60,60,60,0.75)",
+            color: "#FFFFFF",
+            fontFamily: "Inter, sans-serif",
+            fontSize: 10,
+            fontWeight: 600,
+            borderRadius: 100,
+            padding: "3px 10px",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          {p.delivery}
+        </div>
+
+        {/* Hit badge */}
+        {p.hit && (
+          <div
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              background: "#C8973A",
+              color: "#1A3028",
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 10,
+              fontWeight: 700,
+              borderRadius: 100,
+              padding: "3px 10px",
+            }}
+          >
+            Хит
+          </div>
+        )}
       </div>
-      <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--honey)" }}>
-        {p.cat}
+
+      {/* Content */}
+      <div style={{ padding: "14px 16px" }}>
+        <div
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 11,
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+            color: "#C8973A",
+            fontWeight: 600,
+            marginBottom: 4,
+          }}
+        >
+          {p.cat}
+        </div>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(100,80,50,0.6)" }}>
+          {p.producer}
+        </div>
+        <h4
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 14,
+            fontWeight: 700,
+            color: "#1A3028",
+            lineHeight: 1.3,
+            marginTop: 4,
+          }}
+        >
+          {p.name}
+        </h4>
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 12,
+            color: "#7A6A5A",
+            lineHeight: 1.4,
+            marginTop: 4,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {p.desc}
+        </p>
+        <div
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 20,
+            fontWeight: 800,
+            color: "#1A3028",
+            marginTop: 10,
+          }}
+        >
+          {p.price}
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "#7A6A5A", marginLeft: 6 }}>
+            {p.unit}
+          </span>
+        </div>
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          onClick={() => onAdd({ id: p.name, name: p.name, price: p.price })}
+          style={{
+            background: "#C8973A",
+            color: "#1A3028",
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 12,
+            fontWeight: 700,
+            borderRadius: 8,
+            width: "100%",
+            padding: 10,
+            marginTop: 10,
+          }}
+        >
+          В корзину
+        </motion.button>
       </div>
-      <h4 className="mt-1 font-display text-base font-bold text-forest line-clamp-2 min-h-[44px]">
-        {p.name}
-      </h4>
-      <p className="mt-1 text-xs text-ink-muted line-clamp-1">{p.desc}</p>
-      <div className="mt-2 font-bold text-forest text-xl">
-        {p.price}
-        <span className="text-sm font-medium text-ink-muted ml-1">{p.unit}</span>
-      </div>
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.97 }}
-        onClick={() => onAdd({ id: p.name, name: p.name, price: p.price })}
-        className="mt-3 w-full rounded-lg bg-honey py-2 text-sm font-semibold text-forest transition-colors hover:bg-honey-light"
-      >
-        В корзину
-      </motion.button>
     </motion.div>
   );
 }
