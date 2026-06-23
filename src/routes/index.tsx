@@ -1290,71 +1290,100 @@ function Locations() {
 /* ---------- FOOTER ---------- */
 
 function Footer() {
+  const socials = [
+    { label: "VK", initials: "VK" },
+    { label: "Telegram", initials: "TG" },
+    { label: "WhatsApp", initials: "WA" },
+  ];
+
   return (
-    <footer id="footer" className="pt-16 pb-8" style={{ background: "var(--forest)" }}>
+    <footer
+      id="footer"
+      style={{
+        background: "#0F1E18",
+        borderTop: "2px solid #C8973A",
+        paddingTop: 48,
+        paddingBottom: 32,
+      }}
+    >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="grid gap-10 grid-cols-2 md:grid-cols-4">
-          <div className="col-span-2 md:col-span-1">
-            <div className="flex items-center gap-2">
-              <span>🌿</span>
-              <span className="font-display text-xl font-bold" style={{ color: "#FFFBF3" }}>
-                Жемчужина Алтая
-              </span>
-            </div>
-            <p className="mt-3 text-sm" style={{ color: "rgba(255,251,243,0.6)" }}>
-              Дарим лучшее от алтайской природы
-            </p>
-            <div className="mt-4 flex gap-3">
-              {["VK", "TG", "WA"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  className="grid h-10 w-10 place-items-center rounded-full border text-xs font-bold transition-colors hover:bg-honey hover:text-forest"
-                  style={{ borderColor: "rgba(200,151,58,0.3)", color: "var(--honey)" }}
-                >
-                  {s}
-                </a>
-              ))}
-            </div>
+        <div className="flex flex-col items-center gap-6">
+          <div className="flex items-center gap-2">
+            <span>🌿</span>
+            <span
+              style={{
+                fontFamily: "'Unbounded', sans-serif",
+                fontSize: 18,
+                fontWeight: 700,
+                color: "#FFFBF3",
+              }}
+            >
+              Жемчужина Алтая
+            </span>
           </div>
 
-          <FooterCol title="Каталог" links={["Мёд", "Чаи и травы", "Мясо марала", "Косметика", "Подарки"]} />
-          <FooterCol title="Информация" links={["О нас", "Доставка и оплата", "Возврат", "Контакты"]} />
-          <div>
-            <h4 className="font-display text-base font-bold" style={{ color: "#FFFBF3" }}>Контакты</h4>
-            <ul className="mt-4 space-y-2 text-sm" style={{ color: "rgba(255,251,243,0.7)" }}>
-              <li>+7 (960) 798-16-22</li>
-              <li>ул. Титова, 32</li>
-              <li>Гурьевская, 55</li>
-              <li>Ежедневно: уточняйте</li>
-            </ul>
+          <div className="flex gap-3">
+            {socials.map((s) => (
+              <a
+                key={s.label}
+                href="#"
+                aria-label={s.label}
+                className="footer-social grid place-items-center"
+                style={{
+                  width: 32,
+                  height: 32,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(255,251,243,0.15)",
+                  color: "rgba(255,251,243,0.5)",
+                  fontSize: 10,
+                  fontWeight: 700,
+                  transition: "border-color 0.2s ease, color 0.2s ease",
+                }}
+              >
+                {s.initials}
+              </a>
+            ))}
           </div>
         </div>
 
         <div
-          className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-3 border-t pt-6 text-xs"
-          style={{ borderColor: "rgba(200,151,58,0.2)", color: "rgba(255,251,243,0.5)" }}
+          className="mt-8 flex flex-col sm:flex-row items-center justify-between gap-3"
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 12,
+            color: "rgba(255,251,243,0.3)",
+          }}
         >
-          <div>© 2026 Жемчужина Алтая · Новосибирск</div>
+          <div>2026 Жемчужина Алтая</div>
           <div className="flex items-center gap-4">
-            <a
-              href="/admin"
-              style={{ fontSize: 11, color: "rgba(100,100,100,0.4)" }}
-            >
+            <a href="/admin" style={{ fontSize: 11, color: "rgba(255,251,243,0.2)" }}>
               Admin
             </a>
             <span>
               Разработка:{" "}
-              <a href="https://neeklo.studio" target="_blank" rel="noopener noreferrer" style={{ color: "var(--honey)" }}>
+              <a
+                href="https://neeklo.studio"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: "rgba(255,251,243,0.5)" }}
+              >
                 neeklo.studio
               </a>
             </span>
           </div>
         </div>
       </div>
+
+      <style>{`
+        .footer-social:hover {
+          border-color: #C8973A !important;
+          color: #C8973A !important;
+        }
+      `}</style>
     </footer>
   );
 }
+
 
 function FooterCol({ title, links }: { title: string; links: string[] }) {
   return (
