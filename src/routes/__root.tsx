@@ -77,9 +77,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Жемчужина Алтая — натуральная продукция с Алтая" },
+      { title: "Жемчужина Алтая - натуральная продукция с Алтая" },
       { name: "description", content: "Натуральный мёд, деликатесы из марала, травяные чаи и косметика прямо с Алтая. Два магазина в Новосибирске, доставка по России." },
-      { property: "og:title", content: "Жемчужина Алтая — натуральная продукция с Алтая" },
+      { property: "og:title", content: "Жемчужина Алтая - натуральная продукция с Алтая" },
       { property: "og:description", content: "Натуральный мёд, деликатесы из марала, травяные чаи и косметика прямо с Алтая." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },

@@ -13,7 +13,7 @@ import {
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
-    meta: [{ title: "Админ-панель — Жемчужина Алтая" }],
+    meta: [{ title: "Админ-панель - Жемчужина Алтая" }],
   }),
   component: AdminPage,
 });
