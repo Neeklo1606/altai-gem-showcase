@@ -284,7 +284,7 @@ function Header({ cartCount, onCartOpen, scrolled, mobileMenu, setMobileMenu, sc
             )}
           </motion.button>
           <button
-            className="md:hidden grid h-10 w-10 place-items-center rounded-full text-forest"
+            className="hidden grid h-10 w-10 place-items-center rounded-full text-forest"
             onClick={() => setMobileMenu(!mobileMenu)}
             aria-label="Меню"
           >
