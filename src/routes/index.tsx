@@ -1431,3 +1431,130 @@ function CartDrawer({
     </AnimatePresence>
   );
 }
+
+/* ---------- MOBILE BOTTOM NAV ---------- */
+
+function MobileBottomNav({
+  cartCount,
+  onCartOpen,
+  scrollTo,
+}: {
+  cartCount: number;
+  onCartOpen: () => void;
+  scrollTo: (id: string) => void;
+}) {
+  const [active, setActive] = useState("hero");
+
+  const items: {
+    id: string;
+    label: string;
+    Icon: typeof Home;
+    target: string;
+  }[] = [
+    { id: "hero", label: "Главная", Icon: Home, target: "hero" },
+    { id: "catalog", label: "Каталог", Icon: LayoutGrid, target: "catalog" },
+    { id: "locations", label: "Доставка", Icon: Truck, target: "locations" },
+    { id: "footer", label: "Контакты", Icon: Phone, target: "footer" },
+  ];
+
+  const go = (id: string, target: string) => {
+    setActive(id);
+    scrollTo(target);
+  };
+
+  return (
+    <nav
+      className="md:hidden flex"
+      style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        height: 64,
+        background: "rgba(15, 30, 24, 0.96)",
+        backdropFilter: "blur(20px)",
+        borderTop: "1px solid rgba(200, 151, 58, 0.15)",
+        paddingBottom: "env(safe-area-inset-bottom, 0px)",
+        justifyContent: "space-around",
+        alignItems: "center",
+      }}
+    >
+      {items.slice(0, 2).map((it) => {
+        const isActive = active === it.id;
+        return (
+          <button
+            key={it.id}
+            onClick={() => go(it.id, it.target)}
+            className="flex flex-col items-center"
+            style={{
+              gap: 3,
+              padding: "8px 12px",
+              color: isActive ? "#C8973A" : "rgba(255,251,243,0.4)",
+            }}
+          >
+            <it.Icon size={22} />
+            <span style={{ fontSize: 9, letterSpacing: "0.3px" }}>{it.label}</span>
+          </button>
+        );
+      })}
+
+      {/* Center cart */}
+      <button
+        onClick={onCartOpen}
+        className="relative grid place-items-center"
+        style={{
+          width: 52,
+          height: 52,
+          borderRadius: "50%",
+          background: "#C8973A",
+          padding: 14,
+          boxShadow: "0 6px 18px rgba(200,151,58,0.45)",
+        }}
+        aria-label="Корзина"
+      >
+        <ShoppingCart size={24} color="#1A3028" />
+        {cartCount > 0 && (
+          <span
+            className="grid place-items-center"
+            style={{
+              position: "absolute",
+              top: -2,
+              right: -2,
+              minWidth: 18,
+              height: 18,
+              padding: "0 5px",
+              borderRadius: 100,
+              background: "#D93030",
+              color: "#FFFFFF",
+              fontSize: 10,
+              fontWeight: 700,
+              border: "2px solid rgba(15,30,24,0.96)",
+            }}
+          >
+            {cartCount}
+          </span>
+        )}
+      </button>
+
+      {items.slice(2).map((it) => {
+        const isActive = active === it.id;
+        return (
+          <button
+            key={it.id}
+            onClick={() => go(it.id, it.target)}
+            className="flex flex-col items-center"
+            style={{
+              gap: 3,
+              padding: "8px 12px",
+              color: isActive ? "#C8973A" : "rgba(255,251,243,0.4)",
+            }}
+          >
+            <it.Icon size={22} />
+            <span style={{ fontSize: 9, letterSpacing: "0.3px" }}>{it.label}</span>
+          </button>
+        );
+      })}
+    </nav>
+  );
+}
