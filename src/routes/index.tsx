@@ -172,11 +172,11 @@ function LandingPage() {
       <div
         aria-hidden
         style={{
-          height: 32,
-          background: "#1A3028",
+          height: 28,
+          backgroundColor: "#1A3028",
           backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg width='40' height='32' viewBox='0 0 40 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 16 L10 0 L20 16 L30 0 L40 16 L30 32 L20 16 L10 32 Z' fill='none' stroke='rgba(200,151,58,0.35)' stroke-width='1'/%3E%3C/svg%3E\")",
-          backgroundSize: "40px 32px",
+            "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='28'%3E%3Cpolygon points='0,14 7,0 15,14 23,0 30,14 23,28 15,14 7,28' fill='none' stroke='%23C8973A' stroke-width='0.8' opacity='0.5'/%3E%3C/svg%3E\")",
+          backgroundSize: "30px 28px",
           backgroundRepeat: "repeat-x",
         }}
       />
