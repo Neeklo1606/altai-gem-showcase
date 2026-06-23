@@ -195,6 +195,21 @@ function LandingPage() {
 
       <WhyUs />
 
+      <div style={{ width: "100%", overflow: "hidden" }} className="h-[200px] md:h-[300px]">
+        <img
+          src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1920&q=80&fit=crop&crop=center"
+          alt="Горы Алтая"
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 40%",
+            filter: "brightness(0.75) saturate(1.1)",
+            display: "block",
+          }}
+        />
+      </div>
+
       <GiftSets onAdd={handleAdd} />
 
 
