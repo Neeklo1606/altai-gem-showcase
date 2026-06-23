@@ -691,96 +691,110 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <SectionHeading subtitle="Выберите категорию">Наша продукция</SectionHeading>
 
-        <div style={{ overflow: "hidden" }}>
-          <div
-            className="grid gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
-            style={{ minHeight: typeof window !== "undefined" && window.innerWidth < 768 ? 1200 : 900 }}
-          >
-            {CATEGORY_CARDS.map((c, i) => (
-              <motion.div
-                key={c.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.98 }}
-                className="category-card relative cursor-pointer overflow-hidden"
+        <div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          style={{ gap: 16 }}
+        >
+          {CATEGORY_CARDS.map((c, i) => (
+            <motion.div
+              key={c.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.06 }}
+              className="cat-card-photo relative cursor-pointer overflow-hidden"
+              style={{
+                height: "var(--cat-h)",
+                borderRadius: 18,
+                background: c.gradient,
+                boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+                transition: "all 0.35s ease",
+              }}
+            >
+              {/* Photo */}
+              <img
+                src={c.photo}
+                alt={c.title}
+                className="cat-card-img"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.display = "none";
+                }}
                 style={{
-                  height: "var(--cat-h)",
-                  borderRadius: 20,
-                  background: c.gradient,
-                  transition: "filter 0.3s ease, box-shadow 0.3s ease",
-                  boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  transition: "transform 0.4s ease",
+                }}
+              />
+              {/* Gradient overlay */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(8,16,12,0.95) 0%, rgba(8,16,12,0.5) 50%, rgba(8,16,12,0.1) 100%)",
+                }}
+              />
+              {/* Arrow pill */}
+              <div
+                style={{
+                  position: "absolute",
+                  top: 16,
+                  right: 16,
+                  background: "rgba(200,151,58,0.2)",
+                  border: "1px solid rgba(200,151,58,0.4)",
+                  color: "#C8973A",
+                  fontFamily: "Inter, sans-serif",
+                  fontSize: 12,
+                  borderRadius: 100,
+                  padding: "4px 12px",
+                  backdropFilter: "blur(8px)",
                 }}
               >
-                {/* noise texture */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0"
+                → {c.count}
+              </div>
+              {/* Content */}
+              <div
+                style={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  padding: 20,
+                }}
+              >
+                <h3
                   style={{
-                    backgroundImage:
-                      "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/></svg>\")",
-                    opacity: 0.04,
-                    mixBlendMode: "overlay",
-                  }}
-                />
-                {/* bottom shine */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0"
-                  style={{
-                    background:
-                      "linear-gradient(to top, rgba(255,255,255,0.06) 0%, transparent 60%)",
-                  }}
-                />
-                {/* text */}
-                <div className="relative" style={{ margin: 20 }}>
-                  <h3
-                    style={{
-                      fontFamily: "'Unbounded', sans-serif",
-                      fontSize: 18,
-                      fontWeight: 700,
-                      color: "#FFFBF3",
-                      lineHeight: 1.1,
-                    }}
-                  >
-                    {c.title}
-                  </h3>
-                  <div
-                    style={{
-                      marginTop: 6,
-                      fontSize: 13,
-                      color: "rgba(255,251,243,0.55)",
-                    }}
-                  >
-                    {c.count} товаров
-                  </div>
-                </div>
-                {/* emoji */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute"
-                  style={{
-                    bottom: 16,
-                    right: 16,
-                    fontSize: 52,
-                    lineHeight: 1,
-                    transform: "rotate(10deg)",
-                    filter: "drop-shadow(0 4px 12px rgba(0,0,0,0.4))",
+                    fontFamily: "'Unbounded', sans-serif",
+                    fontSize: 18,
+                    fontWeight: 700,
+                    color: "#FFFBF3",
+                    lineHeight: 1.15,
                   }}
                 >
-                  {c.emoji}
+                  {c.title}
+                </h3>
+                <div
+                  style={{
+                    marginTop: 4,
+                    fontFamily: "Inter, sans-serif",
+                    fontSize: 13,
+                    color: "rgba(255,251,243,0.55)",
+                  }}
+                >
+                  {c.count} товаров
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
       <style>{`
-        .category-card { --cat-h: 160px; }
-        @media (min-width: 768px) { .category-card { --cat-h: 200px; } }
-        .category-card:hover { filter: brightness(1.12); }
+        .cat-card-photo { --cat-h: 180px; }
+        @media (min-width: 768px) { .cat-card-photo { --cat-h: 220px; } }
+        .cat-card-photo:hover .cat-card-img { transform: scale(1.08); }
       `}</style>
     </section>
   );
