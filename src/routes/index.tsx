@@ -82,16 +82,16 @@ const CATEGORY_CARDS = [
 ];
 
 const BESTSELLERS = [
-  { name: "Донниковый мёд", price: 890, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Нежный ванильный аромат", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Мясо марала (вырезка)", price: 2150, unit: "₽/кг", cat: "Марал", emoji: "🦌", desc: "Плотное, нежное, травяные нотки", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель" },
-  { name: "Набор Сладкоежка", price: 2650, unit: "₽", cat: "Подарки", emoji: "🎁", desc: "Мёд, конфеты, чай", bg: "#FBE0A8", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Пантогематоген батончик", price: 380, unit: "₽/шт", cat: "Здоровье", emoji: "💪", desc: "С кровью марала", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Горный мёд с миндалём", price: 950, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Алтайский разнотравный", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Чай Таёжный со смородиной", price: 520, unit: "₽/упак", cat: "Чаи", emoji: "🌿", desc: "Сбор горных трав", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Крем Саган дайля", price: 890, unit: "₽", cat: "Косметика", emoji: "🌸", desc: "Для лица, натуральный", bg: "#E0EBD6", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Молочная колбаса", price: 680, unit: "₽/кг", cat: "Мясное", emoji: "🥓", desc: "Нежная, домашнего рецепта", bg: "#E8C8C8", delivery: "Самовывоз", producer: "Шлегель" },
-  { name: "Сыр Алтайский", price: 1290, unit: "₽/кг", cat: "Сыры", emoji: "🧀", desc: "Выдержанный, мягкий вкус", bg: "#FBE9C2", delivery: "Самовывоз", producer: "Шлегель" },
-  { name: "Колбаса сырокопченая", price: 1450, unit: "₽/кг", cat: "Мясное", emoji: "🍖", desc: "Из мяса марала, копчёная на ольхе", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель" },
+  { name: "Донниковый мёд", price: 890, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Нежный ванильный аромат", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: true, photo: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=80&fit=crop" },
+  { name: "Мясо марала (вырезка)", price: 2150, unit: "₽/кг", cat: "Марал", emoji: "🦌", desc: "Плотное, нежное, травяные нотки", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&q=80&fit=crop" },
+  { name: "Набор Сладкоежка", price: 2650, unit: "₽", cat: "Подарки", emoji: "🎁", desc: "Мёд, конфеты, чай", bg: "#FBE0A8", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: true, photo: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80&fit=crop" },
+  { name: "Пантогематоген батончик", price: 380, unit: "₽/шт", cat: "Здоровье", emoji: "💪", desc: "С кровью марала", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=400&q=80&fit=crop" },
+  { name: "Горный мёд с миндалём", price: 950, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Алтайский разнотравный", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80&fit=crop" },
+  { name: "Чай Таёжный со смородиной", price: 520, unit: "₽/упак", cat: "Чаи", emoji: "🌿", desc: "Сбор горных трав", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80&fit=crop" },
+  { name: "Крем Саган дайля", price: 890, unit: "₽", cat: "Косметика", emoji: "🌸", desc: "Для лица, натуральный", bg: "#E0EBD6", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80&fit=crop" },
+  { name: "Молочная колбаса", price: 680, unit: "₽/кг", cat: "Мясное", emoji: "🥓", desc: "Нежная, домашнего рецепта", bg: "#E8C8C8", delivery: "Самовывоз", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80&fit=crop" },
+  { name: "Сыр Алтайский", price: 1290, unit: "₽/кг", cat: "Сыры", emoji: "🧀", desc: "Выдержанный, мягкий вкус", bg: "#FBE9C2", delivery: "Самовывоз", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&q=80&fit=crop" },
+  { name: "Колбаса сырокопченая", price: 1450, unit: "₽/кг", cat: "Мясное", emoji: "🍖", desc: "Из мяса марала, копчёная на ольхе", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель", hit: true, photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80&fit=crop" },
 ];
 
 const STATS = [
