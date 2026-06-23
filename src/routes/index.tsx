@@ -82,16 +82,16 @@ const CATEGORY_CARDS = [
 ];
 
 const BESTSELLERS = [
-  { name: "Донниковый мёд", price: 890, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Нежный ванильный аромат", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Мясо марала (вырезка)", price: 2150, unit: "₽/кг", cat: "Марал", emoji: "🦌", desc: "Плотное, нежное, травяные нотки", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель" },
-  { name: "Набор Сладкоежка", price: 2650, unit: "₽", cat: "Подарки", emoji: "🎁", desc: "Мёд, конфеты, чай", bg: "#FBE0A8", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Пантогематоген батончик", price: 380, unit: "₽/шт", cat: "Здоровье", emoji: "💪", desc: "С кровью марала", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Горный мёд с миндалём", price: 950, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Алтайский разнотравный", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Чай Таёжный со смородиной", price: 520, unit: "₽/упак", cat: "Чаи", emoji: "🌿", desc: "Сбор горных трав", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Крем Саган дайля", price: 890, unit: "₽", cat: "Косметика", emoji: "🌸", desc: "Для лица, натуральный", bg: "#E0EBD6", delivery: "Доставка по РФ", producer: "Алтайская деревня" },
-  { name: "Молочная колбаса", price: 680, unit: "₽/кг", cat: "Мясное", emoji: "🥓", desc: "Нежная, домашнего рецепта", bg: "#E8C8C8", delivery: "Самовывоз", producer: "Шлегель" },
-  { name: "Сыр Алтайский", price: 1290, unit: "₽/кг", cat: "Сыры", emoji: "🧀", desc: "Выдержанный, мягкий вкус", bg: "#FBE9C2", delivery: "Самовывоз", producer: "Шлегель" },
-  { name: "Колбаса сырокопченая", price: 1450, unit: "₽/кг", cat: "Мясное", emoji: "🍖", desc: "Из мяса марала, копчёная на ольхе", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель" },
+  { name: "Донниковый мёд", price: 890, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Нежный ванильный аромат", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: true, photo: "https://images.unsplash.com/photo-1587049352846-4a222e784d38?w=400&q=80&fit=crop" },
+  { name: "Мясо марала (вырезка)", price: 2150, unit: "₽/кг", cat: "Марал", emoji: "🦌", desc: "Плотное, нежное, травяные нотки", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=400&q=80&fit=crop" },
+  { name: "Набор Сладкоежка", price: 2650, unit: "₽", cat: "Подарки", emoji: "🎁", desc: "Мёд, конфеты, чай", bg: "#FBE0A8", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: true, photo: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80&fit=crop" },
+  { name: "Пантогематоген батончик", price: 380, unit: "₽/шт", cat: "Здоровье", emoji: "💪", desc: "С кровью марала", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=400&q=80&fit=crop" },
+  { name: "Горный мёд с миндалём", price: 950, unit: "₽/кг", cat: "Мёд", emoji: "🍯", desc: "Алтайский разнотравный", bg: "#FBE9C2", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=400&q=80&fit=crop" },
+  { name: "Чай Таёжный со смородиной", price: 520, unit: "₽/упак", cat: "Чаи", emoji: "🌿", desc: "Сбор горных трав", bg: "#D6E8DC", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=400&q=80&fit=crop" },
+  { name: "Крем Саган дайля", price: 890, unit: "₽", cat: "Косметика", emoji: "🌸", desc: "Для лица, натуральный", bg: "#E0EBD6", delivery: "Доставка по РФ", producer: "Алтайская деревня", hit: false, photo: "https://images.unsplash.com/photo-1612817288484-6f916006741a?w=400&q=80&fit=crop" },
+  { name: "Молочная колбаса", price: 680, unit: "₽/кг", cat: "Мясное", emoji: "🥓", desc: "Нежная, домашнего рецепта", bg: "#E8C8C8", delivery: "Самовывоз", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80&fit=crop" },
+  { name: "Сыр Алтайский", price: 1290, unit: "₽/кг", cat: "Сыры", emoji: "🧀", desc: "Выдержанный, мягкий вкус", bg: "#FBE9C2", delivery: "Самовывоз", producer: "Шлегель", hit: false, photo: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=400&q=80&fit=crop" },
+  { name: "Колбаса сырокопченая", price: 1450, unit: "₽/кг", cat: "Мясное", emoji: "🍖", desc: "Из мяса марала, копчёная на ольхе", bg: "#E8C8C8", delivery: "Доставка по РФ", producer: "Шлегель", hit: true, photo: "https://images.unsplash.com/photo-1547592180-85f173990554?w=400&q=80&fit=crop" },
 ];
 
 const STATS = [
@@ -935,36 +935,171 @@ function About() {
 /* ---------- BESTSELLERS ---------- */
 
 function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: CartItem) => void }) {
+  const isShipping = p.delivery === "Доставка по РФ";
   return (
     <motion.div
       whileHover={{ y: -2 }}
-      className="shrink-0 w-[75vw] sm:w-[220px] snap-start rounded-xl bg-parchment p-4 shadow-card transition-all hover:shadow-card-hover"
+      className="product-card shrink-0 snap-start"
+      style={{
+        width: 220,
+        background: "#FFFFFF",
+        borderRadius: 16,
+        overflow: "hidden",
+        border: "1px solid rgba(30,58,47,0.07)",
+        boxShadow: "0 2px 16px rgba(30,58,47,0.06)",
+        transition: "box-shadow 0.3s ease, transform 0.3s ease",
+      }}
     >
-      <div
-        className="grid h-[140px] place-items-center rounded-lg text-5xl"
-        style={{ background: p.bg }}
-      >
-        {p.emoji}
+      {/* Image zone */}
+      <div style={{ position: "relative", height: 180, background: p.bg, overflow: "hidden" }}>
+        <img
+          src={p.photo}
+          alt={p.name}
+          className="pc-img"
+          onError={(e) => {
+            const el = e.currentTarget as HTMLImageElement;
+            el.style.display = "none";
+            const fb = el.nextElementSibling as HTMLElement | null;
+            if (fb) fb.style.display = "grid";
+          }}
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            transition: "transform 0.3s ease",
+            display: "block",
+          }}
+        />
+        <div
+          aria-hidden
+          style={{
+            display: "none",
+            position: "absolute",
+            inset: 0,
+            placeItems: "center",
+            fontSize: 56,
+            background: p.bg,
+          }}
+        >
+          {p.emoji}
+        </div>
+
+        {/* Delivery badge */}
+        <div
+          style={{
+            position: "absolute",
+            top: 10,
+            left: 10,
+            background: isShipping ? "rgba(22,101,52,0.85)" : "rgba(60,60,60,0.75)",
+            color: "#FFFFFF",
+            fontFamily: "Inter, sans-serif",
+            fontSize: 10,
+            fontWeight: 600,
+            borderRadius: 100,
+            padding: "3px 10px",
+            backdropFilter: "blur(4px)",
+          }}
+        >
+          {p.delivery}
+        </div>
+
+        {/* Hit badge */}
+        {p.hit && (
+          <div
+            style={{
+              position: "absolute",
+              top: 10,
+              right: 10,
+              background: "#C8973A",
+              color: "#1A3028",
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 10,
+              fontWeight: 700,
+              borderRadius: 100,
+              padding: "3px 10px",
+            }}
+          >
+            Хит
+          </div>
+        )}
       </div>
-      <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider" style={{ color: "var(--honey)" }}>
-        {p.cat}
+
+      {/* Content */}
+      <div style={{ padding: "14px 16px" }}>
+        <div
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 11,
+            letterSpacing: "1px",
+            textTransform: "uppercase",
+            color: "#C8973A",
+            fontWeight: 600,
+            marginBottom: 4,
+          }}
+        >
+          {p.cat}
+        </div>
+        <div style={{ fontFamily: "Inter, sans-serif", fontSize: 11, color: "rgba(100,80,50,0.6)" }}>
+          {p.producer}
+        </div>
+        <h4
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 14,
+            fontWeight: 700,
+            color: "#1A3028",
+            lineHeight: 1.3,
+            marginTop: 4,
+          }}
+        >
+          {p.name}
+        </h4>
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 12,
+            color: "#7A6A5A",
+            lineHeight: 1.4,
+            marginTop: 4,
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+          }}
+        >
+          {p.desc}
+        </p>
+        <div
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 20,
+            fontWeight: 800,
+            color: "#1A3028",
+            marginTop: 10,
+          }}
+        >
+          {p.price}
+          <span style={{ fontFamily: "Inter, sans-serif", fontSize: 12, fontWeight: 500, color: "#7A6A5A", marginLeft: 6 }}>
+            {p.unit}
+          </span>
+        </div>
+        <motion.button
+          whileTap={{ scale: 0.97 }}
+          onClick={() => onAdd({ id: p.name, name: p.name, price: p.price })}
+          style={{
+            background: "#C8973A",
+            color: "#1A3028",
+            fontFamily: "'Unbounded', sans-serif",
+            fontSize: 12,
+            fontWeight: 700,
+            borderRadius: 8,
+            width: "100%",
+            padding: 10,
+            marginTop: 10,
+          }}
+        >
+          В корзину
+        </motion.button>
       </div>
-      <h4 className="mt-1 font-display text-base font-bold text-forest line-clamp-2 min-h-[44px]">
-        {p.name}
-      </h4>
-      <p className="mt-1 text-xs text-ink-muted line-clamp-1">{p.desc}</p>
-      <div className="mt-2 font-bold text-forest text-xl">
-        {p.price}
-        <span className="text-sm font-medium text-ink-muted ml-1">{p.unit}</span>
-      </div>
-      <motion.button
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.97 }}
-        onClick={() => onAdd({ id: p.name, name: p.name, price: p.price })}
-        className="mt-3 w-full rounded-lg bg-honey py-2 text-sm font-semibold text-forest transition-colors hover:bg-honey-light"
-      >
-        В корзину
-      </motion.button>
     </motion.div>
   );
 }
@@ -988,6 +1123,10 @@ function Bestsellers({ onAdd }: { onAdd: (i: CartItem) => void }) {
           ))}
         </div>
       </div>
+      <style>{`
+        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.18); }
+        .product-card:hover .pc-img { transform: scale(1.05); }
+      `}</style>
     </section>
   );
 }
