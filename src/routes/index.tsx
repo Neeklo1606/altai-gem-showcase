@@ -182,7 +182,6 @@ function LandingPage() {
 
       <GiftSets onAdd={handleAdd} />
 
-      <Locations />
 
       <Footer />
 
