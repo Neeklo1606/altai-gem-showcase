@@ -160,7 +160,12 @@ function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-cream text-ink pb-20 md:pb-0">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.4 }}
+      className="min-h-screen bg-cream text-ink pb-20 md:pb-0"
+    >
       <Header
         cartCount={cart.totalCount}
         onCartOpen={() => setIsCartOpen(true)}
@@ -209,14 +214,35 @@ function LandingPage() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
-            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] -translate-x-1/2 rounded-full bg-forest px-6 py-3 text-sm font-medium text-cream shadow-lg"
-            style={{ boxShadow: "0 8px 32px rgba(200, 151, 58, 0.4)" }}
+            transition={{ duration: 0.25 }}
+            className="fixed bottom-24 md:bottom-8 left-1/2 z-[110] flex items-center gap-2 -translate-x-1/2 rounded-full px-5 py-3 shadow-lg"
+            style={{
+              background: "#0F1E18",
+              color: "#FFFBF3",
+              fontFamily: "Inter, sans-serif",
+              fontSize: 14,
+              boxShadow: "0 12px 36px rgba(0,0,0,0.35)",
+            }}
           >
+            <span
+              className="grid place-items-center"
+              style={{
+                width: 20,
+                height: 20,
+                borderRadius: "50%",
+                background: "#1E8A4C",
+                color: "#FFFFFF",
+                fontSize: 12,
+                fontWeight: 700,
+              }}
+            >
+              ✓
+            </span>
             {toast}
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 }
 
