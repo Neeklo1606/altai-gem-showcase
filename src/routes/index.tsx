@@ -1323,8 +1323,7 @@ function Footer() {
     >
       <div className="mx-auto max-w-7xl px-4 md:px-8">
         <div className="flex flex-col items-center gap-6">
-          <div className="flex items-center gap-2">
-            <span>🌿</span>
+          <div className="flex items-center">
             <span
               style={{
                 fontFamily: "'Unbounded', sans-serif",
