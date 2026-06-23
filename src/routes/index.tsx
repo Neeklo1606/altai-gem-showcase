@@ -111,9 +111,9 @@ const FEATURES = [
 ];
 
 const GIFT_SETS = [
-  { name: "Набор Сладкоежка", price: 2650, desc: "Мёд с орехами, конфеты ручной работы, кедровые матрёшки, чай", gradient: "linear-gradient(135deg, #F5C76A 0%, #C8973A 100%)", badge: "Популярный", emoji: "🎁" },
-  { name: "Набор Здоровье", price: 2390, desc: "Алтайский чай, растирка, мазь пантовая, кедровая живица, бальзам", gradient: "linear-gradient(135deg, #6AAE7E 0%, #1E5C3F 100%)", badge: null, emoji: "🌿" },
-  { name: "Набор Супермен", price: 1200, desc: "Мёд, бальзам Чемчудой, батончик пантогематоген, чай Батыр", gradient: "linear-gradient(135deg, #B89248 0%, #5C4416 100%)", badge: "Хит", emoji: "💪" },
+  { name: "Набор Сладкоежка", price: 2650, desc: "Мёд, кедровые конфеты, травяной чай, варенье", gradient: "linear-gradient(135deg, #7B4F0A 0%, #C8973A 100%)", badge: "Хит", emoji: "🎁" },
+  { name: "Набор Здоровье", price: 2390, desc: "Пантогематоген, бальзам, мазь пантовая, чай Батыр", gradient: "linear-gradient(135deg, #0D2B1A 0%, #1E6B3A 100%)", badge: null, emoji: "🌿" },
+  { name: "Набор Энергия", price: 1200, desc: "Мёд, пантогематоген, бальзам Чемчудой", gradient: "linear-gradient(135deg, #2A1A00 0%, #7A5000 100%)", badge: null, emoji: "💪" },
 ];
 
 /* ---------- CART HOOK ---------- */
@@ -930,18 +930,53 @@ function GiftSets({ onAdd }: { onAdd: (i: CartItem) => void }) {
   return (
     <section
       id="gifts"
-      className="py-16 md:py-24"
-      style={{ background: "linear-gradient(180deg, #F9F3E8 0%, #EFE7D6 100%)" }}
+      style={{
+        background:
+          "linear-gradient(160deg, #0F1E18 0%, #1A3028 50%, #0F1E18 100%)",
+        padding: "80px 24px",
+      }}
     >
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="text-center mb-12">
-          <h2 className="font-display font-bold text-[28px] md:text-[40px] text-forest">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center">
+          <span
+            className="inline-block"
+            style={{
+              border: "1px solid rgba(200,151,58,0.3)",
+              color: "#C8973A",
+              fontSize: 13,
+              padding: "6px 16px",
+              borderRadius: 100,
+            }}
+          >
+            Идеальный подарок
+          </span>
+          <h2
+            style={{
+              fontFamily: "'Unbounded', sans-serif",
+              fontSize: 36,
+              fontWeight: 800,
+              color: "#FFFBF3",
+              marginTop: 16,
+              lineHeight: 1.1,
+            }}
+          >
             Подарочные наборы
           </h2>
-          <p className="mt-3 text-base text-ink-muted">Готовые подарки с историей</p>
+          <p
+            style={{
+              fontSize: 16,
+              color: "rgba(255,251,243,0.6)",
+              marginTop: 8,
+            }}
+          >
+            Собираем из лучшей продукции двух хозяйств
+          </p>
         </div>
 
-        <div className="grid gap-6 grid-cols-1 md:grid-cols-3">
+        <div
+          className="grid grid-cols-1 md:grid-cols-3"
+          style={{ gap: 20, marginTop: 48 }}
+        >
           {GIFT_SETS.map((g, i) => (
             <motion.div
               key={g.name}
@@ -950,43 +985,106 @@ function GiftSets({ onAdd }: { onAdd: (i: CartItem) => void }) {
               viewport={{ once: true }}
               transition={{ delay: i * 0.12, duration: 0.6 }}
               whileHover={{ y: -6 }}
-              className="overflow-hidden rounded-2xl bg-parchment shadow-card transition-all hover:shadow-card-hover"
+              className="relative"
+              style={{
+                background: "rgba(255,251,243,0.07)",
+                backdropFilter: "blur(20px)",
+                border: "1px solid rgba(200,151,58,0.2)",
+                borderRadius: 24,
+                padding: "28px 24px",
+              }}
             >
-              <div className="relative grid h-[200px] place-items-center text-7xl" style={{ background: g.gradient }}>
-                <span className="drop-shadow-lg">{g.emoji}</span>
+              <div
+                className="relative grid place-items-center"
+                style={{
+                  height: 160,
+                  borderRadius: 16,
+                  background: g.gradient,
+                  fontSize: 64,
+                }}
+              >
+                <span style={{ filter: "drop-shadow(0 6px 16px rgba(0,0,0,0.4))" }}>
+                  {g.emoji}
+                </span>
                 {g.badge && (
-                  <span className="absolute right-4 top-4 rounded-full bg-forest px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-honey">
+                  <span
+                    className="absolute"
+                    style={{
+                      top: 16,
+                      right: 16,
+                      background: "#C8973A",
+                      color: "#1A3028",
+                      fontFamily: "'Unbounded', sans-serif",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      padding: "4px 12px",
+                      borderRadius: 100,
+                    }}
+                  >
                     {g.badge}
                   </span>
                 )}
               </div>
-              <div className="p-6">
-                <h3 className="font-display text-xl font-bold text-forest">{g.name}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink-muted min-h-[60px]">{g.desc}</p>
-                <div className="mt-4 flex items-center justify-between">
-                  <div className="font-bold text-forest text-2xl">{g.price} ₽</div>
-                  <motion.button
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() => onAdd({ id: g.name, name: g.name, price: g.price })}
-                    className="rounded-lg bg-honey px-4 py-2 text-sm font-semibold text-forest transition-colors hover:bg-honey-light"
-                  >
-                    В корзину
-                  </motion.button>
-                </div>
+
+              <h3
+                style={{
+                  fontFamily: "'Unbounded', sans-serif",
+                  fontSize: 18,
+                  fontWeight: 700,
+                  color: "#FFFBF3",
+                  marginTop: 18,
+                }}
+              >
+                {g.name}
+              </h3>
+              <p
+                style={{
+                  fontSize: 13,
+                  color: "rgba(255,251,243,0.55)",
+                  lineHeight: 1.5,
+                  marginTop: 6,
+                }}
+              >
+                {g.desc}
+              </p>
+              <div
+                style={{
+                  fontFamily: "'Unbounded', sans-serif",
+                  fontSize: 28,
+                  fontWeight: 800,
+                  color: "#C8973A",
+                  marginTop: 14,
+                }}
+              >
+                {g.price.toLocaleString("ru-RU")} ₽
               </div>
+              <motion.button
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => onAdd({ id: g.name, name: g.name, price: g.price })}
+                className="w-full gift-cta"
+                style={{
+                  background: "#C8973A",
+                  color: "#1A3028",
+                  fontFamily: "'Unbounded', sans-serif",
+                  fontSize: 14,
+                  fontWeight: 700,
+                  padding: 14,
+                  borderRadius: 12,
+                  marginTop: 16,
+                  transition: "background 0.2s ease",
+                }}
+              >
+                В корзину
+              </motion.button>
             </motion.div>
           ))}
         </div>
-
-        <div className="mt-10 text-center">
-          <button
-            className="inline-flex items-center gap-2 rounded-lg border-[1.5px] px-7 py-3 text-sm font-semibold transition-all hover:bg-honey hover:text-forest"
-            style={{ borderColor: "var(--honey)", color: "var(--honey)" }}
-          >
-            Все подарочные наборы <ArrowRight className="h-4 w-4" />
-          </button>
-        </div>
       </div>
+
+      <style>{`
+        .gift-cta:hover { background: #E8B84B !important; }
+      `}</style>
     </section>
   );
 }
