@@ -95,7 +95,7 @@ const BESTSELLERS = [
 ];
 
 const STATS = [
-  { value: 4.4, suffix: " ⭐", label: "Рейтинг на Яндекс.Картах", decimals: 1 },
+  { value: 4.4, suffix: " ★", label: "Рейтинг на Яндекс.Картах", decimals: 1 },
   { value: 180, suffix: "+", label: "Фотографий продукции", decimals: 0 },
   { value: 2, suffix: "", label: "Магазина в Новосибирске", decimals: 0 },
   { value: 2018, suffix: "", label: "Год основания", decimals: 0 },
