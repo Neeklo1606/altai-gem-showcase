@@ -316,26 +316,30 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 
   return (
     <section
-      className="relative flex min-h-[600px] items-center overflow-hidden"
-      style={{
-        background: "linear-gradient(180deg, #1E3A2F 0%, #2A4A3A 100%)",
-        minHeight: "100vh",
-      }}
+      className="relative flex items-center overflow-hidden"
+      style={{ height: "100svh", minHeight: 600 }}
     >
-      {/* horizontal lines pattern */}
+      {/* Background photo */}
+      <img
+        src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1920&q=80&fit=crop&crop=center"
+        alt="Горы Алтая"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center" }}
+      />
+      {/* Overlay 1 */}
       <div
-        className="absolute inset-0 opacity-[0.05]"
+        className="absolute inset-0"
         style={{
-          backgroundImage:
-            "repeating-linear-gradient(0deg, #FFFBF3 0px, #FFFBF3 1px, transparent 1px, transparent 8px)",
+          background:
+            "linear-gradient(to right, rgba(10,25,15,0.92) 0%, rgba(10,25,15,0.75) 50%, rgba(10,25,15,0.3) 100%)",
         }}
       />
-      {/* honey blob */}
+      {/* Overlay 2 */}
       <div
-        className="pointer-events-none absolute -right-32 -bottom-32 h-[600px] w-[600px] rounded-full"
+        className="absolute inset-0"
         style={{
-          background: "radial-gradient(circle, rgba(200,151,58,0.35) 0%, transparent 70%)",
-          filter: "blur(80px)",
+          background:
+            "linear-gradient(to top, rgba(10,25,15,0.8) 0%, transparent 50%)",
         }}
       />
 
@@ -356,21 +360,29 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
 
           <motion.h1
             {...fade(0.3)}
-            className="mt-6 font-display font-bold leading-[1.1] text-[40px] md:text-[64px]"
-            style={{ color: "#FFFBF3" }}
+            className="mt-6 text-[40px] md:text-[64px]"
+            style={{
+              color: "#FFFBF3",
+              fontFamily: "'Unbounded', sans-serif",
+              fontWeight: 800,
+              lineHeight: 1.0,
+            }}
           >
-            Вкус настоящего
+            Продукты
             <br />
-            <span style={{ color: "var(--honey)" }}>Алтая</span>
+            с душой <span style={{ color: "#C8973A" }}>Алтая</span>
           </motion.h1>
 
           <motion.p
             {...fade(0.5)}
-            className="mt-4 max-w-[480px] text-[17px] md:text-[18px] leading-relaxed"
-            style={{ color: "rgba(255,251,243,0.75)" }}
+            className="text-[17px] leading-relaxed"
+            style={{
+              color: "rgba(255,251,243,0.72)",
+              maxWidth: 460,
+              marginTop: 16,
+            }}
           >
-            Натуральный мёд, деликатесы из марала, травяные чаи и косметика —
-            прямо с Алтая. Два магазина в Новосибирске, доставка по России.
+            Натуральная продукция двух алтайских фермерских хозяйств. Два магазина в Новосибирске. Доставка по России.
           </motion.p>
 
           <motion.div {...fade(0.7)} className="mt-8 flex flex-wrap gap-3">
@@ -378,7 +390,8 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.97 }}
               onClick={() => scrollTo("catalog")}
-              className="rounded-lg bg-honey px-7 py-3.5 text-[15px] font-semibold text-forest transition-colors hover:bg-honey-light"
+              className="rounded-lg px-7 py-3.5 text-[15px] transition-colors hover:brightness-110"
+              style={{ backgroundColor: "#C8973A", color: "#1A3028", fontWeight: 700 }}
             >
               Смотреть каталог
             </motion.button>
@@ -396,7 +409,7 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
           <motion.p
             {...fade(0.9)}
             className="mt-6 text-[13px]"
-            style={{ color: "rgba(255,251,243,0.5)" }}
+            style={{ color: "rgba(255,251,243,0.6)" }}
           >
             ⭐ 4.4 на Яндекс.Картах · 180+ фото · 8 отзывов · Работаем с 2018 г.
           </motion.p>
@@ -407,11 +420,11 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="absolute hidden lg:block right-12 top-1/2 -translate-y-1/2 w-[220px] rounded-2xl border p-5"
+          className="absolute hidden lg:block right-12 top-1/2 -translate-y-1/2 w-[220px] rounded-2xl p-5"
           style={{
             background: "rgba(255,251,243,0.1)",
-            backdropFilter: "blur(12px)",
-            borderColor: "rgba(200,151,58,0.25)",
+            backdropFilter: "blur(20px)",
+            border: "1px solid rgba(200,151,58,0.4)",
             animation: "heroFloat 4s ease-in-out infinite",
           }}
         >
@@ -427,16 +440,6 @@ function Hero({ scrollTo }: { scrollTo: (id: string) => void }) {
           </div>
         </motion.div>
       </div>
-
-      {/* wave */}
-      <svg
-        className="absolute bottom-0 left-0 w-full"
-        viewBox="0 0 1440 60"
-        preserveAspectRatio="none"
-        style={{ height: 60 }}
-      >
-        <path d="M0,30 C360,60 720,0 1440,30 L1440,60 L0,60 Z" fill="var(--cream)" />
-      </svg>
 
       <style>{`
         @keyframes heroFloat {
