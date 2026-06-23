@@ -535,20 +535,24 @@ function CategoryBar({ active, setActive }: { active: string; setActive: (id: st
 
 /* ---------- SECTION HEADING ---------- */
 
-function SectionHeading({ children, dark = false }: { children: React.ReactNode; dark?: boolean }) {
+function SectionHeading({ children, dark = false, subtitle }: { children: React.ReactNode; dark?: boolean; subtitle?: string }) {
   return (
     <div className="mb-12 text-center">
       <h2
-        className="font-display font-bold text-[28px] md:text-[40px]"
-        style={{ color: dark ? "#FFFBF3" : "var(--forest)" }}
+        style={{
+          fontFamily: "'Unbounded', sans-serif",
+          fontWeight: 800,
+          color: dark ? "#FFFBF3" : "#1A3028",
+        }}
+        className="text-[28px] md:text-[40px]"
       >
         {children}
       </h2>
-      <div className="mt-4 flex items-center justify-center gap-4">
-        <span className="h-px w-12" style={{ background: "var(--honey)" }} />
-        <span style={{ color: "var(--honey)" }}>🌿</span>
-        <span className="h-px w-12" style={{ background: "var(--honey)" }} />
-      </div>
+      {subtitle && (
+        <p style={{ fontFamily: "Inter, sans-serif", fontSize: 16, color: dark ? "rgba(255,251,243,0.65)" : "#6B5E4E", marginTop: 12 }}>
+          {subtitle}
+        </p>
+      )}
     </div>
   );
 }
