@@ -607,6 +607,11 @@ function Catalog({ onAdd }: { onAdd: (i: CartItem) => void }) {
           </div>
         </div>
       </div>
+      <style>{`
+        .category-card { --cat-h: 160px; }
+        @media (min-width: 768px) { .category-card { --cat-h: 200px; } }
+        .category-card:hover { filter: brightness(1.12); }
+      `}</style>
     </section>
   );
 }
