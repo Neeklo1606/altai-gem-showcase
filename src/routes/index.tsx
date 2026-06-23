@@ -40,46 +40,46 @@ const CATEGORIES = [
 
 const CATEGORY_CARDS = [
   {
-    title: "Мёд и пчелопродукты",
+    title: "Мёд",
     desc: "Донниковый, горный, таёжный, прополис",
     count: 12,
     emoji: "🍯",
-    gradient: "linear-gradient(135deg, #F5C76A 0%, #C8973A 100%)",
+    gradient: "linear-gradient(135deg, #5C3A00 0%, #C8973A 100%)",
   },
   {
     title: "Травяные чаи",
     desc: "Иван-чай, чага, алтайский сбор",
     count: 8,
     emoji: "🌿",
-    gradient: "linear-gradient(135deg, #6AAE7E 0%, #1E5C3F 100%)",
+    gradient: "linear-gradient(135deg, #0D2B1A 0%, #1E6B3A 100%)",
   },
   {
     title: "Деликатесы из марала",
     desc: "Вырезка, колбасы, копчёности",
     count: 6,
     emoji: "🦌",
-    gradient: "linear-gradient(135deg, #8B3A3A 0%, #4A1A1F 100%)",
+    gradient: "linear-gradient(135deg, #2A0A0A 0%, #7A2020 100%)",
   },
   {
     title: "Натуральная косметика",
     desc: "Кремы, шампуни, мыло, масла",
     count: 15,
     emoji: "🌸",
-    gradient: "linear-gradient(135deg, #C8E6B8 0%, #5C8C6A 100%)",
+    gradient: "linear-gradient(135deg, #0F2010 0%, #2D5A1E 100%)",
   },
   {
-    title: "Пантогематоген и бальзамы",
+    title: "Пантогематоген",
     desc: "Бальзамы на травах, пантогематоген",
     count: 9,
     emoji: "💪",
-    gradient: "linear-gradient(135deg, #5DA9B5 0%, #2F4A3D 100%)",
+    gradient: "linear-gradient(135deg, #0A0F2A 0%, #1E3A7A 100%)",
   },
   {
     title: "Подарочные наборы",
     desc: "Готовые наборы от 1 200 ₽",
     count: 10,
     emoji: "🎁",
-    gradient: "linear-gradient(135deg, #E8B84B 0%, #8B6B1E 100%)",
+    gradient: "linear-gradient(135deg, #2A1A00 0%, #7A5000 100%)",
   },
 ];
 
