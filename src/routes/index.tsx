@@ -1131,25 +1131,39 @@ function ProductCard({ p, onAdd }: { p: typeof BESTSELLERS[number]; onAdd: (i: C
 
 function Bestsellers({ onAdd }: { onAdd: (i: CartItem) => void }) {
   return (
-    <section className="bg-cream py-16 md:py-20">
-      <div className="mx-auto max-w-7xl px-4 md:px-8">
-        <div className="mb-8 flex items-end justify-between gap-4">
-          <h2 className="font-display font-bold text-forest text-[28px] md:text-[40px]">
-            Хиты продаж
-          </h2>
-          <button className="shrink-0 text-sm font-medium hover:underline" style={{ color: "var(--honey)" }}>
-            Посмотреть все →
-          </button>
-        </div>
+    <section style={{ background: "#1A3028", padding: "40px 0 56px" }}>
+      <div className="mx-auto max-w-7xl" style={{ padding: "0 24px 32px" }}>
+        <h2
+          style={{
+            fontFamily: "'Unbounded', sans-serif",
+            fontWeight: 900,
+            color: "#FFFBF3",
+            textAlign: "left",
+            lineHeight: 1.05,
+          }}
+          className="text-[32px] md:text-[48px]"
+        >
+          Хиты продаж
+        </h2>
+        <p
+          style={{
+            fontFamily: "Inter, sans-serif",
+            fontSize: 16,
+            color: "rgba(255,251,243,0.5)",
+            marginTop: 8,
+          }}
+        >
+          Самое популярное этого сезона
+        </p>
+      </div>
 
-        <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3 -mx-4 px-4">
-          {BESTSELLERS.map((p) => (
-            <ProductCard key={p.name} p={p} onAdd={onAdd} />
-          ))}
-        </div>
+      <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-3" style={{ padding: "0 24px 12px" }}>
+        {BESTSELLERS.map((p) => (
+          <ProductCard key={p.name} p={p} onAdd={onAdd} dark />
+        ))}
       </div>
       <style>{`
-        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.18); }
+        .product-card:hover { box-shadow: 0 8px 32px rgba(200,151,58,0.25); }
         .product-card:hover .pc-img { transform: scale(1.05); }
       `}</style>
     </section>
