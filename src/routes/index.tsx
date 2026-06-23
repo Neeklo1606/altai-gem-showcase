@@ -1299,11 +1299,19 @@ function Footer() {
           style={{ borderColor: "rgba(200,151,58,0.2)", color: "rgba(255,251,243,0.5)" }}
         >
           <div>© 2026 Жемчужина Алтая · Новосибирск</div>
-          <div>
-            Разработка:{" "}
-            <a href="https://neeklo.studio" target="_blank" rel="noopener noreferrer" style={{ color: "var(--honey)" }}>
-              neeklo.studio
+          <div className="flex items-center gap-4">
+            <a
+              href="/admin"
+              style={{ fontSize: 11, color: "rgba(100,100,100,0.4)" }}
+            >
+              Admin
             </a>
+            <span>
+              Разработка:{" "}
+              <a href="https://neeklo.studio" target="_blank" rel="noopener noreferrer" style={{ color: "var(--honey)" }}>
+                neeklo.studio
+              </a>
+            </span>
           </div>
         </div>
       </div>
