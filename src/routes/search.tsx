@@ -23,13 +23,9 @@ export const Route = createFileRoute("/search")({
     q: typeof raw.q === "string" ? raw.q : "",
     cat: typeof raw.cat === "string" && raw.cat ? raw.cat : null,
   }),
-  head: ({ search }) => ({
+  head: () => ({
     meta: [
-      {
-        title: search?.q
-          ? `Поиск: ${search.q} - Жемчужина Алтая`
-          : "Поиск - Жемчужина Алтая",
-      },
+      { title: "Поиск - Жемчужина Алтая" },
       {
         name: "description",
         content: "Поиск по каталогу натуральных продуктов с Алтая.",
