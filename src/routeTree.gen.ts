@@ -10,6 +10,8 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SearchRouteImport } from './routes/search'
+import { Route as ReviewsRouteImport } from './routes/reviews'
+import { Route as PromoRouteImport } from './routes/promo'
 import { Route as DeliveryRouteImport } from './routes/delivery'
 import { Route as CheckoutRouteImport } from './routes/checkout'
 import { Route as CatalogRouteImport } from './routes/catalog'
@@ -17,11 +19,22 @@ import { Route as CartRouteImport } from './routes/cart'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PromoSlugRouteImport } from './routes/promo.$slug'
 import { Route as ProductSlugRouteImport } from './routes/product.$slug'
 
 const SearchRoute = SearchRouteImport.update({
   id: '/search',
   path: '/search',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReviewsRoute = ReviewsRouteImport.update({
+  id: '/reviews',
+  path: '/reviews',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PromoRoute = PromoRouteImport.update({
+  id: '/promo',
+  path: '/promo',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DeliveryRoute = DeliveryRouteImport.update({
@@ -59,6 +72,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PromoSlugRoute = PromoSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => PromoRoute,
+} as any)
 const ProductSlugRoute = ProductSlugRouteImport.update({
   id: '/product/$slug',
   path: '/product/$slug',
@@ -73,8 +91,11 @@ export interface FileRoutesByFullPath {
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
   '/delivery': typeof DeliveryRoute
+  '/promo': typeof PromoRouteWithChildren
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/promo/$slug': typeof PromoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,8 +105,11 @@ export interface FileRoutesByTo {
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
   '/delivery': typeof DeliveryRoute
+  '/promo': typeof PromoRouteWithChildren
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/promo/$slug': typeof PromoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,8 +120,11 @@ export interface FileRoutesById {
   '/catalog': typeof CatalogRoute
   '/checkout': typeof CheckoutRoute
   '/delivery': typeof DeliveryRoute
+  '/promo': typeof PromoRouteWithChildren
+  '/reviews': typeof ReviewsRoute
   '/search': typeof SearchRoute
   '/product/$slug': typeof ProductSlugRoute
+  '/promo/$slug': typeof PromoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -109,8 +136,11 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/checkout'
     | '/delivery'
+    | '/promo'
+    | '/reviews'
     | '/search'
     | '/product/$slug'
+    | '/promo/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -120,8 +150,11 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/checkout'
     | '/delivery'
+    | '/promo'
+    | '/reviews'
     | '/search'
     | '/product/$slug'
+    | '/promo/$slug'
   id:
     | '__root__'
     | '/'
@@ -131,8 +164,11 @@ export interface FileRouteTypes {
     | '/catalog'
     | '/checkout'
     | '/delivery'
+    | '/promo'
+    | '/reviews'
     | '/search'
     | '/product/$slug'
+    | '/promo/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -143,6 +179,8 @@ export interface RootRouteChildren {
   CatalogRoute: typeof CatalogRoute
   CheckoutRoute: typeof CheckoutRoute
   DeliveryRoute: typeof DeliveryRoute
+  PromoRoute: typeof PromoRouteWithChildren
+  ReviewsRoute: typeof ReviewsRoute
   SearchRoute: typeof SearchRoute
   ProductSlugRoute: typeof ProductSlugRoute
 }
@@ -154,6 +192,20 @@ declare module '@tanstack/react-router' {
       path: '/search'
       fullPath: '/search'
       preLoaderRoute: typeof SearchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reviews': {
+      id: '/reviews'
+      path: '/reviews'
+      fullPath: '/reviews'
+      preLoaderRoute: typeof ReviewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/promo': {
+      id: '/promo'
+      path: '/promo'
+      fullPath: '/promo'
+      preLoaderRoute: typeof PromoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/delivery': {
@@ -205,6 +257,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/promo/$slug': {
+      id: '/promo/$slug'
+      path: '/$slug'
+      fullPath: '/promo/$slug'
+      preLoaderRoute: typeof PromoSlugRouteImport
+      parentRoute: typeof PromoRoute
+    }
     '/product/$slug': {
       id: '/product/$slug'
       path: '/product/$slug'
@@ -215,6 +274,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface PromoRouteChildren {
+  PromoSlugRoute: typeof PromoSlugRoute
+}
+
+const PromoRouteChildren: PromoRouteChildren = {
+  PromoSlugRoute: PromoSlugRoute,
+}
+
+const PromoRouteWithChildren = PromoRoute._addFileChildren(PromoRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -223,6 +292,8 @@ const rootRouteChildren: RootRouteChildren = {
   CatalogRoute: CatalogRoute,
   CheckoutRoute: CheckoutRoute,
   DeliveryRoute: DeliveryRoute,
+  PromoRoute: PromoRouteWithChildren,
+  ReviewsRoute: ReviewsRoute,
   SearchRoute: SearchRoute,
   ProductSlugRoute: ProductSlugRoute,
 }
