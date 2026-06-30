@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, Phone, Search, ShoppingBag, X } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const NAV_LINKS = [
   { label: "Каталог", href: "#catalog" },
