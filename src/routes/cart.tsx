@@ -50,6 +50,8 @@ function CartPage() {
     getCartCount,
     hasPerishable,
   } = useCart();
+  const navigate = useNavigate();
+  const goCheckout = () => navigate({ to: "/checkout" });
 
   const [toast, setToast] = useState<string | null>(null);
   const fireToast = (m: string) => {
@@ -148,7 +150,7 @@ function CartPage() {
               {/* Summary desktop */}
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
-                  <Summary total={total} discount={discount} count={count} perishable={hasPerishable()} onCheckout={() => fireToast("Переход к оформлению…")} />
+                  <Summary total={total} discount={discount} count={count} perishable={hasPerishable()} onCheckout={goCheckout} />
                 </div>
               </aside>
             </div>
@@ -212,7 +214,7 @@ function CartPage() {
             </div>
             <button
               type="button"
-              onClick={() => fireToast("Переход к оформлению…")}
+              onClick={goCheckout}
               className="ml-auto inline-flex flex-1 items-center justify-center gap-2 rounded-full"
               style={{
                 backgroundColor: "var(--color-accent)",
