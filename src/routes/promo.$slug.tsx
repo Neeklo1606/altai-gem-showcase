@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { PageHero } from "@/components/info/PageHero";
-import { PROMOS } from "@/data/promos";
+import { PROMOS, type Promo } from "@/data/promos";
 import { PRODUCTS } from "@/data/products";
 import { CATEGORIES } from "@/data/categories";
 import { ProductCard } from "@/components/catalog/ProductCard";
@@ -81,12 +81,13 @@ export const Route = createFileRoute("/promo/$slug")({
 });
 
 function PromoDetailPage() {
-  const { promo } = Route.useLoaderData();
+  const data = Route.useLoaderData() as { promo: Promo };
+  const promo = data.promo;
   const { addToCart } = useCart();
   const trackRef = useRef<HTMLDivElement | null>(null);
 
   const products = (promo.productIds ?? [])
-    .map((id) => PRODUCTS.find((p) => p.id === id))
+    .map((id: string) => PRODUCTS.find((p) => p.id === id))
     .filter((p): p is NonNullable<typeof p> => Boolean(p));
 
   const category = promo.categoryFilter
@@ -264,7 +265,7 @@ function PromoDetailPage() {
               >
                 <span>
                   Перейти в каталог
-                  {category ? ` · ${category.label}` : ""}
+                  {category ? ` · ${category.name}` : ""}
                 </span>
                 <ArrowRight size={18} />
               </Link>
