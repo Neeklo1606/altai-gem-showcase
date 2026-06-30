@@ -109,14 +109,14 @@ export function Header({ cartCount = 0, phone = "+7 (383) 000-00-00" }: HeaderPr
             >
               <Phone size={20} />
             </a>
-            <button
-              type="button"
+            <Link
+              to="/search"
               className="inline-flex items-center justify-center rounded-full transition-colors hover:bg-black/5"
               style={{ width: 44, height: 44, color: textColor }}
               aria-label="Поиск"
             >
               <Search size={20} />
-            </button>
+            </Link>
             <a
               href="#cart"
               className="relative inline-flex items-center justify-center rounded-full transition-colors hover:bg-black/5"
