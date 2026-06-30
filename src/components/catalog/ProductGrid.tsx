@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import type { Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 import type { ViewMode } from "./CatalogFilters";
