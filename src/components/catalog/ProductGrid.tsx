@@ -1,4 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import type { Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
 import type { ViewMode } from "./CatalogFilters";
@@ -64,7 +65,13 @@ export function ProductGrid({ products, view, onAdd }: ProductGridProps) {
               ease: "easeOut",
             }}
           >
-            <ProductCard product={p} onAdd={onAdd} />
+            <Link
+              to="/product/$slug"
+              params={{ slug: p.id }}
+              style={{ textDecoration: "none", color: "inherit", display: "block" }}
+            >
+              <ProductCard product={p} onAdd={onAdd} />
+            </Link>
           </motion.div>
         ))}
       </AnimatePresence>

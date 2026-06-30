@@ -174,7 +174,11 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
 
         <button
           type="button"
-          onClick={() => onAdd?.(p)}
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            onAdd?.(p);
+          }}
           disabled={!p.inStock}
           className="mt-auto inline-flex items-center justify-center gap-2 rounded-full"
           style={{
