@@ -65,7 +65,13 @@ export function ProductGrid({ products, view, onAdd }: ProductGridProps) {
               ease: "easeOut",
             }}
           >
-            <ProductCard product={p} onAdd={onAdd} />
+            <Link
+              to="/product/$slug"
+              params={{ slug: p.id }}
+              style={{ textDecoration: "none", color: "inherit", display: "block" }}
+            >
+              <ProductCard product={p} onAdd={onAdd} />
+            </Link>
           </motion.div>
         ))}
       </AnimatePresence>
