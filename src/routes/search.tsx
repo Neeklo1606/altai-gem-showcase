@@ -73,7 +73,7 @@ function SearchPage() {
   useEffect(() => {
     if (debounced === q) return;
     navigate({
-      search: (prev) => ({ ...prev, q: debounced }),
+      search: (prev: SearchParams) => ({ ...prev, q: debounced }),
       replace: true,
     });
   }, [debounced, q, navigate]);
@@ -95,7 +95,7 @@ function SearchPage() {
 
   const setCat = (id: string | null) => {
     navigate({
-      search: (prev) => ({ ...prev, cat: id }),
+      search: (prev: SearchParams) => ({ ...prev, cat: id }),
       replace: true,
     });
   };
@@ -103,7 +103,7 @@ function SearchPage() {
   const clearInput = () => {
     setInput("");
     setDebounced("");
-    navigate({ search: (prev) => ({ ...prev, q: "" }), replace: true });
+    navigate({ search: (prev: SearchParams) => ({ ...prev, q: "" }), replace: true });
     inputRef.current?.focus();
   };
 
