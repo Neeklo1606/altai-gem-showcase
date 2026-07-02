@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { CATEGORIES } from "@/data/categories";
 
 export function CategoriesGrid() {
@@ -51,9 +52,8 @@ export function CategoriesGrid() {
           {CATEGORIES.map((cat, idx) => {
             const Icon = cat.icon;
             return (
-              <motion.a
+              <motion.div
                 key={cat.id}
-                href={`#cat-${cat.slug}`}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-80px" }}
@@ -63,7 +63,7 @@ export function CategoriesGrid() {
                   ease: "easeOut",
                 }}
                 whileHover={{ y: -4 }}
-                className="category-card group relative flex flex-col justify-between overflow-hidden p-5 md:p-6"
+                className="category-card group relative overflow-hidden"
                 style={{
                   minHeight: 200,
                   background: cat.gradient,
@@ -74,78 +74,114 @@ export function CategoriesGrid() {
                   textDecoration: "none",
                 }}
               >
-                {/* Noise overlay */}
-                <span
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0"
+                <Link
+                  to="/catalog"
+                  search={{ category: cat.id }}
+                  className="relative flex h-full min-h-[200px] flex-col justify-between p-5 md:p-6"
                   style={{
-                    background:
-                      "radial-gradient(120% 80% at 100% 0%, rgba(255,255,255,0.18), transparent 55%)",
+                    color: "var(--color-text-on-dark)",
+                    textDecoration: "none",
                   }}
-                />
-
-                <div className="relative flex items-start justify-between">
-                  <div
-                    className="cat-icon flex items-center justify-center rounded-full"
+                >
+                  <img
+                    src={cat.image}
+                    alt={cat.imageAlt}
+                    width={900}
+                    height={540}
+                    loading="lazy"
+                    decoding="async"
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
                     style={{
-                      width: 52,
-                      height: 52,
-                      backgroundColor: "rgba(255,255,255,0.14)",
-                      backdropFilter: "blur(6px)",
-                      transition: "var(--transition-smooth)",
+                      background:
+                        "linear-gradient(to top, rgba(8,16,12,0.9) 0%, rgba(8,16,12,0.52) 52%, rgba(8,16,12,0.18) 100%), radial-gradient(120% 80% at 100% 0%, rgba(255,255,255,0.14), transparent 55%)",
                     }}
-                  >
-                    <Icon size={26} strokeWidth={1.75} />
+                  />
+
+                  <div className="relative flex items-start justify-between">
+                    <div
+                      className="cat-icon flex items-center justify-center rounded-full"
+                      style={{
+                        width: 52,
+                        height: 52,
+                        backgroundColor: "rgba(255,255,255,0.14)",
+                        backdropFilter: "blur(6px)",
+                        transition: "var(--transition-smooth)",
+                      }}
+                    >
+                      <Icon size={26} strokeWidth={1.75} />
+                    </div>
                   </div>
-                </div>
 
-                <div className="relative mt-6">
-                  <h3
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontWeight: 600,
-                      fontSize: 18,
-                      lineHeight: 1.2,
-                      color: "var(--color-text-on-dark)",
-                    }}
-                  >
-                    {cat.name}
-                  </h3>
-                  <p
-                    className="mt-1.5"
-                    style={{
-                      fontFamily: "var(--font-body)",
-                      fontSize: 12.5,
-                      lineHeight: 1.45,
-                      color: "rgba(245,239,224,0.78)",
-                    }}
-                  >
-                    {cat.description}
-                  </p>
+                  <div className="relative mt-6">
+                    <h3
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontWeight: 600,
+                        fontSize: 18,
+                        lineHeight: 1.2,
+                        color: "var(--color-text-on-dark)",
+                      }}
+                    >
+                      {cat.name}
+                    </h3>
+                    <p
+                      className="mt-1.5"
+                      style={{
+                        fontFamily: "var(--font-body)",
+                        fontSize: 12.5,
+                        lineHeight: 1.45,
+                        color: "rgba(245,239,224,0.78)",
+                      }}
+                    >
+                      {cat.description}
+                    </p>
 
-                  <div className="mt-4 flex flex-wrap gap-1.5">
-                    {cat.subcategories.map((s) => (
-                      <span
-                        key={s}
-                        style={{
-                          fontFamily: "var(--font-body)",
-                          fontSize: 11,
-                          fontWeight: 500,
-                          padding: "4px 9px",
-                          borderRadius: 999,
-                          backgroundColor: "rgba(255,255,255,0.14)",
-                          color: "var(--color-text-on-dark)",
-                          backdropFilter: "blur(4px)",
-                        }}
-                      >
-                        {s}
-                      </span>
-                    ))}
+                    <div className="mt-4 flex flex-wrap gap-1.5">
+                      {cat.subcategories.map((s) => (
+                        <span
+                          key={s}
+                          style={{
+                            fontFamily: "var(--font-body)",
+                            fontSize: 11,
+                            fontWeight: 500,
+                            padding: "4px 9px",
+                            borderRadius: 999,
+                            backgroundColor: "rgba(255,255,255,0.14)",
+                            color: "var(--color-text-on-dark)",
+                            backdropFilter: "blur(4px)",
+                          }}
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </motion.a>
+                </Link>
+              </motion.div>
             );
           })}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/catalog"
+            className="inline-flex items-center rounded-full transition-colors"
+            style={{
+              backgroundColor: "var(--color-accent)",
+              color: "var(--color-bg-dark)",
+              fontFamily: "var(--font-body)",
+              fontWeight: 600,
+              fontSize: 15,
+              padding: "13px 24px",
+              minHeight: 44,
+            }}
+          >
+            Смотреть каталог
+          </Link>
         </div>
       </div>
 

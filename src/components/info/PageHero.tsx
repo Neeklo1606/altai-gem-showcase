@@ -22,7 +22,10 @@ export function PageHero({
       className="relative isolate flex items-end overflow-hidden"
       style={{
         minHeight: "max(40vh, 280px)",
-        background: `radial-gradient(120% 80% at 20% 0%, ${accent}22 0%, transparent 55%), linear-gradient(160deg, ${bgColor} 0%, #0d1812 100%)`,
+        // color-mix() вместо конкатенации хекс+альфа ("${accent}22") — та
+        // склейка ломала весь background, если accent приходит как var(...)
+        // (что и есть значение по умолчанию), а не хекс-литерал.
+        background: `radial-gradient(120% 80% at 20% 0%, color-mix(in srgb, ${accent} 13%, transparent) 0%, transparent 55%), linear-gradient(160deg, ${bgColor} 0%, #0d1812 100%)`,
         color: "var(--color-text-on-dark)",
         paddingTop: 96,
         paddingBottom: 64,

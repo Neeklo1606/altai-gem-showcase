@@ -49,6 +49,11 @@ function CartPage() {
     getCartDiscount,
     getCartCount,
     hasPerishable,
+    promoCode,
+    promoError,
+    applyPromoCode,
+    clearPromoCode,
+    getPromoDiscount,
   } = useCart();
   const navigate = useNavigate();
   const goCheckout = () => navigate({ to: "/checkout" });
@@ -61,11 +66,14 @@ function CartPage() {
 
   const count = getCartCount();
   const total = getCartTotal();
-  const discount = getCartDiscount();
+  const promoDiscount = getPromoDiscount();
+  // getCartDiscount = скидки по старой цене + промокод вместе; в сводке
+  // показываем их отдельными строками, поэтому вычитаем промо-часть.
+  const discount = getCartDiscount() - promoDiscount;
 
   return (
     <div style={{ backgroundColor: "var(--color-bg-cream)", minHeight: "100vh" }}>
-      <Header cartCount={count} />
+      <Header />
 
       <main className="pt-20 pb-32 md:pt-24 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -150,7 +158,18 @@ function CartPage() {
               {/* Summary desktop */}
               <aside className="hidden lg:block">
                 <div className="sticky top-24">
-                  <Summary total={total} discount={discount} count={count} perishable={hasPerishable()} onCheckout={goCheckout} />
+                  <Summary
+                    total={total}
+                    discount={discount}
+                    count={count}
+                    perishable={hasPerishable()}
+                    onCheckout={goCheckout}
+                    promoCode={promoCode}
+                    promoError={promoError}
+                    promoDiscount={promoDiscount}
+                    onApplyPromo={applyPromoCode}
+                    onClearPromo={clearPromoCode}
+                  />
                 </div>
               </aside>
             </div>
@@ -534,13 +553,24 @@ function Summary({
   count,
   perishable,
   onCheckout,
+  promoCode,
+  promoError,
+  promoDiscount,
+  onApplyPromo,
+  onClearPromo,
 }: {
   total: number;
   discount: number;
   count: number;
   perishable: boolean;
   onCheckout: () => void;
+  promoCode: string | null;
+  promoError: string | null;
+  promoDiscount: number;
+  onApplyPromo: (code: string) => void;
+  onClearPromo: () => void;
 }) {
+  const [promoInput, setPromoInput] = useState("");
   return (
     <div
       style={{
@@ -563,7 +593,10 @@ function Summary({
         Ваш заказ
       </h2>
 
-      <SummaryRow label={`Подытог (${count} шт)`} value={formatPrice(total + discount)} />
+      <SummaryRow
+        label={`Подытог (${count} шт)`}
+        value={formatPrice(total + discount + promoDiscount)}
+      />
       {discount > 0 && (
         <SummaryRow
           label="Скидка"
@@ -571,6 +604,99 @@ function Summary({
           accent="var(--color-error)"
         />
       )}
+      {promoDiscount > 0 && (
+        <SummaryRow
+          label={`Промокод ${promoCode}`}
+          value={`− ${formatPrice(promoDiscount)}`}
+          accent="var(--color-error)"
+        />
+      )}
+
+      {/* Промокод */}
+      <div className="mt-3">
+        {promoCode ? (
+          <div
+            className="flex items-center justify-between rounded-xl"
+            style={{
+              backgroundColor: "rgba(59,110,74,0.08)",
+              padding: "10px 14px",
+            }}
+          >
+            <span
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: 13,
+                fontWeight: 600,
+                color: "var(--color-success)",
+              }}
+            >
+              Промокод {promoCode} применён
+            </span>
+            <button
+              type="button"
+              onClick={() => {
+                onClearPromo();
+                setPromoInput("");
+              }}
+              aria-label="Убрать промокод"
+              className="rounded-full transition-colors hover:bg-black/5"
+              style={{ width: 28, height: 28, color: "var(--color-text-muted)" }}
+            >
+              <X size={14} />
+            </button>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <input
+                type="text"
+                value={promoInput}
+                onChange={(e) => setPromoInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") onApplyPromo(promoInput);
+                }}
+                placeholder="Промокод"
+                className="w-full rounded-full border px-4 outline-none transition-colors focus:border-[color:var(--color-accent)]"
+                style={{
+                  borderColor: "rgba(31,26,14,0.15)",
+                  fontFamily: "var(--font-body)",
+                  fontSize: 14,
+                  minHeight: 40,
+                  backgroundColor: "#fff",
+                }}
+              />
+              <button
+                type="button"
+                onClick={() => onApplyPromo(promoInput)}
+                className="shrink-0 rounded-full transition-colors"
+                style={{
+                  backgroundColor: "var(--color-bg-dark)",
+                  color: "var(--color-accent)",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  fontSize: 13,
+                  padding: "0 16px",
+                  minHeight: 40,
+                }}
+              >
+                Применить
+              </button>
+            </div>
+            {promoError && (
+              <p
+                className="mt-1.5"
+                style={{
+                  fontFamily: "var(--font-body)",
+                  fontSize: 12,
+                  color: "var(--color-error)",
+                }}
+              >
+                {promoError}
+              </p>
+            )}
+          </>
+        )}
+      </div>
 
       <hr style={{ borderColor: "rgba(31,26,14,0.08)", margin: "16px 0" }} />
 

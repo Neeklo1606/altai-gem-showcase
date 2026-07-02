@@ -248,6 +248,7 @@ function PromoDetailPage() {
 
               <Link
                 to="/catalog"
+                search={promo.categoryFilter ? { category: promo.categoryFilter } : undefined}
                 className="inline-flex items-center justify-between gap-2 rounded-2xl px-5 py-4 transition-transform hover:-translate-y-0.5"
                 style={{
                   background: "var(--color-bg-dark)",

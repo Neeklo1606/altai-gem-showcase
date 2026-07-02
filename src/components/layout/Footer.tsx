@@ -1,20 +1,21 @@
 import { Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 
 const CATALOG = [
-  { label: "Мёд и пчелопродукты", href: "#cat-honey" },
-  { label: "Травяные чаи", href: "#cat-tea" },
-  { label: "Продукты из марала", href: "#cat-deer" },
-  { label: "Натуральная косметика", href: "#cat-cosmetics" },
-  { label: "Здоровье и БАДы", href: "#cat-health" },
-  { label: "Подарочные наборы", href: "#cat-gifts" },
-];
+  { label: "Мёд и пчелопродукты", to: "/catalog" },
+  { label: "Травяные чаи", to: "/catalog" },
+  { label: "Продукты из марала", to: "/catalog" },
+  { label: "Натуральная косметика", to: "/catalog" },
+  { label: "Здоровье и БАДы", to: "/catalog" },
+  { label: "Подарочные наборы", to: "/catalog" },
+] as const;
 
 const CUSTOMERS = [
-  { label: "Доставка", href: "#delivery" },
-  { label: "Оплата", href: "#payment" },
-  { label: "Возврат", href: "#returns" },
-  { label: "Контакты", href: "#contacts" },
-];
+  { label: "Доставка", to: "/delivery" },
+  { label: "Оплата", to: "/delivery" },
+  { label: "Возврат", to: "/delivery" },
+  { label: "Контакты", to: "/about" },
+] as const;
 
 export function Footer() {
   const muted = "var(--color-text-muted)";
@@ -94,10 +95,10 @@ export function Footer() {
             <h4 style={headingStyle}>Каталог</h4>
             <ul className="flex flex-col">
               {CATALOG.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="transition-colors hover:text-white">
+                <li key={l.label}>
+                  <Link to={l.to} style={linkStyle} className="transition-colors hover:text-white">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -108,10 +109,10 @@ export function Footer() {
             <h4 style={headingStyle}>Клиентам</h4>
             <ul className="flex flex-col">
               {CUSTOMERS.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} style={linkStyle} className="transition-colors hover:text-white">
+                <li key={l.label}>
+                  <Link to={l.to} style={linkStyle} className="transition-colors hover:text-white">
                     {l.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

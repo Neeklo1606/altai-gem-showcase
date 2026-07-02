@@ -10,7 +10,7 @@ interface LayoutProps {
 export function Layout({ children, cartCount = 0 }: LayoutProps) {
   return (
     <div id="top" style={{ backgroundColor: "var(--color-bg-cream)", minHeight: "100vh" }}>
-      <Header cartCount={cartCount} />
+      <Header />
       <main>{children}</main>
       <Footer />
     </div>

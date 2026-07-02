@@ -1,14 +1,12 @@
-import { LayoutGrid, Rows3 } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Check, ChevronDown } from "lucide-react";
 
 export type SortKey = "price-asc" | "price-desc" | "name-asc";
-export type ViewMode = "grid-3" | "grid-4";
 
 interface CatalogFiltersProps {
   count: number;
   sort: SortKey;
   onSortChange: (s: SortKey) => void;
-  view: ViewMode;
-  onViewChange: (v: ViewMode) => void;
 }
 
 const SORT_OPTIONS: { value: SortKey; label: string }[] = [
@@ -21,9 +19,29 @@ export function CatalogFilters({
   count,
   sort,
   onSortChange,
-  view,
-  onViewChange,
 }: CatalogFiltersProps) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const current = SORT_OPTIONS.find((o) => o.value === sort) ?? SORT_OPTIONS[0];
+
+  useEffect(() => {
+    if (!open) return;
+    const onDocClick = (e: MouseEvent) => {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDocClick);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDocClick);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
   return (
     <div
       className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
@@ -47,70 +65,78 @@ export function CatalogFilters({
         </span>
       </span>
 
-      <div className="flex items-center gap-3">
-        <select
-          value={sort}
-          onChange={(e) => onSortChange(e.target.value as SortKey)}
-          className="rounded-md border px-3 py-2 outline-none transition-colors"
+      <div ref={rootRef} className="relative">
+        <button
+          type="button"
+          onClick={() => setOpen((v) => !v)}
+          aria-haspopup="listbox"
+          aria-expanded={open}
+          className="inline-flex items-center gap-2 rounded-full border transition-colors"
           style={{
-            borderColor: "rgba(31,26,14,0.15)",
+            borderColor: open ? "var(--color-accent)" : "rgba(31,26,14,0.15)",
             fontFamily: "var(--font-body)",
             fontSize: 14,
+            fontWeight: 500,
             color: "var(--color-text)",
             backgroundColor: "#fff",
             minHeight: 44,
+            padding: "0 16px",
           }}
         >
-          {SORT_OPTIONS.map((o) => (
-            <option key={o.value} value={o.value}>
-              {o.label}
-            </option>
-          ))}
-        </select>
+          {current.label}
+          <ChevronDown
+            size={16}
+            style={{
+              color: "var(--color-text-muted)",
+              transition: "transform 200ms",
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+            }}
+          />
+        </button>
 
-        <div
-          className="hidden items-center gap-1 rounded-full p-1 lg:flex"
-          style={{ backgroundColor: "rgba(31,26,14,0.06)" }}
-        >
-          <button
-            type="button"
-            onClick={() => onViewChange("grid-3")}
-            aria-label="Сетка 3 колонки"
-            className="inline-flex items-center justify-center rounded-full"
+        {open && (
+          <ul
+            role="listbox"
+            className="absolute right-0 z-20 mt-2 overflow-hidden"
             style={{
-              width: 36,
-              height: 36,
-              backgroundColor:
-                view === "grid-3" ? "var(--color-accent)" : "transparent",
-              color:
-                view === "grid-3"
-                  ? "var(--color-bg-dark)"
-                  : "var(--color-text-muted)",
-              transition: "var(--transition-smooth)",
+              minWidth: 220,
+              backgroundColor: "#fffdf7",
+              borderRadius: 14,
+              border: "1px solid rgba(31,26,14,0.08)",
+              boxShadow: "var(--shadow-elevated)",
+              padding: 6,
             }}
           >
-            <Rows3 size={16} />
-          </button>
-          <button
-            type="button"
-            onClick={() => onViewChange("grid-4")}
-            aria-label="Сетка 4 колонки"
-            className="inline-flex items-center justify-center rounded-full"
-            style={{
-              width: 36,
-              height: 36,
-              backgroundColor:
-                view === "grid-4" ? "var(--color-accent)" : "transparent",
-              color:
-                view === "grid-4"
-                  ? "var(--color-bg-dark)"
-                  : "var(--color-text-muted)",
-              transition: "var(--transition-smooth)",
-            }}
-          >
-            <LayoutGrid size={16} />
-          </button>
-        </div>
+            {SORT_OPTIONS.map((o) => {
+              const active = o.value === sort;
+              return (
+                <li key={o.value}>
+                  <button
+                    type="button"
+                    role="option"
+                    aria-selected={active}
+                    onClick={() => {
+                      onSortChange(o.value);
+                      setOpen(false);
+                    }}
+                    className="flex w-full items-center justify-between gap-3 rounded-lg text-left transition-colors hover:bg-black/5"
+                    style={{
+                      padding: "10px 12px",
+                      minHeight: 40,
+                      fontFamily: "var(--font-body)",
+                      fontSize: 14,
+                      fontWeight: active ? 600 : 500,
+                      color: active ? "var(--color-accent-dark)" : "var(--color-text)",
+                    }}
+                  >
+                    {o.label}
+                    {active && <Check size={15} style={{ color: "var(--color-accent)" }} />}
+                  </button>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     </div>
   );

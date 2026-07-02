@@ -29,8 +29,11 @@ export function CatalogSidebar({ filters, onChange }: CatalogSidebarProps) {
   const [openCat, setOpenCat] = useState<string | null>(filters.category);
 
   const toggleCat = (id: string) => {
+    const isActive = filters.category === id;
     setOpenCat((cur) => (cur === id ? null : id));
-    onChange({ ...filters, category: id, subcategory: null });
+    // Повторный клик по уже выбранной категории снимает фильтр — раньше
+    // категория "залипала" навсегда, пока не жали "Сбросить фильтры".
+    onChange({ ...filters, category: isActive ? null : id, subcategory: null });
   };
 
   const reset = () => {

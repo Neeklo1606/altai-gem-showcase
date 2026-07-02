@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { ChevronRight, SlidersHorizontal, X } from "lucide-react";
@@ -10,16 +10,16 @@ import {
   DEFAULT_FILTERS,
   type CatalogFilterState,
 } from "@/components/catalog/CatalogSidebar";
-import {
-  CatalogFilters,
-  type SortKey,
-  type ViewMode,
-} from "@/components/catalog/CatalogFilters";
+import { CatalogFilters, type SortKey } from "@/components/catalog/CatalogFilters";
 import { ProductGrid } from "@/components/catalog/ProductGrid";
 import { PRODUCTS, type Product } from "@/data/products";
 import { CATEGORIES } from "@/data/categories";
+import { useCart } from "@/context/CartContext";
 
 export const Route = createFileRoute("/catalog")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    category: typeof search.category === "string" ? search.category : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Каталог продукции - Жемчужина Алтая" },
@@ -42,12 +42,22 @@ export const Route = createFileRoute("/catalog")({
 const PAGE_SIZE = 12;
 
 function CatalogPage() {
-  const [filters, setFilters] = useState<CatalogFilterState>(DEFAULT_FILTERS);
+  const search = Route.useSearch();
+  const [filters, setFilters] = useState<CatalogFilterState>(() => ({
+    ...DEFAULT_FILTERS,
+    category: search.category ?? null,
+  }));
   const [sort, setSort] = useState<SortKey>("price-asc");
-  const [view, setView] = useState<ViewMode>("grid-3");
   const [page, setPage] = useState(1);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+
+  // Переход с баннера акции/плитки категории на уже открытый каталог
+  // (без полного размонтирования роута) — синкаем фильтр с URL.
+  useEffect(() => {
+    setFilters((f) => ({ ...f, category: search.category ?? null, subcategory: null }));
+    setPage(1);
+  }, [search.category]);
 
   const filtered = useMemo(() => {
     const min = filters.priceMin ? Number(filters.priceMin) : null;
@@ -83,7 +93,9 @@ function CatalogPage() {
     setPage(1);
   };
 
+  const { addToCart } = useCart();
   const onAdd = (p: Product) => {
+    addToCart(p);
     setToast(`«${p.name}» добавлено в корзину`);
     window.setTimeout(() => setToast(null), 2200);
   };
@@ -98,7 +110,7 @@ function CatalogPage() {
         minHeight: "100vh",
       }}
     >
-      <Header cartCount={0} />
+      <Header />
 
       <main className="pt-20 md:pt-24">
         <div className="mx-auto max-w-7xl px-4 md:px-8">
@@ -197,11 +209,9 @@ function CatalogPage() {
                 count={sorted.length}
                 sort={sort}
                 onSortChange={setSort}
-                view={view}
-                onViewChange={setView}
               />
 
-              <ProductGrid products={pageItems} view={view} onAdd={onAdd} />
+              <ProductGrid products={pageItems} onAdd={onAdd} />
 
               {pages > 1 && (
                 <div className="mt-6 flex flex-wrap items-center justify-center gap-2">

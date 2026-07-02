@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { PROMOS } from "@/data/promos";
 
 const AUTOPLAY_MS = 5000;
+const MotionLink = motion.create(Link);
 
 export function PromoBanner() {
   const [index, setIndex] = useState(0);
@@ -49,14 +51,14 @@ export function PromoBanner() {
           }}
         >
           <AnimatePresence mode="wait" initial={false}>
-            <motion.a
+            <MotionLink
               key={promo.id}
-              href={promo.ctaLink}
-              initial={{ opacity: 0, x: 32 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -32 }}
-              transition={{ duration: 0.45, ease: "easeOut" }}
-              whileHover={{ scale: 1.02 }}
+              to="/promo/$slug"
+              params={{ slug: promo.id }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               className="promo-card group relative flex cursor-pointer flex-col items-stretch overflow-hidden md:flex-row md:items-center"
               style={{
                 background: promo.bgColor,
@@ -65,6 +67,23 @@ export function PromoBanner() {
                 transition: "var(--transition-smooth)",
               }}
             >
+              <img
+                src={promo.image}
+                alt={promo.imageAlt}
+                width={960}
+                height={540}
+                loading="lazy"
+                decoding="async"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(105deg, rgba(15,30,24,0.88) 0%, rgba(15,30,24,0.74) 46%, rgba(15,30,24,0.36) 100%)",
+                }}
+              />
               {/* Shine overlay */}
               <span
                 aria-hidden
@@ -147,14 +166,14 @@ export function PromoBanner() {
                 style={{ color: promo.accentColor }}
               >
                 <motion.div
-                  initial={{ rotate: -8, scale: 0.9, opacity: 0 }}
-                  animate={{ rotate: 0, scale: 1, opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut" }}
                   className="flex items-center justify-center rounded-full"
                   style={{
                     width: 168,
                     height: 168,
-                    backgroundColor: "rgba(255,255,255,0.12)",
+                    backgroundColor: "rgba(255,255,255,0.16)",
                     backdropFilter: "blur(8px)",
                     boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.18)",
                   }}
@@ -162,7 +181,7 @@ export function PromoBanner() {
                   <Icon size={84} strokeWidth={1.4} />
                 </motion.div>
               </div>
-            </motion.a>
+            </MotionLink>
           </AnimatePresence>
 
           {/* Arrows */}
