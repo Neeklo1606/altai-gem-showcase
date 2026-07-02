@@ -175,7 +175,8 @@ export function ProductInfo({ product, onAdd }: ProductInfoProps) {
       <div className="flex flex-wrap items-baseline gap-3">
         <span
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
             fontWeight: 700,
             fontSize: 40,
             lineHeight: 1,
@@ -188,6 +189,7 @@ export function ProductInfo({ product, onAdd }: ProductInfoProps) {
           <span
             style={{
               fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
               fontSize: 18,
               color: "var(--color-text-muted)",
               textDecoration: "line-through",

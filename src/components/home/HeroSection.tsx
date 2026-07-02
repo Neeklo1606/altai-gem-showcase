@@ -298,7 +298,8 @@ export function HeroSection() {
                   <span
                     style={{
                       color: "var(--color-accent)",
-                      fontFamily: "var(--font-display)",
+                      fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                       fontSize: 30,
                       fontWeight: 700,
                       lineHeight: 1,

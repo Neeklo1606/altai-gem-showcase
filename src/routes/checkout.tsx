@@ -857,7 +857,8 @@ function OrderSummary({
     >
       <h3
         style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
           fontSize: 20,
           fontWeight: 600,
           color: "var(--color-text)",
@@ -884,7 +885,8 @@ function OrderSummary({
         </span>
         <span
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
             fontSize: 28,
             fontWeight: 700,
             color: "var(--color-accent)",

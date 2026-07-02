@@ -271,7 +271,8 @@ export function BestsellersCarousel() {
                   >
                     <span
                       style={{
-                        fontFamily: "var(--font-display)",
+                        fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                         fontWeight: 600,
                         fontSize: 24,
                         color: p.oldPrice
@@ -286,6 +287,7 @@ export function BestsellersCarousel() {
                       <span
                         style={{
                           fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                           fontSize: 13,
                           color: "var(--color-text-muted)",
                           textDecoration: "line-through",

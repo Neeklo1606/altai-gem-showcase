@@ -221,7 +221,8 @@ function CartPage() {
               </span>
               <span
                 style={{
-                  fontFamily: "var(--font-display)",
+                  fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                   fontSize: 24,
                   fontWeight: 700,
                   color: "var(--color-accent)",
@@ -362,6 +363,7 @@ function CartItemRow({
           <span
             style={{
               fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
               fontSize: 13,
               color: "var(--color-text-muted)",
             }}
@@ -406,7 +408,8 @@ function CartItemRow({
           <div className="flex flex-col items-end">
             <span
               style={{
-                fontFamily: "var(--font-display)",
+                fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                 fontWeight: 700,
                 fontSize: 18,
                 color: "var(--color-text)",
@@ -419,6 +422,7 @@ function CartItemRow({
               <span
                 style={{
                   fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                   fontSize: 12,
                   color: "var(--color-text-muted)",
                   textDecoration: "line-through",
@@ -437,7 +441,8 @@ function CartItemRow({
         <div className="flex w-28 flex-col items-end">
           <span
             style={{
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
               fontWeight: 700,
               fontSize: 20,
               color: "var(--color-text)",
@@ -450,6 +455,7 @@ function CartItemRow({
             <span
               style={{
                 fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                 fontSize: 12,
                 color: "var(--color-text-muted)",
                 textDecoration: "line-through",
@@ -583,7 +589,8 @@ function Summary({
     >
       <h2
         style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
           fontSize: 24,
           fontWeight: 600,
           color: "var(--color-text)",
@@ -715,7 +722,8 @@ function Summary({
         </span>
         <span
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
             fontSize: 32,
             fontWeight: 700,
             color: "var(--color-accent)",

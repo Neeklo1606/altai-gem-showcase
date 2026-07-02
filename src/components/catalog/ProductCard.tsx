@@ -140,7 +140,8 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
         <div className="mt-4 flex items-baseline gap-2">
           <span
             style={{
-              fontFamily: "var(--font-display)",
+              fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
               fontWeight: 600,
               fontSize: 22,
               color: p.oldPrice
@@ -155,6 +156,7 @@ export function ProductCard({ product, onAdd }: ProductCardProps) {
             <span
               style={{
                 fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                 fontSize: 13,
                 color: "var(--color-text-muted)",
                 textDecoration: "line-through",
