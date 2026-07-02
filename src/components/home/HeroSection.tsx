@@ -144,6 +144,28 @@ export function HeroSection() {
               </Link>
             </motion.div>
           </motion.div>
+
+          {/* Trust line — социальное доказательство из утверждённого ТЗ */}
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2"
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: 14,
+              color: "#c8bfa8",
+            }}
+          >
+            <span className="inline-flex items-center gap-1.5">
+              <span aria-hidden style={{ color: "var(--color-accent-light)" }}>★</span>
+              4.9 Яндекс.Карты · 4.8 2ГИС
+            </span>
+            <span aria-hidden style={{ opacity: 0.4 }}>|</span>
+            <span>Собственная пасека</span>
+            <span aria-hidden style={{ opacity: 0.4 }}>|</span>
+            <span>Два магазина в Новосибирске с 2018 года</span>
+          </motion.div>
         </div>
 
         {featuredProduct && (
