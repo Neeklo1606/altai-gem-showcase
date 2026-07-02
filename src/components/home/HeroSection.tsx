@@ -1,26 +1,10 @@
 import { motion } from "framer-motion";
-import { useMemo } from "react";
 import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
 import { Link } from "@tanstack/react-router";
 import { HOME_ASSETS } from "@/data/homeAssets";
 import { PRODUCTS } from "@/data/products";
 
-const PARTICLES = 18;
-const PARTICLE_LAYOUT = Array.from({ length: PARTICLES }).map((_, i) => {
-  const seed = i + 1;
-  return {
-    id: i,
-    left: (seed * 37) % 100,
-    top: (seed * 53) % 100,
-    size: 2 + ((seed * 17) % 40) / 10,
-    delay: ((seed * 11) % 40) / 10,
-    duration: 6 + ((seed * 19) % 60) / 10,
-    drift: -20 + ((seed * 23) % 40),
-  };
-});
-
 export function HeroSection() {
-  const particles = useMemo(() => PARTICLE_LAYOUT, []);
   const featuredProduct = PRODUCTS.find((product) => product.id === "p01");
 
   const titleLines = ["Настоящие продукты", "Алтая"];
@@ -53,36 +37,6 @@ export function HeroSection() {
             "linear-gradient(180deg, rgba(13,24,18,0.18) 0%, rgba(13,24,18,0.82) 100%)",
         }}
       />
-
-      {/* Particles */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
-        {particles.map((p) => (
-          <motion.span
-            key={p.id}
-            className="absolute rounded-full"
-            style={{
-              left: `${p.left}%`,
-              top: `${p.top}%`,
-              width: p.size,
-              height: p.size,
-              backgroundColor: "var(--color-accent-light)",
-              boxShadow: "0 0 8px rgba(232,180,79,0.7)",
-            }}
-            initial={{ opacity: 0, y: 0 }}
-            animate={{
-              opacity: [0, 0.9, 0],
-              y: [0, -40, -80],
-              x: [0, p.drift, 0],
-            }}
-            transition={{
-              duration: p.duration,
-              delay: p.delay,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
-        ))}
-      </div>
 
       {/* Content */}
       <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-[minmax(0,1fr)_360px]">
@@ -151,16 +105,7 @@ export function HeroSection() {
             transition={{ duration: 0.6, delay: 0.8 }}
             className="mt-10 flex flex-wrap items-center gap-4"
           >
-            <motion.div
-              animate={{ boxShadow: [
-                "0 0 0 0 rgba(200,150,62,0.5)",
-                "0 0 0 16px rgba(200,150,62,0)",
-                "0 0 0 0 rgba(200,150,62,0)",
-              ] }}
-              transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Link
                 to="/catalog"
                 className="inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors"
