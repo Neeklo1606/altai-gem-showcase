@@ -41,9 +41,9 @@
   --color-ink: var(--text);
   --color-ink-muted: var(--text-muted);
 
-  --font-display: "Unbounded", sans-serif;
-  --font-body: "Inter", sans-serif;
-  --font-sans: "Inter", sans-serif;
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "Golos Text", sans-serif;
+  --font-sans: "Golos Text", sans-serif;
 }
 
 :root {
@@ -119,7 +119,7 @@
   }
 
   h1, h2, h3, .font-display {
-    font-family: 'Unbounded', sans-serif;
+    font-family: var(--font-display);
   }
 }
 
