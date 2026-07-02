@@ -179,24 +179,54 @@ export function FindUsSection() {
             Правый берег
           </div>
           <div
-            className="absolute inset-x-6 bottom-6 rounded-2xl p-5"
+            className="absolute inset-x-6 bottom-6 flex flex-wrap items-center gap-3 rounded-2xl p-4"
             style={{
               backgroundColor: "rgba(255,253,247,0.93)",
               backdropFilter: "blur(8px)",
             }}
           >
-            <p
+            <span
               style={{
                 fontFamily: "var(--font-body)",
                 fontSize: 14,
-                lineHeight: 1.55,
+                fontWeight: 600,
                 color: "var(--color-text)",
-                margin: 0,
               }}
             >
-              Карта показывает ориентиры по районам. Для точного маршрута
-              позвоните в магазин, и мы подскажем ближайший вход и парковку.
-            </p>
+              Построить маршрут:
+            </span>
+            <a
+              href="https://yandex.ru/maps/65/novosibirsk/?text=%D0%9D%D0%BE%D0%B2%D0%BE%D1%81%D0%B8%D0%B1%D0%B8%D1%80%D1%81%D0%BA%2C%20%D0%92%D0%B0%D1%82%D1%83%D1%82%D0%B8%D0%BD%D0%B0%2089"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full px-4 transition-colors hover:opacity-85"
+              style={{
+                backgroundColor: "var(--color-bg-dark)",
+                color: "var(--color-accent-light)",
+                fontFamily: "var(--font-body)",
+                fontSize: 13,
+                fontWeight: 600,
+                minHeight: 38,
+              }}
+            >
+              Яндекс.Карты
+            </a>
+            <a
+              href="https://2gis.ru/novosibirsk/search/%D0%92%D0%B0%D1%82%D1%83%D1%82%D0%B8%D0%BD%D0%B0%2089"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-full border px-4 transition-colors hover:bg-black/5"
+              style={{
+                borderColor: "rgba(31,26,14,0.2)",
+                color: "var(--color-text)",
+                fontFamily: "var(--font-body)",
+                fontSize: 13,
+                fontWeight: 600,
+                minHeight: 38,
+              }}
+            >
+              2ГИС
+            </a>
           </div>
         </motion.div>
       </div>
