@@ -188,7 +188,8 @@ function ProductPage() {
           <div className="flex flex-col">
             <span
               style={{
-                fontFamily: "var(--font-display)",
+                fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
                 fontSize: 22,
                 fontWeight: 700,
                 color: "var(--color-accent)",

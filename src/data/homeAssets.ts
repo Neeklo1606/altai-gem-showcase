@@ -16,7 +16,7 @@ export const HOME_ASSETS = {
     alt: "Медовые соты и продукты пчеловодства",
   },
   teaHerbs: {
-    src: "https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=900&q=82&fit=crop&crop=center",
+    src: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=900&q=82&fit=crop&crop=center",
     alt: "Алтайский травяной чай и сухие травы",
   },
   maralDeli: {
@@ -36,15 +36,15 @@ export const HOME_ASSETS = {
     alt: "Фермерский алтайский сыр",
   },
   gifts: {
-    src: "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=900&q=82&fit=crop&crop=center",
-    alt: "Подарочный набор с мёдом, чаем и сладостями",
+    src: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=82&fit=crop&crop=center",
+    alt: "Подарочные наборы в тёмной упаковке с золотыми лентами",
   },
   altaiPanorama: {
     src: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1200&q=82&fit=crop&crop=center",
     alt: "Алтайские горы и леса, откуда привозят продукты",
   },
   storeShelf: {
-    src: "https://images.unsplash.com/photo-1606914469633-bd39206ea739?w=900&q=82&fit=crop&crop=center",
-    alt: "Полка магазина с фермерскими продуктами и банками",
+    src: "https://images.unsplash.com/photo-1552767059-ce182ead6c1b?w=900&q=82&fit=crop&crop=center",
+    alt: "Прилавок с фермерскими сырами и продуктами",
   },
 };

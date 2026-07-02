@@ -28,48 +28,75 @@ const G = {
   gift: "linear-gradient(135deg, #a67c2e 0%, #1a2a20 100%)",
 };
 
+// Временные фото-плейсхолдеры до подключения реальных карточек из Эватора.
+// Каждый URL визуально проверен (сюжет соответствует категории).
+const P = {
+  honeyGlow: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?w=900&q=80&fit=crop",
+  honeyJars: "https://images.unsplash.com/photo-1671548185843-3f50c6c1060b?w=900&q=80&fit=crop",
+  honeycomb: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=900&q=80&fit=crop",
+  apiary: "https://images.unsplash.com/photo-1471943311424-646960669fbc?w=900&q=80&fit=crop",
+  teapot: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=900&q=80&fit=crop",
+  herbalCup: "https://images.unsplash.com/photo-1576092768241-dec231879fc3?w=900&q=80&fit=crop",
+  herbs: "https://images.unsplash.com/photo-1515586000433-45406d8e6662?w=900&q=80&fit=crop",
+  teaCup: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=900&q=80&fit=crop",
+  cheeseFigs: "https://images.unsplash.com/photo-1452195100486-9cc805987862?w=900&q=80&fit=crop",
+  cheeseWheel: "https://images.unsplash.com/photo-1486297678162-eb2a19b0a32d?w=900&q=80&fit=crop",
+  cheeseStall: "https://images.unsplash.com/photo-1552767059-ce182ead6c1b?w=900&q=80&fit=crop",
+  meatDeli: "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=900&q=80&fit=crop",
+  creamSet: "https://images.unsplash.com/photo-1601049676869-702ea24cfd58?w=900&q=80&fit=crop",
+  soapBars: "https://images.unsplash.com/photo-1600857544200-b2f666a9a2ec?w=900&q=80&fit=crop",
+  cosmetics: "https://images.unsplash.com/photo-1612817288484-6f916006741a?w=900&q=80&fit=crop",
+  amberBottle: "https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=900&q=80&fit=crop",
+  oilBottles: "https://images.unsplash.com/photo-1471193945509-9ad0617afabf?w=900&q=80&fit=crop",
+  giftGold: "https://images.unsplash.com/photo-1607344645866-009c320b63e0?w=900&q=80&fit=crop",
+};
+
+// Фото поверх градиента: градиент остаётся видимым, пока грузится картинка.
+const img = (photo: string, fallback: string) =>
+  `url(${photo}) center/cover no-repeat, ${fallback}`;
+
 export const PRODUCTS: Product[] = [
   // Мёд
-  { id: "p01", name: "Мёд разнотравье горный", category: "honey", subcategory: "Разнотравье", price: 890, oldPrice: null, unit: "500 г", inStock: true, isPerishable: false, badges: ["Хит"], image: G.honey, shortDescription: "Собран на пасеках предгорий Алтая" },
-  { id: "p02", name: "Мёд гречишный", category: "honey", subcategory: "Гречишный", price: 950, oldPrice: 1100, unit: "500 г", inStock: true, isPerishable: false, badges: ["-15%"], image: G.honeyDark, shortDescription: "Тёмный, с насыщенным вкусом" },
-  { id: "p03", name: "Мёд акациевый", category: "honey", subcategory: "Акациевый", price: 1180, oldPrice: null, unit: "500 г", inStock: true, isPerishable: false, badges: [], image: G.honey, shortDescription: "Светлый, долго не кристаллизуется" },
-  { id: "p04", name: "Мёд с пергой", category: "honey", subcategory: "С пергой", price: 1450, oldPrice: null, unit: "300 г", inStock: false, isPerishable: false, badges: ["Новинка"], image: G.honeyDark, shortDescription: "Богат витаминами и аминокислотами" },
+  { id: "p01", name: "Мёд разнотравье горный", category: "honey", subcategory: "Разнотравье", price: 890, oldPrice: null, unit: "500 г", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.honeyGlow, G.honey), shortDescription: "Собран на пасеках предгорий Алтая" },
+  { id: "p02", name: "Мёд гречишный", category: "honey", subcategory: "Гречишный", price: 950, oldPrice: 1100, unit: "500 г", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.honeyJars, G.honeyDark), shortDescription: "Тёмный, с насыщенным вкусом" },
+  { id: "p03", name: "Мёд акациевый", category: "honey", subcategory: "Акациевый", price: 1180, oldPrice: null, unit: "500 г", inStock: true, isPerishable: false, badges: [], image: img(P.honeycomb, G.honey), shortDescription: "Светлый, долго не кристаллизуется" },
+  { id: "p04", name: "Мёд с пергой", category: "honey", subcategory: "С пергой", price: 1450, oldPrice: null, unit: "300 г", inStock: false, isPerishable: false, badges: ["Новинка"], image: img(P.apiary, G.honeyDark), shortDescription: "Богат витаминами и аминокислотами" },
 
   // Чаи
-  { id: "p05", name: "Иван-чай ферментированный", category: "tea", subcategory: "Иван-чай", price: 380, oldPrice: null, unit: "100 г", inStock: true, isPerishable: false, badges: ["Хит"], image: G.tea, shortDescription: "Классический алтайский иван-чай" },
-  { id: "p06", name: "Сбор Горный воздух", category: "tea", subcategory: "Горные травы", price: 420, oldPrice: 490, unit: "80 г", inStock: true, isPerishable: false, badges: ["-15%"], image: G.teaLight, shortDescription: "Чабрец, душица, зверобой" },
-  { id: "p07", name: "Чага алтайская", category: "tea", subcategory: "Горные травы", price: 450, oldPrice: null, unit: "100 г", inStock: true, isPerishable: false, badges: [], image: G.tea, shortDescription: "Берёзовый гриб с антиоксидантами" },
-  { id: "p08", name: "Сбор Ягодный лес", category: "tea", subcategory: "Ягодные", price: 360, oldPrice: null, unit: "80 г", inStock: true, isPerishable: false, badges: ["Новинка"], image: G.teaLight, shortDescription: "Брусника, малина, смородина" },
+  { id: "p05", name: "Иван-чай ферментированный", category: "tea", subcategory: "Иван-чай", price: 380, oldPrice: null, unit: "100 г", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.teapot, G.tea), shortDescription: "Классический алтайский иван-чай" },
+  { id: "p06", name: "Сбор Горный воздух", category: "tea", subcategory: "Горные травы", price: 420, oldPrice: 490, unit: "80 г", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.herbs, G.teaLight), shortDescription: "Чабрец, душица, зверобой" },
+  { id: "p07", name: "Чага алтайская", category: "tea", subcategory: "Горные травы", price: 450, oldPrice: null, unit: "100 г", inStock: true, isPerishable: false, badges: [], image: img(P.herbalCup, G.tea), shortDescription: "Берёзовый гриб с антиоксидантами" },
+  { id: "p08", name: "Сбор Ягодный лес", category: "tea", subcategory: "Ягодные", price: 360, oldPrice: null, unit: "80 г", inStock: true, isPerishable: false, badges: ["Новинка"], image: img(P.teaCup, G.teaLight), shortDescription: "Брусника, малина, смородина" },
 
   // Сыры
-  { id: "p09", name: "Сыр Алтайский выдержанный", category: "cheese", subcategory: "Твёрдые", price: 620, oldPrice: 730, unit: "300 г", inStock: true, isPerishable: true, badges: ["-15%", "Хит"], image: G.cheese, shortDescription: "Выдержка 6 месяцев" },
-  { id: "p10", name: "Сыр Качотта с травами", category: "cheese", subcategory: "Полутвёрдые", price: 490, oldPrice: null, unit: "250 г", inStock: true, isPerishable: true, badges: [], image: G.cheese, shortDescription: "Мягкий полутвёрдый сыр" },
-  { id: "p11", name: "Сыр копчёный Чечил", category: "cheese", subcategory: "Копчёные", price: 380, oldPrice: null, unit: "200 г", inStock: false, isPerishable: true, badges: [], image: G.cheese, shortDescription: "Натуральное копчение на ольхе" },
+  { id: "p09", name: "Сыр Алтайский выдержанный", category: "cheese", subcategory: "Твёрдые", price: 620, oldPrice: 730, unit: "300 г", inStock: true, isPerishable: true, badges: ["-15%", "Хит"], image: img(P.cheeseFigs, G.cheese), shortDescription: "Выдержка 6 месяцев" },
+  { id: "p10", name: "Сыр Качотта с травами", category: "cheese", subcategory: "Полутвёрдые", price: 490, oldPrice: null, unit: "250 г", inStock: true, isPerishable: true, badges: [], image: img(P.cheeseWheel, G.cheese), shortDescription: "Мягкий полутвёрдый сыр" },
+  { id: "p11", name: "Сыр копчёный Чечил", category: "cheese", subcategory: "Копчёные", price: 380, oldPrice: null, unit: "200 г", inStock: false, isPerishable: true, badges: [], image: img(P.cheeseStall, G.cheese), shortDescription: "Натуральное копчение на ольхе" },
 
   // Мясные деликатесы
-  { id: "p12", name: "Колбаса из марала сыровяленая", category: "meat", subcategory: "Марал", price: 1250, oldPrice: null, unit: "200 г", inStock: true, isPerishable: false, badges: ["Хит"], image: G.meat, shortDescription: "Без консервантов и красителей" },
-  { id: "p13", name: "Вяленая оленина", category: "meat", subcategory: "Оленина", price: 980, oldPrice: 1150, unit: "150 г", inStock: true, isPerishable: false, badges: ["-15%"], image: G.meat, shortDescription: "Классический рецепт" },
-  { id: "p14", name: "Снеки из марала", category: "meat", subcategory: "Снеки", price: 540, oldPrice: null, unit: "80 г", inStock: true, isPerishable: false, badges: ["Новинка"], image: G.meat, shortDescription: "Перекус на любой случай" },
+  { id: "p12", name: "Колбаса из марала сыровяленая", category: "meat", subcategory: "Марал", price: 1250, oldPrice: null, unit: "200 г", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.meatDeli, G.meat), shortDescription: "Без консервантов и красителей" },
+  { id: "p13", name: "Вяленая оленина", category: "meat", subcategory: "Оленина", price: 980, oldPrice: 1150, unit: "150 г", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.meatDeli, G.meat), shortDescription: "Классический рецепт" },
+  { id: "p14", name: "Снеки из марала", category: "meat", subcategory: "Снеки", price: 540, oldPrice: null, unit: "80 г", inStock: true, isPerishable: false, badges: ["Новинка"], image: img(P.meatDeli, G.meat), shortDescription: "Перекус на любой случай" },
 
   // Косметика
-  { id: "p15", name: "Крем для лица облепиховый", category: "cosmetics", subcategory: "Лицо", price: 720, oldPrice: null, unit: "50 мл", inStock: true, isPerishable: false, badges: ["Хит"], image: G.cosmetics, shortDescription: "Питание и восстановление" },
-  { id: "p16", name: "Скраб для тела медовый", category: "cosmetics", subcategory: "Тело", price: 540, oldPrice: 640, unit: "200 мл", inStock: true, isPerishable: false, badges: ["-15%"], image: G.cosmetics, shortDescription: "Мёд и кедровая скорлупа" },
-  { id: "p17", name: "Шампунь травяной", category: "cosmetics", subcategory: "Волосы", price: 480, oldPrice: null, unit: "250 мл", inStock: true, isPerishable: false, badges: [], image: G.cosmetics, shortDescription: "Без сульфатов и парабенов" },
+  { id: "p15", name: "Крем для лица облепиховый", category: "cosmetics", subcategory: "Лицо", price: 720, oldPrice: null, unit: "50 мл", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.creamSet, G.cosmetics), shortDescription: "Питание и восстановление" },
+  { id: "p16", name: "Скраб для тела медовый", category: "cosmetics", subcategory: "Тело", price: 540, oldPrice: 640, unit: "200 мл", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.soapBars, G.cosmetics), shortDescription: "Мёд и кедровая скорлупа" },
+  { id: "p17", name: "Шампунь травяной", category: "cosmetics", subcategory: "Волосы", price: 480, oldPrice: null, unit: "250 мл", inStock: true, isPerishable: false, badges: [], image: img(P.cosmetics, G.cosmetics), shortDescription: "Без сульфатов и парабенов" },
 
   // Бальзамы и масла
-  { id: "p18", name: "Бальзам Сила Алтая", category: "balms", subcategory: "Бальзамы", price: 780, oldPrice: null, unit: "100 мл", inStock: true, isPerishable: false, badges: ["Хит"], image: G.balm, shortDescription: "27 трав в одной бутылке" },
-  { id: "p19", name: "Масло кедровое холодного отжима", category: "balms", subcategory: "Кедровое", price: 590, oldPrice: null, unit: "250 мл", inStock: true, isPerishable: false, badges: ["Новинка"], image: G.balm, shortDescription: "Первый холодный отжим" },
-  { id: "p20", name: "Масло облепиховое", category: "balms", subcategory: "Облепиховое", price: 520, oldPrice: 620, unit: "200 мл", inStock: true, isPerishable: false, badges: ["-15%"], image: G.balm, shortDescription: "Богато каротиноидами" },
+  { id: "p18", name: "Бальзам Сила Алтая", category: "balms", subcategory: "Бальзамы", price: 780, oldPrice: null, unit: "100 мл", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.amberBottle, G.balm), shortDescription: "27 трав в одной бутылке" },
+  { id: "p19", name: "Масло кедровое холодного отжима", category: "balms", subcategory: "Кедровое", price: 590, oldPrice: null, unit: "250 мл", inStock: true, isPerishable: false, badges: ["Новинка"], image: img(P.oilBottles, G.balm), shortDescription: "Первый холодный отжим" },
+  { id: "p20", name: "Масло облепиховое", category: "balms", subcategory: "Облепиховое", price: 520, oldPrice: 620, unit: "200 мл", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.oilBottles, G.balm), shortDescription: "Богато каротиноидами" },
 
   // Пантогематоген
-  { id: "p21", name: "Пантогематоген классический", category: "pantohematogen", subcategory: "Жидкий", price: 1100, oldPrice: 1380, unit: "50 мл", inStock: true, isPerishable: false, badges: ["-20%"], image: G.panto, shortDescription: "Сила сибирской тайги" },
-  { id: "p22", name: "Пантогематоген капсулы", category: "pantohematogen", subcategory: "Капсулы", price: 1450, oldPrice: null, unit: "60 шт", inStock: true, isPerishable: false, badges: ["Хит"], image: G.panto, shortDescription: "Удобный формат приёма" },
-  { id: "p23", name: "Сироп с пантами и шиповником", category: "pantohematogen", subcategory: "Сиропы", price: 890, oldPrice: null, unit: "200 мл", inStock: false, isPerishable: false, badges: ["Новинка"], image: G.panto, shortDescription: "Натуральный иммуномодулятор" },
+  { id: "p21", name: "Пантогематоген классический", category: "pantohematogen", subcategory: "Жидкий", price: 1100, oldPrice: 1380, unit: "50 мл", inStock: true, isPerishable: false, badges: ["-20%"], image: img(P.amberBottle, G.panto), shortDescription: "Сила сибирской тайги" },
+  { id: "p22", name: "Пантогематоген капсулы", category: "pantohematogen", subcategory: "Капсулы", price: 1450, oldPrice: null, unit: "60 шт", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.amberBottle, G.panto), shortDescription: "Удобный формат приёма" },
+  { id: "p23", name: "Сироп с пантами и шиповником", category: "pantohematogen", subcategory: "Сиропы", price: 890, oldPrice: null, unit: "200 мл", inStock: false, isPerishable: false, badges: ["Новинка"], image: img(P.herbalCup, G.panto), shortDescription: "Натуральный иммуномодулятор" },
 
   // Подарочные наборы
-  { id: "p24", name: "Подарочный набор Премиум", category: "gifts", subcategory: "Премиум", price: 3200, oldPrice: null, unit: "5 предметов", inStock: true, isPerishable: false, badges: ["Хит"], image: G.gift, shortDescription: "Мёд, чай, бальзам, орехи, конфеты" },
-  { id: "p25", name: "Набор Алтайское утро", category: "gifts", subcategory: "До 2000 ₽", price: 1850, oldPrice: 2100, unit: "3 предмета", inStock: true, isPerishable: false, badges: ["-15%"], image: G.gift, shortDescription: "Мёд, иван-чай, кедровые орехи" },
-  { id: "p26", name: "Набор Сила гор", category: "gifts", subcategory: "До 5000 ₽", price: 4200, oldPrice: null, unit: "4 предмета", inStock: true, isPerishable: false, badges: ["Новинка"], image: G.gift, shortDescription: "Пантогематоген, бальзамы, мёд" },
+  { id: "p24", name: "Подарочный набор Премиум", category: "gifts", subcategory: "Премиум", price: 3200, oldPrice: null, unit: "5 предметов", inStock: true, isPerishable: false, badges: ["Хит"], image: img(P.giftGold, G.gift), shortDescription: "Мёд, чай, бальзам, орехи, конфеты" },
+  { id: "p25", name: "Набор Алтайское утро", category: "gifts", subcategory: "До 2000 ₽", price: 1850, oldPrice: 2100, unit: "3 предмета", inStock: true, isPerishable: false, badges: ["-15%"], image: img(P.honeyJars, G.gift), shortDescription: "Мёд, иван-чай, кедровые орехи" },
+  { id: "p26", name: "Набор Сила гор", category: "gifts", subcategory: "До 5000 ₽", price: 4200, oldPrice: null, unit: "4 предмета", inStock: true, isPerishable: false, badges: ["Новинка"], image: img(P.giftGold, G.gift), shortDescription: "Пантогематоген, бальзамы, мёд" },
 ];
 
 export const PRODUCT_COUNTS: Record<string, number> = PRODUCTS.reduce(

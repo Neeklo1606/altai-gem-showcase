@@ -62,9 +62,10 @@ interface FormErrors {
   address?: string;
 }
 
+// Адреса синхронизированы с футером и секцией «Как нас найти»
 const PICKUP_ADDRESSES: Record<"pickup_left" | "pickup_right", string> = {
-  pickup_left: "г. Новосибирск, ул. Ленина, 12 (Левый берег)",
-  pickup_right: "г. Новосибирск, ул. Большевистская, 45 (Правый берег)",
+  pickup_left: "г. Новосибирск, ул. Ватутина, 89 (Левый берег)",
+  pickup_right: "г. Новосибирск, ул. Кирова, 27 (Правый берег)",
 };
 
 function maskPhone(value: string): string {
@@ -857,7 +858,8 @@ function OrderSummary({
     >
       <h3
         style={{
-          fontFamily: "var(--font-display)",
+          fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
           fontSize: 20,
           fontWeight: 600,
           color: "var(--color-text)",
@@ -884,7 +886,8 @@ function OrderSummary({
         </span>
         <span
           style={{
-            fontFamily: "var(--font-display)",
+            fontFamily: "var(--font-body)",
+                        fontVariantNumeric: "tabular-nums",
             fontSize: 28,
             fontWeight: 700,
             color: "var(--color-accent)",
