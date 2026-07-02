@@ -2,19 +2,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
 import type { Product } from "@/data/products";
 import { ProductCard } from "./ProductCard";
-import type { ViewMode } from "./CatalogFilters";
 
 interface ProductGridProps {
   products: Product[];
-  view: ViewMode;
   onAdd?: (p: Product) => void;
 }
 
-export function ProductGrid({ products, view, onAdd }: ProductGridProps) {
-  const cols =
-    view === "grid-4"
-      ? "grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
-      : "grid-cols-2 md:grid-cols-3";
+export function ProductGrid({ products, onAdd }: ProductGridProps) {
+  // Единая сетка — 3 карточки в ряд на десктопе, без переключателя вида.
+  const cols = "grid-cols-2 md:grid-cols-3";
 
   if (products.length === 0) {
     return (

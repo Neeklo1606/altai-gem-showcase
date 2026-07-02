@@ -117,7 +117,7 @@ function SearchPage() {
 
   return (
     <div style={{ backgroundColor: "var(--color-bg-cream)", minHeight: "100vh" }}>
-      <Header cartCount={0} />
+      <Header />
 
       <main className="pt-20 pb-24 md:pt-28">
         <div className="mx-auto max-w-7xl px-4 md:px-8">

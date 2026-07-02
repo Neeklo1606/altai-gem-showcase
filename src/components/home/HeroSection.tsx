@@ -1,23 +1,27 @@
 import { motion } from "framer-motion";
 import { useMemo } from "react";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight, ShoppingBag, Sparkles } from "lucide-react";
+import { Link } from "@tanstack/react-router";
+import { HOME_ASSETS } from "@/data/homeAssets";
+import { PRODUCTS } from "@/data/products";
 
 const PARTICLES = 18;
+const PARTICLE_LAYOUT = Array.from({ length: PARTICLES }).map((_, i) => {
+  const seed = i + 1;
+  return {
+    id: i,
+    left: (seed * 37) % 100,
+    top: (seed * 53) % 100,
+    size: 2 + ((seed * 17) % 40) / 10,
+    delay: ((seed * 11) % 40) / 10,
+    duration: 6 + ((seed * 19) % 60) / 10,
+    drift: -20 + ((seed * 23) % 40),
+  };
+});
 
 export function HeroSection() {
-  const particles = useMemo(
-    () =>
-      Array.from({ length: PARTICLES }).map((_, i) => ({
-        id: i,
-        left: Math.random() * 100,
-        top: Math.random() * 100,
-        size: 2 + Math.random() * 4,
-        delay: Math.random() * 4,
-        duration: 6 + Math.random() * 6,
-        drift: -20 + Math.random() * 40,
-      })),
-    [],
-  );
+  const particles = useMemo(() => PARTICLE_LAYOUT, []);
+  const featuredProduct = PRODUCTS.find((product) => product.id === "p01");
 
   const titleLines = ["Настоящие продукты", "Алтая"];
 
@@ -30,27 +34,23 @@ export function HeroSection() {
           "linear-gradient(160deg, var(--color-bg-dark) 0%, #0d1812 100%)",
       }}
     >
-      {/* Mountain placeholder background */}
-      <div
-        aria-hidden
-        className="absolute inset-0 opacity-40"
-        style={{
-          background:
-            "radial-gradient(120% 80% at 20% 30%, rgba(200,150,62,0.18), transparent 60%)," +
-            "radial-gradient(100% 70% at 80% 70%, rgba(45,90,63,0.45), transparent 65%)," +
-            "linear-gradient(180deg, transparent 40%, rgba(0,0,0,0.5) 100%)",
-        }}
+      <img
+        src={HOME_ASSETS.altaiHero.src}
+        alt={HOME_ASSETS.altaiHero.alt}
+        width={1920}
+        height={1080}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ objectPosition: "center 42%" }}
       />
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-1/2 opacity-30"
+        className="absolute inset-0"
         style={{
-          backgroundImage:
-            "linear-gradient(180deg, transparent 0%, #0d1812 95%)," +
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'><path d='M0 320 L120 240 L240 280 L360 180 L480 260 L600 160 L720 240 L840 140 L960 220 L1080 180 L1200 260 L1200 400 L0 400 Z' fill='%232d5a3f' opacity='0.5'/><path d='M0 360 L160 300 L320 340 L480 260 L640 320 L800 240 L960 300 L1120 260 L1200 320 L1200 400 L0 400 Z' fill='%231a3028' opacity='0.7'/></svg>\")",
-          backgroundSize: "cover",
-          backgroundPosition: "bottom",
-          backgroundRepeat: "no-repeat",
+          background:
+            "linear-gradient(105deg, rgba(8,18,12,0.9) 0%, rgba(8,18,12,0.72) 48%, rgba(8,18,12,0.32) 100%)," +
+            "linear-gradient(180deg, rgba(13,24,18,0.18) 0%, rgba(13,24,18,0.82) 100%)",
         }}
       />
 
@@ -85,121 +85,246 @@ export function HeroSection() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-24 md:px-8 md:py-32">
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5"
-          style={{
-            borderColor: "rgba(200,150,62,0.4)",
-            backgroundColor: "rgba(200,150,62,0.08)",
-            color: "var(--color-accent-light)",
-            fontFamily: "var(--font-body)",
-            fontSize: 13,
-            letterSpacing: "0.08em",
-          }}
-        >
-          <Sparkles size={14} />
-          <span style={{ textTransform: "uppercase" }}>С душой Алтая</span>
-        </motion.div>
-
-        <h1
-          className="mt-6 text-5xl md:text-7xl"
-          style={{
-            fontFamily: "var(--font-display)",
-            fontWeight: 600,
-            color: "var(--color-accent-light)",
-            lineHeight: 1.02,
-            letterSpacing: "-0.01em",
-            maxWidth: "16ch",
-          }}
-        >
-          {titleLines.map((line, i) => (
-            <motion.span
-              key={line}
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.15 + i * 0.2, ease: "easeOut" }}
-              style={{ display: "block" }}
-            >
-              {line}
-            </motion.span>
-          ))}
-        </h1>
-
-        <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 text-lg md:text-xl"
-          style={{
-            fontFamily: "var(--font-body)",
-            color: "#c8bfa8",
-            maxWidth: 560,
-            lineHeight: 1.6,
-          }}
-        >
-          Мёд, чаи, сыры, деликатесы и натуральная косметика от алтайских
-          производителей.
-        </motion.p>
-
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.8 }}
-          className="mt-10 flex flex-wrap items-center gap-4"
-        >
-          <motion.a
-            href="#catalog"
-            animate={{ boxShadow: [
-              "0 0 0 0 rgba(200,150,62,0.5)",
-              "0 0 0 16px rgba(200,150,62,0)",
-              "0 0 0 0 rgba(200,150,62,0)",
-            ] }}
-            transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors"
+      <div className="relative z-10 mx-auto grid w-full max-w-7xl items-center gap-10 px-4 py-24 md:px-8 md:py-32 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="inline-flex items-center gap-2 rounded-full border px-4 py-1.5"
             style={{
-              backgroundColor: "var(--color-accent)",
-              color: "var(--color-bg-dark)",
-              fontFamily: "var(--font-body)",
-              fontWeight: 600,
-              fontSize: 16,
-              minHeight: 44,
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-                "var(--color-accent-light)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLAnchorElement).style.backgroundColor =
-                "var(--color-accent)";
-            }}
-          >
-            В каталог
-            <ArrowRight size={18} />
-          </motion.a>
-
-          <motion.a
-            href="#promo"
-            whileHover={{ scale: 1.02, backgroundColor: "rgba(200,150,62,0.1)" }}
-            whileTap={{ scale: 0.98 }}
-            className="inline-flex items-center rounded-full border px-7 py-4 transition-colors"
-            style={{
-              borderColor: "var(--color-accent)",
+              borderColor: "rgba(200,150,62,0.4)",
+              backgroundColor: "rgba(200,150,62,0.08)",
               color: "var(--color-accent-light)",
               fontFamily: "var(--font-body)",
-              fontWeight: 600,
-              fontSize: 16,
-              minHeight: 44,
-              backgroundColor: "transparent",
+              fontSize: 13,
+              letterSpacing: "0.08em",
             }}
           >
-            Акции
-          </motion.a>
-        </motion.div>
+            <Sparkles size={14} />
+            <span style={{ textTransform: "uppercase" }}>С душой Алтая</span>
+          </motion.div>
+
+          <h1
+            className="mt-6 text-5xl md:text-7xl"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontWeight: 600,
+              color: "var(--color-accent-light)",
+              lineHeight: 1.02,
+              letterSpacing: "-0.01em",
+              maxWidth: "16ch",
+            }}
+          >
+            {titleLines.map((line, i) => (
+              <motion.span
+                key={line}
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.15 + i * 0.2, ease: "easeOut" }}
+                style={{ display: "block" }}
+              >
+                {line}
+              </motion.span>
+            ))}
+          </h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="mt-6 text-lg md:text-xl"
+            style={{
+              fontFamily: "var(--font-body)",
+              color: "#c8bfa8",
+              maxWidth: 560,
+              lineHeight: 1.6,
+            }}
+          >
+            Свой алтайский мёд, продукты пчеловодства, чаи, сыры, деликатесы и
+            натуральная косметика от проверенных производителей.
+          </motion.p>
+
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
+            className="mt-10 flex flex-wrap items-center gap-4"
+          >
+            <motion.div
+              animate={{ boxShadow: [
+                "0 0 0 0 rgba(200,150,62,0.5)",
+                "0 0 0 16px rgba(200,150,62,0)",
+                "0 0 0 0 rgba(200,150,62,0)",
+              ] }}
+              transition={{ duration: 2.2, repeat: Infinity, ease: "easeOut" }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                to="/catalog"
+                className="inline-flex items-center gap-2 rounded-full px-7 py-4 transition-colors"
+                style={{
+                  backgroundColor: "var(--color-accent)",
+                  color: "var(--color-bg-dark)",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  minHeight: 44,
+                }}
+              >
+                В каталог
+                <ArrowRight size={18} />
+              </Link>
+            </motion.div>
+
+            <motion.div
+              whileHover={{ scale: 1.02, backgroundColor: "rgba(200,150,62,0.1)" }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Link
+                to="/promo"
+                className="inline-flex items-center rounded-full border px-7 py-4 transition-colors"
+                style={{
+                  borderColor: "var(--color-accent)",
+                  color: "var(--color-accent-light)",
+                  fontFamily: "var(--font-body)",
+                  fontWeight: 600,
+                  fontSize: 16,
+                  minHeight: 44,
+                  backgroundColor: "transparent",
+                }}
+              >
+                Акции
+              </Link>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        {featuredProduct && (
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.9, ease: "easeOut" }}
+            className="w-full max-w-sm justify-self-start lg:justify-self-end"
+          >
+            <Link
+              to="/product/$slug"
+              params={{ slug: featuredProduct.id }}
+              aria-label={`Открыть товар: ${featuredProduct.name}`}
+              className="group block overflow-hidden rounded-2xl outline-none transition-transform focus-visible:ring-2 focus-visible:ring-[color:var(--color-accent-light)] focus-visible:ring-offset-2 focus-visible:ring-offset-[color:var(--color-bg-dark)]"
+              style={{
+                backgroundColor: "rgba(255,253,247,0.94)",
+                border: "1px solid rgba(232,180,79,0.24)",
+                boxShadow: "0 24px 70px rgba(0,0,0,0.28)",
+              }}
+            >
+              <div
+                className="relative overflow-hidden"
+                style={{
+                  aspectRatio: "16 / 10",
+                  background: featuredProduct.image,
+                }}
+              >
+                <img
+                  src={HOME_ASSETS.honeyJars.src}
+                  alt={HOME_ASSETS.honeyJars.alt}
+                  width={720}
+                  height={480}
+                  loading="eager"
+                  decoding="async"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <span
+                  aria-hidden
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(13,24,18,0.46), transparent 64%)",
+                  }}
+                />
+                <span
+                  className="absolute left-4 top-4 rounded-full px-3 py-1"
+                  style={{
+                    backgroundColor: "var(--color-accent)",
+                    color: "var(--color-bg-dark)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: 11,
+                    fontWeight: 700,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Хит продаж
+                </span>
+              </div>
+              <div className="p-5">
+                <span
+                  style={{
+                    color: "var(--color-accent-dark)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: 12,
+                    fontWeight: 600,
+                    letterSpacing: "0.08em",
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Собственная пасека
+                </span>
+                <h2
+                  className="mt-2"
+                  style={{
+                    color: "var(--color-text)",
+                    fontFamily: "var(--font-display)",
+                    fontSize: 28,
+                    fontWeight: 600,
+                    lineHeight: 1.06,
+                  }}
+                >
+                  {featuredProduct.name}
+                </h2>
+                <p
+                  className="mt-2"
+                  style={{
+                    color: "var(--color-text-muted)",
+                    fontFamily: "var(--font-body)",
+                    fontSize: 14,
+                    lineHeight: 1.45,
+                  }}
+                >
+                  {featuredProduct.shortDescription}. Банка {featuredProduct.unit}.
+                </p>
+                <div className="mt-5 flex items-center justify-between gap-4">
+                  <span
+                    style={{
+                      color: "var(--color-accent)",
+                      fontFamily: "var(--font-display)",
+                      fontSize: 30,
+                      fontWeight: 700,
+                      lineHeight: 1,
+                    }}
+                  >
+                    {featuredProduct.price.toLocaleString("ru-RU")} ₽
+                  </span>
+                  <span
+                    className="inline-flex items-center gap-2 rounded-full px-4 py-2"
+                    style={{
+                      backgroundColor: "var(--color-bg-dark)",
+                      color: "var(--color-accent-light)",
+                      fontFamily: "var(--font-body)",
+                      fontSize: 13,
+                      fontWeight: 600,
+                      minHeight: 40,
+                    }}
+                  >
+                    <ShoppingBag size={15} />
+                    Смотреть
+                  </span>
+                </div>
+              </div>
+            </Link>
+          </motion.div>
+        )}
       </div>
 
       {/* Topographic divider */}

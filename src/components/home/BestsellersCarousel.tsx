@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight, ShoppingBag } from "lucide-react";
+import { ChevronLeft, ChevronRight, Minus, Plus, ShoppingBag } from "lucide-react";
 import { BESTSELLERS, type Bestseller } from "@/data/bestsellers";
+import { useCart } from "@/context/CartContext";
+import type { Product } from "@/data/products";
+import { CATEGORIES } from "@/data/categories";
 
 const BADGE_STYLES: Record<NonNullable<Bestseller["badge"]>, { bg: string; color: string }> = {
   "Хит": { bg: "var(--color-accent)", color: "var(--color-bg-dark)" },
@@ -44,10 +47,24 @@ export function BestsellersCarousel() {
     el.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
-  const onAdd = (id: string) => {
-    // Заглушка: подключите свою корзину
-    console.log("add to cart", id);
-  };
+  const { items, addToCart, updateQuantity } = useCart();
+
+  // Бестселлеры и каталог — два независимых источника данных с разными id,
+  // поэтому для корзины собираем Product-совместимый объект на лету.
+  const toCartProduct = (b: Bestseller): Product => ({
+    id: b.id,
+    name: b.name,
+    category: CATEGORIES.find((c) => c.name === b.category)?.id ?? "bestseller",
+    subcategory: b.category,
+    price: b.price,
+    oldPrice: b.oldPrice ?? null,
+    unit: b.weight,
+    inStock: true,
+    isPerishable: false,
+    badges: b.badge ? [b.badge] : [],
+    image: `url(${b.image}) center/cover no-repeat`,
+    shortDescription: b.category,
+  });
 
   return (
     <section
@@ -158,21 +175,29 @@ export function BestsellersCarousel() {
                   transition: "var(--transition-smooth)",
                 }}
               >
-                {/* Image placeholder */}
                 <div
                   className="relative"
                   style={{
                     aspectRatio: "1 / 1",
-                    background: p.image,
+                    background: p.imageFallback,
                     overflow: "hidden",
                   }}
                 >
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt}
+                    width={640}
+                    height={640}
+                    loading="lazy"
+                    decoding="async"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
                   <span
                     aria-hidden
                     className="absolute inset-0"
                     style={{
                       background:
-                        "radial-gradient(80% 60% at 100% 0%, rgba(255,255,255,0.22), transparent 60%)",
+                        "linear-gradient(to top, rgba(31,26,14,0.16), transparent 56%), radial-gradient(80% 60% at 100% 0%, rgba(255,255,255,0.18), transparent 60%)",
                     }}
                   />
                   {badge && (
@@ -238,7 +263,12 @@ export function BestsellersCarousel() {
                     {p.weight}
                   </span>
 
-                  <div className="mt-4 flex items-baseline gap-2">
+                  {/* Фиксированная высота строки цены — карточки с/без скидки не должны
+                      "прыгать" по-разному, поэтому бейдж скидки всегда в этой же строке. */}
+                  <div
+                    className="mt-4 flex flex-wrap items-center gap-2"
+                    style={{ minHeight: 30 }}
+                  >
                     <span
                       style={{
                         fontFamily: "var(--font-display)",
@@ -264,40 +294,101 @@ export function BestsellersCarousel() {
                         {formatPrice(p.oldPrice)}
                       </span>
                     )}
+                    {discount > 0 && (
+                      <span
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontSize: 12,
+                          fontWeight: 700,
+                          padding: "3px 8px",
+                          borderRadius: 999,
+                          backgroundColor: "var(--color-error)",
+                          color: "#fff",
+                        }}
+                      >
+                        −{discount}%
+                      </span>
+                    )}
                   </div>
-                  {discount > 0 && (
-                    <span
-                      style={{
-                        marginTop: 2,
-                        fontFamily: "var(--font-body)",
-                        fontSize: 11,
-                        fontWeight: 600,
-                        color: "var(--color-success)",
-                      }}
-                    >
-                      Выгода {discount}%
-                    </span>
-                  )}
 
-                  <button
-                    type="button"
-                    onClick={() => onAdd(p.id)}
-                    className="bs-cta mt-auto inline-flex items-center justify-center gap-2 rounded-full"
-                    style={{
-                      marginTop: 20,
-                      backgroundColor: "var(--color-accent)",
-                      color: "var(--color-bg-dark)",
-                      fontFamily: "var(--font-body)",
-                      fontWeight: 600,
-                      fontSize: 14,
-                      padding: "12px 18px",
-                      minHeight: 44,
-                      transition: "var(--transition-smooth)",
-                    }}
-                  >
-                    <ShoppingBag size={16} />
-                    В корзину
-                  </button>
+                  {(() => {
+                    const cartItem = items.find((i) => i.product.id === p.id);
+                    if (cartItem) {
+                      return (
+                        <div
+                          className="mt-auto inline-flex items-center justify-between rounded-full"
+                          style={{
+                            marginTop: 20,
+                            minHeight: 44,
+                            backgroundColor: "rgba(31,26,14,0.06)",
+                            padding: 3,
+                          }}
+                        >
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateQuantity(p.id, cartItem.quantity - 1)
+                            }
+                            disabled={cartItem.quantity <= 1}
+                            aria-label="Уменьшить количество"
+                            className="inline-flex items-center justify-center rounded-full disabled:opacity-40"
+                            style={{ width: 38, height: 38, color: "var(--color-text)" }}
+                          >
+                            <Minus size={16} />
+                          </button>
+                          <span
+                            className="text-center"
+                            style={{
+                              minWidth: 28,
+                              fontFamily: "var(--font-body)",
+                              fontSize: 15,
+                              fontWeight: 700,
+                              color: "var(--color-text)",
+                            }}
+                          >
+                            {cartItem.quantity}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() =>
+                              updateQuantity(p.id, cartItem.quantity + 1)
+                            }
+                            aria-label="Увеличить количество"
+                            className="inline-flex items-center justify-center rounded-full"
+                            style={{
+                              width: 38,
+                              height: 38,
+                              backgroundColor: "var(--color-accent)",
+                              color: "var(--color-bg-dark)",
+                            }}
+                          >
+                            <Plus size={16} />
+                          </button>
+                        </div>
+                      );
+                    }
+                    return (
+                      <button
+                        type="button"
+                        onClick={() => addToCart(toCartProduct(p))}
+                        className="bs-cta mt-auto inline-flex items-center justify-center gap-2 rounded-full"
+                        style={{
+                          marginTop: 20,
+                          backgroundColor: "var(--color-accent)",
+                          color: "var(--color-bg-dark)",
+                          fontFamily: "var(--font-body)",
+                          fontWeight: 600,
+                          fontSize: 14,
+                          padding: "12px 18px",
+                          minHeight: 44,
+                          transition: "var(--transition-smooth)",
+                        }}
+                      >
+                        <ShoppingBag size={16} />
+                        В корзину
+                      </button>
+                    );
+                  })()}
                 </div>
               </motion.article>
             );

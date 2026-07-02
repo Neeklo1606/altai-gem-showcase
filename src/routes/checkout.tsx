@@ -105,6 +105,16 @@ function CheckoutPage() {
   const perishable = hasPerishable();
   const total = getCartTotal();
   const count = getCartCount();
+  const isPickup = form.delivery === "pickup_left" || form.delivery === "pickup_right";
+
+  // Наличные/карта "при получении" физически возможны только на самовывозе —
+  // для курьера/СДЭК остаётся только онлайн-оплата. Если сменили способ
+  // доставки на недоступный для выбранной оплаты — сбрасываем на онлайн.
+  useEffect(() => {
+    if (!isPickup) {
+      setForm((f) => (f.payment === "card_online" ? f : { ...f, payment: "card_online" }));
+    }
+  }, [isPickup]);
 
   useEffect(() => {
     if (items.length === 0 && !done) {
@@ -185,7 +195,7 @@ function CheckoutPage() {
 
   return (
     <div style={{ backgroundColor: "var(--color-bg-cream)", minHeight: "100vh" }}>
-      <Header cartCount={count} />
+      <Header />
 
       <main className="pt-20 pb-16 md:pt-24">
         <div className="mx-auto max-w-5xl px-4 md:px-8">
@@ -350,17 +360,27 @@ function CheckoutPage() {
                           />
                           <RadioCard
                             checked={form.payment === "cash_on_delivery"}
-                            onSelect={() => update("payment", "cash_on_delivery")}
+                            onSelect={() => isPickup && update("payment", "cash_on_delivery")}
+                            disabled={!isPickup}
                             icon={<Banknote size={18} />}
                             title="Наличными при получении"
-                            description="Оплата курьеру или в магазине"
+                            description={
+                              isPickup
+                                ? "Оплата в магазине"
+                                : "Доступно только при самовывозе"
+                            }
                           />
                           <RadioCard
                             checked={form.payment === "card_on_delivery"}
-                            onSelect={() => update("payment", "card_on_delivery")}
+                            onSelect={() => isPickup && update("payment", "card_on_delivery")}
+                            disabled={!isPickup}
                             icon={<Wallet size={18} />}
                             title="Картой при получении"
-                            description="Оплата картой курьеру или в магазине"
+                            description={
+                              isPickup
+                                ? "Оплата картой в магазине"
+                                : "Доступно только при самовывозе"
+                            }
                           />
                         </div>
                       </StepCard>

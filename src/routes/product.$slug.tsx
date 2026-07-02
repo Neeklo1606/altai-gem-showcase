@@ -52,7 +52,7 @@ function ProductNotFound() {
       className="flex min-h-screen flex-col"
       style={{ backgroundColor: "var(--color-bg-cream)" }}
     >
-      <Header cartCount={0} />
+      <Header />
       <main className="mx-auto flex max-w-2xl flex-1 flex-col items-center justify-center px-6 text-center">
         <h1
           style={{
@@ -117,7 +117,7 @@ function ProductPage() {
 
   return (
     <div style={{ backgroundColor: "var(--color-bg-cream)", minHeight: "100vh" }}>
-      <Header cartCount={0} />
+      <Header />
 
       <main className="pt-20 pb-32 md:pt-24 md:pb-16">
         <div className="mx-auto max-w-7xl px-4 md:px-8">

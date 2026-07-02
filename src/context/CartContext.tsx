@@ -7,6 +7,7 @@ import {
   type ReactNode,
 } from "react";
 import type { Product } from "@/data/products";
+import { PROMOS } from "@/data/promos";
 
 export interface CartItem {
   product: Product;
@@ -26,6 +27,11 @@ interface CartContextValue {
   getCartDiscount: () => number;
   getCartCount: () => number;
   hasPerishable: () => boolean;
+  promoCode: string | null;
+  promoError: string | null;
+  applyPromoCode: (code: string) => void;
+  clearPromoCode: () => void;
+  getPromoDiscount: () => number;
 }
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -33,6 +39,8 @@ const CartContext = createContext<CartContextValue | null>(null);
 export function CartProvider({ children }: { children: ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
+  const [promoCode, setPromoCode] = useState<string | null>(null);
+  const [promoError, setPromoError] = useState<string | null>(null);
 
   const addToCart = useCallback((product: Product, qty: number = 1) => {
     setItems((cur) => {
@@ -66,9 +74,43 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
   const clearCart = useCallback(() => setItems([]), []);
 
+  const applyPromoCode = useCallback((code: string) => {
+    const trimmed = code.trim().toUpperCase();
+    if (!trimmed) return;
+    const promo = PROMOS.find((p) => p.promoCode?.toUpperCase() === trimmed);
+    if (!promo) {
+      setPromoError("Такой промокод не найден");
+      setPromoCode(null);
+      return;
+    }
+    setPromoCode(promo.promoCode ?? trimmed);
+    setPromoError(null);
+  }, []);
+
+  const clearPromoCode = useCallback(() => {
+    setPromoCode(null);
+    setPromoError(null);
+  }, []);
+
+  const getPromoDiscount = useCallback(() => {
+    if (!promoCode) return 0;
+    const promo = PROMOS.find(
+      (p) => p.promoCode?.toUpperCase() === promoCode.toUpperCase(),
+    );
+    if (!promo?.discountPercent) return 0;
+    const base = items
+      .filter(
+        (i) => !promo.categoryFilter || i.product.category === promo.categoryFilter,
+      )
+      .reduce((sum, i) => sum + i.product.price * i.quantity, 0);
+    return Math.round(base * (promo.discountPercent / 100));
+  }, [items, promoCode]);
+
   const getCartTotal = useCallback(
-    () => items.reduce((sum, i) => sum + i.product.price * i.quantity, 0),
-    [items],
+    () =>
+      items.reduce((sum, i) => sum + i.product.price * i.quantity, 0) -
+      getPromoDiscount(),
+    [items, getPromoDiscount],
   );
 
   const getCartOldTotal = useCallback(
@@ -109,6 +151,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       getCartDiscount,
       getCartCount,
       hasPerishable,
+      promoCode,
+      promoError,
+      applyPromoCode,
+      clearPromoCode,
+      getPromoDiscount,
     }),
     [
       items,
@@ -120,6 +167,11 @@ export function CartProvider({ children }: { children: ReactNode }) {
       getCartTotal,
       getCartOldTotal,
       getCartDiscount,
+      promoCode,
+      promoError,
+      applyPromoCode,
+      clearPromoCode,
+      getPromoDiscount,
       getCartCount,
       hasPerishable,
     ],
