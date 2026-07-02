@@ -27,7 +27,6 @@ export function PromoBanner() {
   }, [paused, next]);
 
   const promo = PROMOS[index];
-  const Icon = promo.icon;
 
   return (
     <section
@@ -160,27 +159,6 @@ export function PromoBanner() {
                 </span>
               </div>
 
-              {/* Icon area */}
-              <div
-                className="relative flex shrink-0 items-center justify-center px-6 pb-10 md:px-12 md:py-12"
-                style={{ color: promo.accentColor }}
-              >
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.6, delay: 0.15, ease: "easeInOut" }}
-                  className="flex items-center justify-center rounded-full"
-                  style={{
-                    width: 168,
-                    height: 168,
-                    backgroundColor: "rgba(255,255,255,0.16)",
-                    backdropFilter: "blur(8px)",
-                    boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.18)",
-                  }}
-                >
-                  <Icon size={84} strokeWidth={1.4} />
-                </motion.div>
-              </div>
             </MotionLink>
           </AnimatePresence>
 
